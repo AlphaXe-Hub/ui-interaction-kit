@@ -1,4 +1,4 @@
-/* 03 App 高级交互模式 · Interaction Patterns (10) */
+﻿/* 03 App 高级交互模式 · Interaction Patterns (10) */
 (function () {
   var U = UIK.util;
 
@@ -9,7 +9,7 @@
     hint: '在不同位置点击切换按钮，观察圆心变化；减少动效时改为直接切换。',
     mount: function (stage, ctx) {
       var box = U.el('div'); U.css(box, {
-        position: 'relative', width: '100%', height: '168px', borderRadius: '12px', overflow: 'hidden', border: '1px solid #262e40'
+        position: 'relative', width: '100%', height: '168px', borderRadius: '12px', overflow: 'hidden', border: '1px solid var(--d-border)'
       });
       function layer(bg, fg, title, sub) {
         var l = U.el('div'); U.css(l, {
@@ -20,7 +20,7 @@
         return l;
       }
       var light = layer('#f2f4f8', '#10131b', '浅色主题', '底层：始终保持在原位');
-      var dark = layer('linear-gradient(160deg,#1b2233,#0e121b)', '#e6e9f2', '深色主题', '上层：只被圆形遮罩裁切');
+      var dark = layer('#1b2233', '#f2f4f8', '深色主题', '上层：只被圆形遮罩裁切');
       U.css(dark, { clipPath: 'circle(0px at 50% 50%)' });
       box.appendChild(light); box.appendChild(dark);
       var btn = U.el('button', 'd-btn primary', '切换主题');
@@ -49,20 +49,28 @@
       var list = U.el('div'); U.css(list, { position: 'relative', width: '100%', height: '176px' });
       var items = ['需求调研', '方案设计', '开发实现', '验收上线'].map(function (t, i) {
         var r = U.el('div', 'grab'); U.css(r, {
-          position: 'absolute', left: '0', right: '0', height: '36px', background: '#1c2130', border: '1px solid #2b3348',
+          position: 'absolute', left: '0', right: '0', height: '36px', background: 'var(--d-panel)', border: '1px solid var(--d-border)',
           borderRadius: '9px', display: 'flex', alignItems: 'center', padding: '0 12px', fontSize: '12.5px',
           willChange: 'transform', touchAction: 'none'
         });
-        r.innerHTML = '<span style="color:#6f7994;margin-right:8px">≡</span>' + t;
+        r.innerHTML = '<span style="color:var(--d-dim-2);margin-right:8px">≡</span>' + t;
         r._i = i; r._y = i * 42;
         r.style.transform = 'translateY(' + r._y + 'px)';
         list.appendChild(r); return r;
       });
       stage.appendChild(list);
       var H = 42, dragging = null, startY = 0, target = 0;
+      var TX = 'transform .38s cubic-bezier(.34,1.42,.64,1),border-color .2s,box-shadow .2s';
       items.forEach(function (r) {
+        r.style.willChange = 'transform';
+        UIK.tx(r, TX);
         ctx.clean(U.drag(r, {
-          onStart: function (e) { dragging = r; startY = e.clientY; r._base = r._y; r.style.zIndex = 5; r.style.borderColor = '#6ea8fe'; },
+          onStart: function (e) {
+            dragging = r; startY = e.clientY; r._base = r._y;
+            r.style.transition = 'none';            // 拖动项跟手，不加动画
+            r.style.zIndex = 5; r.style.borderColor = 'var(--d-accent)';
+            r.style.boxShadow = '0 10px 24px rgba(0,0,0,.35)';
+          },
           onMove: function (e) {
             var dy = e.clientY - startY;
             r._y = U.clamp(r._base + dy, -6, (items.length - 1) * H + 6);
@@ -80,7 +88,9 @@
             r._i = target;
           },
           onEnd: function () {
-            r.style.zIndex = 1; r.style.borderColor = '#2b3348';
+            UIK.tx(r, TX);                          // 恢复动画，平滑吸附到槽位
+            r.style.zIndex = 1; r.style.borderColor = 'var(--d-border)';
+            r.style.boxShadow = 'none';
             r._y = r._i * H; r.style.transform = 'translateY(' + r._y + 'px)';
             dragging = null;
           }
@@ -99,12 +109,12 @@
       var box = U.el('div'); U.css(box, { width: '100%' });
       var rows = ['客户档案 A', '客户档案 B', '客户档案 C', '客户档案 D'].map(function (t) {
         var r = U.el('div'); U.css(r, {
-          display: 'flex', alignItems: 'center', gap: '10px', padding: '8px 10px', border: '1px solid #2b3348',
-          borderRadius: '9px', background: '#161a24', marginBottom: '7px', fontSize: '12.5px'
+          display: 'flex', alignItems: 'center', gap: '10px', padding: '8px 10px', border: '1px solid var(--d-border)',
+          borderRadius: '9px', background: 'var(--d-panel-2)', marginBottom: '7px', fontSize: '12.5px'
         });
         var chk = U.el('div'); U.css(chk, {
-          width: '18px', height: '18px', borderRadius: '50%', border: '1.5px solid #3a4255',
-          display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#0b0d12', fontSize: '11px',
+          width: '18px', height: '18px', borderRadius: '50%', border: '1.5px solid var(--d-border)',
+          display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--d-inv-text)', fontSize: '11px',
           transition: UIK.isReduced() ? 'none' : 'transform .28s cubic-bezier(.34,1.56,.64,1),background .18s,border-color .18s'
         });
         chk.style.transform = 'scale(0)';
@@ -131,8 +141,8 @@
         });
       });
       function set(r, on) {
-        r.chk.style.background = on ? '#4ade80' : 'transparent';
-        r.chk.style.borderColor = on ? '#4ade80' : '#3a4255';
+        r.chk.style.background = on ? 'var(--d-ok)' : 'transparent';
+        r.chk.style.borderColor = on ? 'var(--d-ok)' : 'var(--d-border)';
         r.chk.textContent = on ? '✓' : '';
       }
       ctx.hint('错峰 70ms；真实状态在点击瞬间已更新');
@@ -146,11 +156,11 @@
     hint: '快速甩动滑块再松手：会先冲过再回吸到最近刻度。',
     mount: function (stage, ctx) {
       var box = U.el('div'); U.css(box, { width: '100%', padding: '18px 4px 6px', position: 'relative' });
-      var track = U.el('div'); U.css(track, { position: 'relative', height: '6px', background: '#232b3a', borderRadius: '3px' });
-      var fill = U.el('div'); U.css(fill, { position: 'absolute', left: '0', top: '0', bottom: '0', width: '0', background: 'linear-gradient(90deg,#6ea8fe,#a78bfa)', borderRadius: '3px' });
+      var track = U.el('div'); U.css(track, { position: 'relative', height: '6px', background: 'var(--d-track)', borderRadius: '3px' });
+      var fill = U.el('div'); U.css(fill, { position: 'absolute', left: '0', top: '0', bottom: '0', width: '0', background: 'var(--d-accent)', borderRadius: '3px' });
       var thumb = U.el('div', 'grab'); U.css(thumb, {
         position: 'absolute', top: '50%', left: '0', width: '22px', height: '22px', marginTop: '-11px', marginLeft: '-11px',
-        borderRadius: '50%', background: '#e6e9f2', border: '2px solid #6ea8fe', boxShadow: '0 3px 10px rgba(0,0,0,.4)', touchAction: 'none'
+        borderRadius: '50%', background: 'var(--d-text)', border: '2px solid var(--d-accent)', boxShadow: '0 3px 10px rgba(0,0,0,.4)', touchAction: 'none'
       });
       track.appendChild(fill); track.appendChild(thumb); box.appendChild(track);
       var ticks = U.el('div'); U.css(ticks, { display: 'flex', justifyContent: 'space-between', marginTop: '10px' });
@@ -158,7 +168,7 @@
         var t = U.el('span', 'd-val', v + '%'); ticks.appendChild(t);
       });
       box.appendChild(ticks);
-      var val = U.el('div', 'd-val'); U.css(val, { marginTop: '6px', color: '#6ea8fe' }); val.textContent = '目标值 0%';
+      var val = U.el('div', 'd-val'); U.css(val, { marginTop: '6px', color: 'var(--d-accent)' }); val.textContent = '目标值 0%';
       box.appendChild(val); stage.appendChild(box);
 
       var W = track.clientWidth || 280, x = 0, vel = 0, last = null, drag = false;
@@ -199,17 +209,17 @@
     desc: '按真实内容高度连续过渡：从当前高度到测量高度，箭头旋转 180°，布局不跳动。',
     hint: '点击标题展开/收起；高度按内容实测，收起时回到折叠高度。',
     mount: function (stage, ctx) {
-      var box = U.el('div'); U.css(box, { width: '100%', background: '#161a24', border: '1px solid #2b3348', borderRadius: '11px', overflow: 'hidden' });
+      var box = U.el('div'); U.css(box, { width: '100%', background: 'var(--d-panel-2)', border: '1px solid var(--d-border)', borderRadius: '11px', overflow: 'hidden' });
       var head = U.el('button'); head.type = 'button';
       U.css(head, {
         width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'space-between', background: 'transparent',
-        border: 'none', color: '#e6e9f2', padding: '11px 13px', fontSize: '13px', cursor: 'pointer'
+        border: 'none', color: 'var(--d-text)', padding: '11px 13px', fontSize: '13px', cursor: 'pointer'
       });
-      head.innerHTML = '<span>服务条款说明</span><span id="cv" style="display:inline-block;transition:' + (UIK.isReduced() ? 'none' : 'transform .3s') + ';color:#98a1b8">▾</span>';
+      head.innerHTML = '<span>服务条款说明</span><span id="cv" style="display:inline-block;transition:' + (UIK.isReduced() ? 'none' : 'transform .3s') + ';color:var(--d-dim)">▾</span>';
       var body = U.el('div'); U.css(body, {
         height: '0', overflow: 'hidden', transition: UIK.isReduced() ? 'none' : 'height .34s cubic-bezier(.4,0,.2,1)'
       });
-      var inner = U.el('div'); U.css(inner, { padding: '0 13px 12px', color: '#98a1b8', fontSize: '12px' });
+      var inner = U.el('div'); U.css(inner, { padding: '0 13px 12px', color: 'var(--d-dim)', fontSize: '12px' });
       inner.textContent = '容器高度来自内容实测值（scrollHeight），而不是写死的数值；收起时从当前高度回到折叠高度，文字不会突然出现，也不会造成下方内容跳动。展开状态通过 aria-expanded 暴露给辅助技术。';
       body.appendChild(inner); box.appendChild(head); box.appendChild(body);
       stage.appendChild(box);
@@ -231,15 +241,15 @@
     hint: '点击「完成当前步骤」；进度条会先过冲再回到准确位置。',
     mount: function (stage, ctx) {
       var box = U.el('div'); U.css(box, { width: '100%' });
-      var track = U.el('div'); U.css(track, { position: 'relative', height: '6px', background: '#232b3a', borderRadius: '3px' });
-      var fill = U.el('div'); U.css(fill, { position: 'absolute', left: '0', top: '0', bottom: '0', width: '0', background: 'linear-gradient(90deg,#6ea8fe,#4ade80)', borderRadius: '3px' });
+      var track = U.el('div'); U.css(track, { position: 'relative', height: '6px', background: 'var(--d-track)', borderRadius: '3px' });
+      var fill = U.el('div'); U.css(fill, { position: 'absolute', left: '0', top: '0', bottom: '0', width: '0', background: 'var(--d-accent)', borderRadius: '3px' });
       track.appendChild(fill); box.appendChild(track);
       var dots = U.el('div'); U.css(dots, { display: 'flex', justifyContent: 'space-between', marginTop: '12px' });
       var steps = ['基本信息', '资质材料', '合同签署', '完成'].map(function (t, i) {
-        var d = U.el('div'); U.css(d, { textAlign: 'center', flex: '1', fontSize: '11px', color: '#6f7994' });
+        var d = U.el('div'); U.css(d, { textAlign: 'center', flex: '1', fontSize: '11px', color: 'var(--d-dim-2)' });
         var c = U.el('div'); U.css(c, {
-          width: '20px', height: '20px', borderRadius: '50%', margin: '0 auto 5px', background: '#1c2130',
-          border: '1.5px solid #3a4255', color: '#98a1b8', display: 'flex', alignItems: 'center', justifyContent: 'center',
+          width: '20px', height: '20px', borderRadius: '50%', margin: '0 auto 5px', background: 'var(--d-panel)',
+          border: '1.5px solid var(--d-border)', color: 'var(--d-dim)', display: 'flex', alignItems: 'center', justifyContent: 'center',
           fontSize: '10px', transition: UIK.isReduced() ? 'none' : 'background .25s,border-color .25s,color .25s,transform .3s cubic-bezier(.34,1.56,.64,1)'
         });
         c.textContent = i + 1;
@@ -258,10 +268,10 @@
       function sync() {
         steps.forEach(function (s, i) {
           var done = i < cur, active = i === cur;
-          s.circle.style.background = done ? '#4ade80' : (active ? '#6ea8fe' : '#1c2130');
-          s.circle.style.borderColor = done ? '#4ade80' : (active ? '#6ea8fe' : '#3a4255');
-          s.circle.style.color = (done || active) ? '#0b0d12' : '#98a1b8';
-          s.node.style.color = active ? '#e6e9f2' : '#6f7994';
+          s.circle.style.background = done ? 'var(--d-ok)' : (active ? 'var(--d-accent)' : 'var(--d-panel)');
+          s.circle.style.borderColor = done ? 'var(--d-ok)' : (active ? 'var(--d-accent)' : 'var(--d-border)');
+          s.circle.style.color = (done || active) ? 'var(--d-panel)' : 'var(--d-dim)';
+          s.node.style.color = active ? 'var(--d-text)' : 'var(--d-dim-2)';
           s.circle.style.transform = active ? 'scale(1.18)' : 'scale(1)';
         });
         info.textContent = '当前 ' + (cur + 1) + ' / 4';
@@ -285,18 +295,18 @@
       ['消息推送', '邮件通知', '短信提醒'].forEach(function (t, i) {
         var row = U.el('div'); U.css(row, {
           display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '9px 12px',
-          background: '#161a24', border: '1px solid #2b3348', borderRadius: '10px', fontSize: '12.5px',
+          background: 'var(--d-panel-2)', border: '1px solid var(--d-border)', borderRadius: '10px', fontSize: '12.5px',
           position: 'relative', overflow: 'hidden', transition: UIK.isReduced() ? 'none' : 'transform .35s cubic-bezier(.34,1.56,.64,1)'
         });
         row.appendChild(U.el('span', null, t));
         var sw = U.el('button'); sw.type = 'button';
         U.css(sw, {
-          width: '40px', height: '22px', borderRadius: '999px', background: '#333c52', border: 'none', position: 'relative',
+          width: '40px', height: '22px', borderRadius: '999px', background: 'var(--d-border)', border: 'none', position: 'relative',
           cursor: 'pointer', transition: UIK.isReduced() ? 'none' : 'background .22s', flex: '0 0 auto'
         });
         var knob = U.el('span'); U.css(knob, {
           position: 'absolute', top: '3px', left: '3px', width: '16px', height: '16px', borderRadius: '50%',
-          background: '#e6e9f2', transition: UIK.isReduced() ? 'none' : 'left .24s cubic-bezier(.34,1.56,.64,1)'
+          background: 'var(--d-text)', transition: UIK.isReduced() ? 'none' : 'left .24s cubic-bezier(.34,1.56,.64,1)'
         });
         sw.appendChild(knob); row.appendChild(sw); box.appendChild(row);
         items.push({ row: row, sw: sw, knob: knob, on: false, i: i });
@@ -307,7 +317,7 @@
       items.forEach(function (it) {
         ctx.on(it.sw, 'click', function () {
           it.on = !it.on;
-          it.sw.style.background = it.on ? '#4ade80' : '#333c52';
+          it.sw.style.background = it.on ? 'var(--d-ok)' : 'var(--d-border)';
           it.knob.style.left = it.on ? '21px' : '3px';
           items.forEach(function (o) {
             if (o === it || UIK.isReduced()) return;
@@ -332,14 +342,14 @@
     mount: function (stage, ctx) {
       var box = U.el('div'); U.css(box, { position: 'relative', width: '100%', height: '176px' });
       var bin = U.el('div'); U.css(bin, {
-        position: 'absolute', right: '6px', top: '6px', color: '#f87171', fontSize: '11px'
+        position: 'absolute', right: '6px', top: '6px', color: 'var(--d-danger)', fontSize: '11px'
       }); bin.textContent = '回收区';
       box.appendChild(bin);
       var names = ['待办 A', '待办 B', '待办 C'];
       function addCard(name, idx) {
         var c = U.el('div', 'grab'); U.css(c, {
-          position: 'absolute', left: '0', right: '0', top: (idx * 50) + 'px', height: '42px', background: '#1c2130',
-          border: '1px solid #2b3348', borderRadius: '10px', display: 'flex', alignItems: 'center', padding: '0 12px',
+          position: 'absolute', left: '0', right: '0', top: (idx * 50) + 'px', height: '42px', background: 'var(--d-panel)',
+          border: '1px solid var(--d-border)', borderRadius: '10px', display: 'flex', alignItems: 'center', padding: '0 12px',
           fontSize: '12.5px', touchAction: 'none', willChange: 'transform'
         });
         c.textContent = name;
@@ -397,8 +407,8 @@
       ['第 1 条记录', '第 2 条记录', '第 3 条记录', '第 4 条记录', '第 5 条记录', '第 6 条记录'].forEach(function (t, i) {
         var c = U.el('div'); U.css(c, {
           position: 'sticky', top: '0', height: '92px', marginBottom: '10px', borderRadius: '12px',
-          background: 'linear-gradient(160deg,#' + (28 + i * 8) + '3350,#171d2c)', border: '1px solid #2b3348',
-          display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '12.5px', color: '#dbe3f5',
+          background: 'var(--d-panel)', border: '1px solid var(--d-border)',
+          display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '12.5px', color: 'var(--d-text)',
           transformOrigin: 'center top', willChange: 'transform'
         });
         c.textContent = t; sc.appendChild(c); cards.push(c);
@@ -437,7 +447,7 @@
       var tags = ['全部', '进行中', '待跟进', '已成交', '已关闭', '高优先级', '本月新增'].map(function (t, i) {
         var b = U.el('button'); b.type = 'button';
         U.css(b, {
-          background: '#161a24', border: '1px solid #2b3348', color: '#98a1b8', borderRadius: '999px',
+          background: 'var(--d-panel-2)', border: '1px solid var(--d-border)', color: 'var(--d-dim)', borderRadius: '999px',
           padding: '7px 12px', fontSize: '12px', cursor: 'pointer', minHeight: '34px',
           transition: UIK.isReduced() ? 'none' : 'transform .28s cubic-bezier(.34,1.56,.64,1),margin .28s cubic-bezier(.4,0,.2,1),background .2s,color .2s,border-color .2s'
         });
@@ -450,9 +460,9 @@
           cur = cur === i ? -1 : i;
           tags.forEach(function (o, k) {
             var on = k === cur;
-            o.style.background = on ? '#6ea8fe' : '#161a24';
-            o.style.color = on ? '#0b0d12' : '#98a1b8';
-            o.style.borderColor = on ? '#6ea8fe' : '#2b3348';
+            o.style.background = on ? 'var(--d-accent)' : 'var(--d-panel-2)';
+            o.style.color = on ? 'var(--d-panel)' : 'var(--d-dim)';
+            o.style.borderColor = on ? 'var(--d-accent)' : 'var(--d-border)';
             o.style.transform = on ? 'scale(1.12)' : 'scale(1)';
             o.style.marginLeft = (k === cur + 1 || (on && k > 0)) ? '10px' : '0px';
             o.style.marginRight = (k === cur - 1) ? '10px' : '0px';

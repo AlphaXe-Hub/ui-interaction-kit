@@ -1,4 +1,4 @@
-/* 07 弹窗组件 · Overlays (7) */
+﻿/* 07 弹窗组件 · Overlays (7) */
 (function () {
   var U = UIK.util;
   function host(stage) { var h = U.el('div'); U.css(h, { position: 'relative', width: '100%', height: '182px', display: 'flex', alignItems: 'center', justifyContent: 'center' }); stage.appendChild(h); return h; }
@@ -18,13 +18,13 @@
       var btn = U.el('button', 'd-btn', '导出报表'); btn.type = 'button';
       var tip = U.el('div'); U.css(tip, {
         position: 'absolute', bottom: 'calc(50% + 26px)', left: '50%', transform: 'translateX(-50%) translateY(4px)',
-        background: '#0b0d12', border: '1px solid #3a4255', color: '#e6e9f2', fontSize: '11.5px', padding: '5px 9px',
+        background: 'var(--d-panel)', border: '1px solid var(--d-border)', color: 'var(--d-text)', fontSize: '11.5px', padding: '5px 9px',
         borderRadius: '7px', whiteSpace: 'nowrap', opacity: '0', pointerEvents: 'none', zIndex: 9,
         boxShadow: '0 6px 16px rgba(0,0,0,.5)'
       });
       UIK.tx(tip, 'opacity .16s,transform .16s');
       tip.textContent = '导出当前筛选结果为 Excel';
-      var arrow = U.el('div'); U.css(arrow, { position: 'absolute', bottom: '-4px', left: '50%', marginLeft: '-4px', width: '8px', height: '8px', background: '#0b0d12', borderRight: '1px solid #3a4255', borderBottom: '1px solid #3a4255', transform: 'rotate(45deg)' });
+      var arrow = U.el('div'); U.css(arrow, { position: 'absolute', bottom: '-4px', left: '50%', marginLeft: '-4px', width: '8px', height: '8px', background: 'var(--d-panel)', borderRight: '1px solid var(--d-border)', borderBottom: '1px solid var(--d-border)', transform: 'rotate(45deg)' });
       tip.appendChild(arrow);
       h.appendChild(btn); h.appendChild(tip);
       function show(on) { tip.style.opacity = on ? '1' : '0'; tip.style.transform = 'translateX(-50%) translateY(' + (on ? '0' : '4px') + ')'; }
@@ -47,13 +47,13 @@
       var btn = U.el('button', 'd-btn', '查看成员'); btn.type = 'button';
       var pop = U.el('div'); U.css(pop, {
         position: 'absolute', top: 'calc(50% - 14px)', left: '50%', transform: 'translateX(-50%) translateY(-6px) scale(.97)',
-        width: '210px', background: '#1c2130', border: '1px solid #3a4255', borderRadius: '11px', padding: '12px',
+        width: '210px', background: 'var(--d-panel)', border: '1px solid var(--d-border)', borderRadius: '11px', padding: '12px',
         opacity: '0', pointerEvents: 'none', zIndex: 9, boxShadow: '0 14px 34px rgba(0,0,0,.55)'
       });
       UIK.tx(pop, 'opacity .2s,transform .2s');
-      pop.innerHTML = '<div style="display:flex;gap:9px;align-items:center"><div style="width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,#6ea8fe,#a78bfa)"></div>' +
-        '<div><div style="font-size:12.5px;font-weight:600">张三月</div><div style="font-size:11px;color:#98a1b8">销售一部 · 负责人</div></div></div>' +
-        '<div style="font-size:11.5px;color:#98a1b8;margin:9px 0 10px">负责华东区重点客户，当前跟进 7 个商机。</div>' +
+      pop.innerHTML = '<div style="display:flex;gap:9px;align-items:center"><div style="width:32px;height:32px;border-radius:50%;background:var(--d-accent)"></div>' +
+        '<div><div style="font-size:12.5px;font-weight:600">张三月</div><div style="font-size:11px;color:var(--d-dim)">销售一部 · 负责人</div></div></div>' +
+        '<div style="font-size:11.5px;color:var(--d-dim);margin:9px 0 10px">负责华东区重点客户，当前跟进 7 个商机。</div>' +
         '<div style="display:flex;gap:8px"><button class="d-btn" style="font-size:11.5px">发消息</button><button class="d-btn" style="font-size:11.5px">查看档案</button></div>';
       h.appendChild(btn); h.appendChild(pop);
       var open = false;
@@ -81,7 +81,7 @@
       var btn = U.el('button', 'd-btn', '更多操作 ▾'); btn.type = 'button';
       var menu = U.el('div'); U.css(menu, {
         position: 'absolute', top: 'calc(50% + 20px)', left: '50%', transform: 'translateX(-50%) translateY(-6px)',
-        minWidth: '150px', background: '#1c2130', border: '1px solid #3a4255', borderRadius: '10px', overflow: 'hidden',
+        minWidth: '150px', background: 'var(--d-panel)', border: '1px solid var(--d-border)', borderRadius: '10px', overflow: 'hidden',
         opacity: '0', pointerEvents: 'none', zIndex: 9
       });
       UIK.tx(menu, 'opacity .18s,transform .18s');
@@ -89,10 +89,10 @@
         var o = U.el('button'); o.type = 'button';
         U.css(o, {
           display: 'block', width: '100%', textAlign: 'left', background: 'transparent', border: 'none',
-          color: i === 3 ? '#f87171' : '#e6e9f2', padding: '9px 12px', fontSize: '12px', cursor: 'pointer'
+          color: i === 3 ? 'var(--d-danger)' : 'var(--d-text)', padding: '9px 12px', fontSize: '12px', cursor: 'pointer'
         });
         o.textContent = t;
-        ctx.on(o, 'mouseenter', function () { o.style.background = '#232b3d'; });
+        ctx.on(o, 'mouseenter', function () { o.style.background = 'var(--d-track)'; });
         ctx.on(o, 'mouseleave', function () { o.style.background = 'transparent'; });
         ctx.on(o, 'click', function () { btn.textContent = t + ' ▾'; set(false); btn.focus(); });
         menu.appendChild(o);
@@ -122,13 +122,13 @@
       h.appendChild(btn);
       var ov = overlay(h);
       var dr = U.el('div'); U.css(dr, {
-        position: 'absolute', top: '0', right: '0', bottom: '0', width: '200px', background: '#1c2130',
-        borderLeft: '1px solid #3a4255', transform: 'translateX(100%)', zIndex: 9, padding: '14px',
+        position: 'absolute', top: '0', right: '0', bottom: '0', width: '200px', background: 'var(--d-panel)',
+        borderLeft: '1px solid var(--d-border)', transform: 'translateX(100%)', zIndex: 9, padding: '14px',
         display: 'flex', flexDirection: 'column'
       });
       UIK.tx(dr, 'transform .36s cubic-bezier(.4,0,.2,1)');
       dr.innerHTML = '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px"><span style="font-size:13px;font-weight:600">客户详情</span><button class="d-btn" id="dx" style="padding:2px 8px">✕</button></div>' +
-        '<div style="font-size:11.5px;color:#98a1b8">原页面仍然可见，抽屉只占据右侧空间，适合边看边编辑。</div>' +
+        '<div style="font-size:11.5px;color:var(--d-dim)">原页面仍然可见，抽屉只占据右侧空间，适合边看边编辑。</div>' +
         '<div style="margin-top:auto;display:flex;gap:8px"><button class="d-btn primary" style="font-size:11.5px">保存</button><button class="d-btn" style="font-size:11.5px">取消</button></div>';
       h.appendChild(dr);
       var open = false;
@@ -157,14 +157,14 @@
       h.appendChild(btn);
       var ov = overlay(h);
       var sheet = U.el('div'); U.css(sheet, {
-        position: 'absolute', left: '8px', right: '8px', bottom: '0', background: '#1c2130',
-        border: '1px solid #3a4255', borderBottom: 'none', borderRadius: '14px 14px 0 0', padding: '8px 14px 14px',
+        position: 'absolute', left: '8px', right: '8px', bottom: '0', background: 'var(--d-panel)',
+        border: '1px solid var(--d-border)', borderBottom: 'none', borderRadius: '14px 14px 0 0', padding: '8px 14px 14px',
         transform: 'translateY(105%)', zIndex: 9
       });
       UIK.tx(sheet, 'transform .38s cubic-bezier(.4,0,.2,1)');
-      var grip = U.el('div'); U.css(grip, { width: '38px', height: '4px', borderRadius: '2px', background: '#3a4255', margin: '0 auto 10px', cursor: 'grab', touchAction: 'none' });
+      var grip = U.el('div'); U.css(grip, { width: '38px', height: '4px', borderRadius: '2px', background: 'var(--d-border)', margin: '0 auto 10px', cursor: 'grab', touchAction: 'none' });
       sheet.appendChild(grip);
-      var content = U.el('div'); U.css(content, { fontSize: '11.5px', color: '#98a1b8' });
+      var content = U.el('div'); U.css(content, { fontSize: '11.5px', color: 'var(--d-dim)' });
       content.innerHTML = '把操作放在屏幕底部，拇指即可触达。<br>向下拖动把手或点击遮罩关闭。';
       sheet.appendChild(content);
       var actions = U.el('div'); U.css(actions, { display: 'flex', flexDirection: 'column', gap: '7px', marginTop: '12px' });
@@ -209,14 +209,14 @@
       var ov = overlay(h);
       var modal = U.el('div'); U.css(modal, {
         position: 'absolute', left: '50%', top: '50%', transform: 'translate(-50%,-50%) scale(.94)',
-        width: '230px', background: '#1c2130', border: '1px solid #3a4255', borderRadius: '13px', padding: '16px',
+        width: '230px', background: 'var(--d-panel)', border: '1px solid var(--d-border)', borderRadius: '13px', padding: '16px',
         opacity: '0', pointerEvents: 'none', zIndex: 10
       });
       UIK.tx(modal, 'opacity .2s,transform .28s cubic-bezier(.34,1.3,.64,1)');
       modal.setAttribute('role', 'dialog'); modal.setAttribute('aria-modal', 'true');
       modal.innerHTML = '<div style="font-size:13.5px;font-weight:600;margin-bottom:6px">确认删除？</div>' +
-        '<div style="font-size:11.5px;color:#98a1b8;margin-bottom:14px">删除后该商机的跟进记录将一并移除，且不可恢复。</div>' +
-        '<div style="display:flex;gap:8px;justify-content:flex-end"><button class="d-btn" id="mc">取消</button><button class="d-btn" id="mo" style="background:#f87171;color:#0b0d12;border-color:transparent;font-weight:600">确认删除</button></div>';
+        '<div style="font-size:11.5px;color:var(--d-dim);margin-bottom:14px">删除后该商机的跟进记录将一并移除，且不可恢复。</div>' +
+        '<div style="display:flex;gap:8px;justify-content:flex-end"><button class="d-btn" id="mc">取消</button><button class="d-btn" id="mo" style="background:var(--d-danger);color:var(--d-inv-text);border-color:transparent;font-weight:600">确认删除</button></div>';
       h.appendChild(modal);
       var open = false, lastFocus = null;
       function set(on) {
@@ -256,7 +256,7 @@
       function toast(msg) {
         n++;
         var t = U.el('div'); U.css(t, {
-          background: '#1c2130', border: '1px solid #3a4255', color: '#e6e9f2', fontSize: '11.5px',
+          background: 'var(--d-panel)', border: '1px solid var(--d-border)', color: 'var(--d-text)', fontSize: '11.5px',
           padding: '8px 13px', borderRadius: '9px', boxShadow: '0 8px 20px rgba(0,0,0,.45)',
           opacity: '0', transform: 'translateY(8px)', whiteSpace: 'nowrap', pointerEvents: 'none'
         });

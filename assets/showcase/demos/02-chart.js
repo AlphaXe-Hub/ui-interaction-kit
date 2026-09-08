@@ -1,16 +1,20 @@
-/* 02 图表交互 · Chart Interaction (7) */
+﻿/* 02 图表交互 · Chart Interaction (7) */
 (function () {
   var U = UIK.util, NS = 'http://www.w3.org/2000/svg';
   function E(tag, a, p) {
     var e = document.createElementNS(NS, tag);
-    for (var k in a) e.setAttribute(k, a[k]);
+    for (var k in a) {
+      // SVG 的 presentation attribute 不解析 var()，必须走 CSS 属性
+      if ((k === 'fill' || k === 'stroke') && String(a[k]).indexOf('var(') === 0) e.style[k] = a[k];
+      else e.setAttribute(k, a[k]);
+    }
     if (p) p.appendChild(e);
     return e;
   }
   var LABELS = ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月'];
   var SERIES = [
-    { name: '销售额', color: '#6ea8fe', values: [42, 55, 48, 70, 66, 82, 74, 90, 86, 95, 88, 102] },
-    { name: '回款额', color: '#a78bfa', values: [28, 34, 40, 38, 52, 58, 55, 64, 70, 68, 76, 80] }
+    { name: '销售额', color: 'var(--d-accent)', values: [42, 55, 48, 70, 66, 82, 74, 90, 86, 95, 88, 102] },
+    { name: '回款额', color: 'var(--d-accent-2)', values: [28, 34, 40, 38, 52, 58, 55, 64, 70, 68, 76, 80] }
   ];
 
   function mkChart(host, cfg) {
@@ -55,15 +59,17 @@
       api.yMax = Math.ceil((max || 1) * 1.18 / 10) * 10 || 10;
       for (var g = 0; g <= 4; g++) {
         var y = pad.t + ih * g / 4;
-        E('line', { x1: pad.l, y1: y, x2: pad.l + iw, y2: y, stroke: '#232b3a', 'stroke-width': 1 }, svg);
-        var t = E('text', { x: pad.l - 6, y: y + 3.5, fill: '#6f7994', 'font-size': 9, 'text-anchor': 'end' }, svg);
+        E('line', { x1: pad.l, y1: y, x2: pad.l + iw, y2: y, stroke: 'var(--d-track)', 'stroke-width': 1 }, svg);
+        var t = E('text', { x: pad.l - 6, y: y + 3.5, fill: 'var(--d-dim-2)', 'font-size': 9, 'text-anchor': 'end' }, svg);
         t.textContent = Math.round(api.yMax * (1 - g / 4));
       }
       var step = Math.max(1, Math.ceil((api.dom.i1 - api.dom.i0 + 1) / 6));
       for (var i = api.dom.i0; i <= api.dom.i1; i += step) {
-        var tx = E('text', { x: api.xAt(i), y: H - 7, fill: '#6f7994', 'font-size': 9, 'text-anchor': 'middle' }, svg);
+        var tx = E('text', { x: api.xAt(i), y: H - 7, fill: 'var(--d-dim-2)', 'font-size': 9, 'text-anchor': 'middle' }, svg);
         tx.textContent = api.labels[i];
       }
+      // 命中层放在最底层：空白处由它接收事件，柱子/折线在上层可点击
+      api.overlay = E('rect', { x: pad.l, y: pad.t, width: iw, height: ih, fill: 'transparent', style: 'cursor:crosshair' }, svg);
       var g2 = E('g', null, svg);
       api.g = g2;
       if (api.type === 'bar') {
@@ -86,10 +92,9 @@
           for (var i = api.dom.i0; i <= api.dom.i1; i++) d += (i === api.dom.i0 ? 'M' : 'L') + api.xAt(i) + ' ' + api.yAt(s.values[i]);
           E('path', { d: d, fill: 'none', stroke: s.color, 'stroke-width': 2, 'stroke-linejoin': 'round', 'stroke-linecap': 'round' }, g2);
           if (api.showDots) for (var j = api.dom.i0; j <= api.dom.i1; j++)
-            E('circle', { cx: api.xAt(j), cy: api.yAt(s.values[j]), r: 2.6, fill: '#0e121b', stroke: s.color, 'stroke-width': 1.6 }, g2);
+            E('circle', { cx: api.xAt(j), cy: api.yAt(s.values[j]), r: 2.6, fill: 'var(--d-hole)', stroke: s.color, 'stroke-width': 1.6 }, g2);
         });
       }
-      api.overlay = E('rect', { x: pad.l, y: pad.t, width: iw, height: ih, fill: 'transparent', style: 'cursor:crosshair' }, svg);
       if (api.onDraw) api.onDraw();
     };
     api.draw();
@@ -108,7 +113,7 @@
       var host = stageRow(stage), c = mkChart(host, { labels: LABELS, series: SERIES });
       var info = note(host, '未选择区间');
       var sel = null, drawing = false, x0 = 0;
-      var rect = E('rect', { y: c.pad.t, height: c.ih, fill: 'rgba(110,168,254,.16)', stroke: '#6ea8fe', 'stroke-width': 1, opacity: 0 }, c.svg);
+      var rect = E('rect', { y: c.pad.t, height: c.ih, fill: 'rgba(110,168,254,.16)', stroke: 'var(--d-accent)', 'stroke-width': 1, opacity: 0 }, c.svg);
       ctx.on(c.svg, 'pointerdown', function (e) { drawing = true; x0 = c.toLocal(e).x; c.svg.setPointerCapture && c.svg.setPointerCapture(e.pointerId); });
       ctx.on(c.svg, 'pointermove', function (e) {
         if (!drawing) return;
@@ -136,12 +141,12 @@
     hint: '在图上移动指针；离开图表即消失。',
     mount: function (stage, ctx) {
       var host = stageRow(stage), c = mkChart(host, { labels: LABELS, series: SERIES });
-      var vl = E('line', { stroke: '#6ea8fe', 'stroke-width': 1, 'stroke-dasharray': '3 3', opacity: 0 }, c.svg);
-      var hl = E('line', { stroke: '#6ea8fe', 'stroke-width': 1, 'stroke-dasharray': '3 3', opacity: 0 }, c.svg);
-      var bx = E('text', { y: c.H - 7, fill: '#0b0d12', 'font-size': 9, 'text-anchor': 'middle', opacity: 0 }, c.svg);
-      var bxr = E('rect', { y: c.H - 17, height: 12, rx: 3, fill: '#6ea8fe', opacity: 0 }, c.svg);
-      var byr = E('rect', { x: 2, width: c.pad.l - 4, height: 12, rx: 3, fill: '#a78bfa', opacity: 0 }, c.svg);
-      var by = E('text', { x: c.pad.l - 6, fill: '#0b0d12', 'font-size': 9, 'text-anchor': 'end', opacity: 0 }, c.svg);
+      var vl = E('line', { stroke: 'var(--d-accent)', 'stroke-width': 1, 'stroke-dasharray': '3 3', opacity: 0 }, c.svg);
+      var hl = E('line', { stroke: 'var(--d-accent)', 'stroke-width': 1, 'stroke-dasharray': '3 3', opacity: 0 }, c.svg);
+      var bx = E('text', { y: c.H - 7, fill: 'var(--d-panel)', 'font-size': 9, 'text-anchor': 'middle', opacity: 0 }, c.svg);
+      var bxr = E('rect', { y: c.H - 17, height: 12, rx: 3, fill: 'var(--d-accent)', opacity: 0 }, c.svg);
+      var byr = E('rect', { x: 2, width: c.pad.l - 4, height: 12, rx: 3, fill: 'var(--d-accent-2)', opacity: 0 }, c.svg);
+      var by = E('text', { x: c.pad.l - 6, fill: 'var(--d-panel)', 'font-size': 9, 'text-anchor': 'end', opacity: 0 }, c.svg);
       note(host, '悬停对齐读值');
       ctx.on(c.svg, 'pointermove', function (e) {
         var p = c.toLocal(e); p.x = U.clamp(p.x, c.pad.l, c.pad.l + c.iw); p.y = U.clamp(p.y, c.pad.t, c.pad.t + c.ih);
@@ -168,8 +173,8 @@
     hint: '峰值点自动脉冲；移动指针时最近点放大，其余保持常态。',
     mount: function (stage, ctx) {
       var host = stageRow(stage), c = mkChart(host, { labels: LABELS, series: SERIES });
-      var peak = E('circle', { r: 5, fill: 'none', stroke: '#fbbf24', 'stroke-width': 2, opacity: .9 }, c.svg);
-      var hover = E('circle', { r: 6, fill: '#6ea8fe', opacity: 0 }, c.svg);
+      var peak = E('circle', { r: 5, fill: 'none', stroke: 'var(--d-warn)', 'stroke-width': 2, opacity: .9 }, c.svg);
+      var hover = E('circle', { r: 6, fill: 'var(--d-accent)', opacity: 0 }, c.svg);
       var info = note(host, '');
       var mi = 0, mv = -1;
       SERIES[0].values.forEach(function (v, i) { if (v > mv) { mv = v; mi = i; } });
@@ -202,8 +207,8 @@
       var host = stageRow(stage); U.css(host, { position: 'relative' });
       var c = mkChart(host, { labels: LABELS, series: SERIES });
       var tip = U.el('div'); U.css(tip, {
-        position: 'absolute', pointerEvents: 'none', background: '#0b0d12', border: '1px solid #3a4255',
-        borderRadius: '8px', padding: '6px 9px', fontSize: '11.5px', color: '#e6e9f2', opacity: 0,
+        position: 'absolute', pointerEvents: 'none', background: 'var(--d-panel)', border: '1px solid var(--d-border)',
+        borderRadius: '8px', padding: '6px 9px', fontSize: '11.5px', color: 'var(--d-text)', opacity: 0,
         transition: 'opacity .12s', whiteSpace: 'nowrap', zIndex: 5, boxShadow: '0 8px 20px rgba(0,0,0,.4)'
       });
       host.appendChild(tip);
@@ -242,8 +247,8 @@
       SERIES.forEach(function (s, si) {
         var b = U.el('button'); b.type = 'button';
         U.css(b, {
-          display: 'inline-flex', alignItems: 'center', gap: '6px', background: '#121724', border: '1px solid #2b3348',
-          color: '#e6e9f2', borderRadius: '999px', padding: '4px 11px', fontSize: '11.5px', cursor: 'pointer'
+          display: 'inline-flex', alignItems: 'center', gap: '6px', background: 'var(--d-chip)', border: '1px solid var(--d-border)',
+          color: 'var(--d-text)', borderRadius: '999px', padding: '4px 11px', fontSize: '11.5px', cursor: 'pointer'
         });
         b.innerHTML = '<span style="width:8px;height:8px;border-radius:50%;background:' + s.color + ';display:inline-block"></span>' + s.name;
         b.onclick = function () {
@@ -251,7 +256,7 @@
           if (c.vis[si] && on === 1) { info.textContent = '至少保留一条系列'; return; }
           c.vis[si] = !c.vis[si];
           b.style.opacity = c.vis[si] ? 1 : .42;
-          b.style.borderColor = c.vis[si] ? s.color : '#2b3348';
+          b.style.borderColor = c.vis[si] ? s.color : 'var(--d-border)';
           c.draw();
           info.textContent = '当前显示 ' + c.vis.filter(Boolean).length + ' / 2 系列';
         };
@@ -307,7 +312,7 @@
       var host = stageRow(stage);
       var WEEKS = LABELS.map(function (_, i) { return [0.2 + (i % 4) * 0.06, 0.28 - (i % 3) * 0.04, 0.22 + (i % 5) * 0.05, 0.3 - (i % 2) * 0.07].map(function (f) { return Math.round(SERIES[0].values[i] * f); }); });
       var level = 0, month = 0;
-      var crumb = U.el('div', 'd-val'); U.css(crumb, { marginBottom: '6px', color: '#98a1b8' });
+      var crumb = U.el('div', 'd-val'); U.css(crumb, { marginBottom: '6px', color: 'var(--d-dim)' });
       host.appendChild(crumb);
       var chartHost = U.el('div'); host.appendChild(chartHost);
       var c = null;
@@ -318,8 +323,8 @@
           crumb.textContent = '年度汇总 ›';
           c = mkChart(chartHost, { labels: LABELS, series: [SERIES[0]], type: 'bar' });
         } else {
-          crumb.innerHTML = '<span style="cursor:pointer;color:#6ea8fe" id="up">年度汇总</span> › ' + LABELS[month] + ' 周明细 ›';
-          c = mkChart(chartHost, { labels: ['第1周', '第2周', '第3周', '第4周'], series: [{ name: '销售额', color: '#4ade80', values: WEEKS[month] }], type: 'bar' });
+          crumb.innerHTML = '<span style="cursor:pointer;color:var(--d-accent)" id="up">年度汇总</span> › ' + LABELS[month] + ' 周明细 ›';
+          c = mkChart(chartHost, { labels: ['第1周', '第2周', '第3周', '第4周'], series: [{ name: '销售额', color: 'var(--d-ok)', values: WEEKS[month] }], type: 'bar' });
           var up = document.getElementById('up');
           if (up) up.onclick = function () { level = 0; render(); };
         }

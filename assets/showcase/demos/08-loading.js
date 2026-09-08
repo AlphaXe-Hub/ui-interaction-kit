@@ -1,12 +1,12 @@
-/* 08 加载动效 · Loading States (7) */
+﻿/* 08 加载动效 · Loading States (7) */
 (function () {
   var U = UIK.util;
   function host(stage) { var h = U.el('div'); U.css(h, { position: 'relative', width: '100%', height: '178px', display: 'flex', alignItems: 'center', justifyContent: 'center' }); stage.appendChild(h); return h; }
   function fakeContent() {
     var c = U.el('div'); U.css(c, { width: '100%', display: 'flex', flexDirection: 'column', gap: '8px' });
-    c.innerHTML = '<div style="display:flex;gap:10px;align-items:center"><div style="width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,#6ea8fe,#a78bfa)"></div>' +
-      '<div><div style="font-size:12.5px;font-weight:600">客户：深圳市水务集团</div><div style="font-size:11px;color:#98a1b8">最近跟进 2 小时前</div></div></div>' +
-      '<div style="font-size:11.5px;color:#98a1b8">数据已加载完成，骨架被真实内容替换，布局没有跳动。</div>';
+    c.innerHTML = '<div style="display:flex;gap:10px;align-items:center"><div style="width:34px;height:34px;border-radius:50%;background:var(--d-accent)"></div>' +
+      '<div><div style="font-size:12.5px;font-weight:600">客户：深圳市水务集团</div><div style="font-size:11px;color:var(--d-dim)">最近跟进 2 小时前</div></div></div>' +
+      '<div style="font-size:11.5px;color:var(--d-dim)">数据已加载完成，骨架被真实内容替换，布局没有跳动。</div>';
     return c;
   }
   function shimmerKeyframes() {
@@ -33,11 +33,11 @@
       });
       UIK.tx(ov, 'opacity .3s');
       var ring = U.el('div'); U.css(ring, {
-        width: '30px', height: '30px', borderRadius: '50%', border: '3px solid #2b3348', borderTopColor: '#6ea8fe'
+        width: '30px', height: '30px', borderRadius: '50%', border: '3px solid var(--d-border)', borderTopColor: 'var(--d-accent)'
       });
       if (!UIK.isReduced()) ring.animate(
         [{ transform: 'rotate(0)' }, { transform: 'rotate(360deg)' }], { duration: 900, iterations: Infinity });
-      var txt = U.el('div'); U.css(txt, { fontSize: '11.5px', color: '#98a1b8' });
+      var txt = U.el('div'); U.css(txt, { fontSize: '11.5px', color: 'var(--d-dim)' });
       txt.textContent = '正在加载页面数据…';
       ov.appendChild(ring); ov.appendChild(txt); h.appendChild(ov);
       var on = true;
@@ -58,9 +58,9 @@
     mount: function (stage, ctx) {
       var h = host(stage);
       var sk = U.el('div'); U.css(sk, { width: '100%', display: 'flex', flexDirection: 'column', gap: '9px', padding: '4px' });
-      function bar(w, hh) { var b = U.el('div'); U.css(b, { width: w, height: hh, borderRadius: '7px', background: '#232b3d' }); return b; }
+      function bar(w, hh) { var b = U.el('div'); U.css(b, { width: w, height: hh, borderRadius: '7px', background: 'var(--d-track)' }); return b; }
       var r1 = U.el('div'); U.css(r1, { display: 'flex', gap: '10px', alignItems: 'center' });
-      var dot = U.el('div'); U.css(dot, { width: '34px', height: '34px', borderRadius: '50%', background: '#232b3d', flex: '0 0 34px' });
+      var dot = U.el('div'); U.css(dot, { width: '34px', height: '34px', borderRadius: '50%', background: 'var(--d-track)', flex: '0 0 34px' });
       var rc = U.el('div'); U.css(rc, { display: 'flex', flexDirection: 'column', gap: '6px', flex: '1' });
       rc.appendChild(bar('62%', '11px')); rc.appendChild(bar('38%', '9px'));
       r1.appendChild(dot); r1.appendChild(rc);
@@ -88,7 +88,7 @@
       var wrap = U.el('div'); U.css(wrap, { width: '100%', display: 'flex', flexDirection: 'column', gap: '10px' });
       [0, 1, 2].forEach(function (i) {
         var line = U.el('div'); U.css(line, {
-          position: 'relative', height: i === 0 ? '34px' : '12px', borderRadius: '8px', background: '#1e2534', overflow: 'hidden'
+          position: 'relative', height: i === 0 ? '34px' : '12px', borderRadius: '8px', background: 'var(--d-track)', overflow: 'hidden'
         });
         if (i === 0) line.style.width = '70%'; else line.style.width = i === 1 ? '100%' : '82%';
         var gl = U.el('div');
@@ -113,7 +113,7 @@
       var h = host(stage);
       var box = U.el('div'); U.css(box, { display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '10px' });
       var sp = U.el('div'); U.css(sp, {
-        width: '32px', height: '32px', borderRadius: '50%', border: '3px solid #2b3348', borderTopColor: '#6ea8fe'
+        width: '32px', height: '32px', borderRadius: '50%', border: '3px solid var(--d-border)', borderTopColor: 'var(--d-accent)'
       });
       var txt = U.el('div', 'd-val', '处理中…');
       box.appendChild(sp); box.appendChild(txt); h.appendChild(box);
@@ -131,8 +131,8 @@
     mount: function (stage, ctx) {
       var h = host(stage);
       var box = U.el('div'); U.css(box, { width: '100%', display: 'flex', flexDirection: 'column', gap: '8px' });
-      var track = U.el('div'); U.css(track, { height: '8px', background: '#232b3a', borderRadius: '4px', overflow: 'hidden' });
-      var fill = U.el('div'); U.css(fill, { height: '100%', width: '0', background: 'linear-gradient(90deg,#6ea8fe,#4ade80)', borderRadius: '4px' });
+      var track = U.el('div'); U.css(track, { height: '8px', background: 'var(--d-track)', borderRadius: '4px', overflow: 'hidden' });
+      var fill = U.el('div'); U.css(fill, { height: '100%', width: '0', background: 'var(--d-accent)', borderRadius: '4px' });
       track.appendChild(fill);
       var txt = U.el('div', 'd-val', '0%');
       box.appendChild(track); box.appendChild(txt); h.appendChild(box);
@@ -161,12 +161,12 @@
       var box = U.el('div'); U.css(box, { position: 'relative', width: '86px', height: '86px' });
       var svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
       svg.setAttribute('viewBox', '0 0 86 86'); svg.setAttribute('width', '86'); svg.setAttribute('height', '86');
-      svg.innerHTML = '<circle cx="43" cy="43" r="34" fill="none" stroke="#232b3a" stroke-width="8"/>' +
-        '<circle id="arc" cx="43" cy="43" r="34" fill="none" stroke="#6ea8fe" stroke-width="8" stroke-linecap="round" ' +
+      svg.innerHTML = '<circle cx="43" cy="43" r="34" fill="none" style="stroke:var(--d-track)" stroke-width="8"/>' +
+        '<circle id="arc" cx="43" cy="43" r="34" fill="none" style="stroke:var(--d-accent)" stroke-width="8" stroke-linecap="round" ' +
         'stroke-dasharray="213.6" stroke-dashoffset="213.6" transform="rotate(-90 43 43)"/>';
       box.appendChild(svg);
       var txt = U.el('div', 'd-val', '0%');
-      U.css(txt, { position: 'absolute', inset: '0', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '13px', color: '#e6e9f2' });
+      U.css(txt, { position: 'absolute', inset: '0', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '13px', color: 'var(--d-text)' });
       box.appendChild(txt); h.appendChild(box);
       var arc = svg.querySelector('#arc'), C = 2 * Math.PI * 34, p = 0;
       function set(v) { arc.setAttribute('stroke-dashoffset', String(C * (1 - v / 100))); txt.textContent = v + '%'; }
@@ -188,7 +188,7 @@
       h.appendChild(btn);
       var sp = U.el('span'); U.css(sp, {
         width: '14px', height: '14px', borderRadius: '50%', border: '2px solid rgba(11,13,18,.35)',
-        borderTopColor: '#0b0d12', display: 'none'
+        borderTopColor: 'var(--d-panel)', display: 'none'
       });
       btn.insertBefore(sp, btn.firstChild);
       var busy = false;

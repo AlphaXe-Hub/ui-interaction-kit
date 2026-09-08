@@ -1,4 +1,4 @@
-/* 05 折叠组件 · Collapse Components (8) */
+﻿/* 05 折叠组件 · Collapse Components (8) */
 (function () {
   var U = UIK.util;
   function panelHeight(el, open) {
@@ -18,15 +18,15 @@
         ['通知设置', '分别控制站内消息、邮件与短信的推送范围与频率。'],
         ['数据权限', '决定当前账号可查看的业务范围与字段级别。']
       ].map(function (g) {
-        var item = U.el('div'); U.css(item, { border: '1px solid #2b3348', borderRadius: '10px', marginBottom: '7px', overflow: 'hidden', background: '#161a24' });
+        var item = U.el('div'); U.css(item, { border: '1px solid var(--d-border)', borderRadius: '10px', marginBottom: '7px', overflow: 'hidden', background: 'var(--d-panel-2)' });
         var h = U.el('button'); h.type = 'button';
         U.css(h, {
           width: '100%', display: 'flex', justifyContent: 'space-between', alignItems: 'center', background: 'transparent',
-          border: 'none', color: '#e6e9f2', padding: '10px 12px', fontSize: '12.5px', cursor: 'pointer'
+          border: 'none', color: 'var(--d-text)', padding: '10px 12px', fontSize: '12.5px', cursor: 'pointer'
         });
-        h.innerHTML = '<span>' + g[0] + '</span><span class="cv" style="color:#98a1b8;transition:' + (UIK.isReduced() ? 'none' : 'transform .3s') + '">▾</span>';
+        h.innerHTML = '<span>' + g[0] + '</span><span class="cv" style="color:var(--d-dim);transition:' + (UIK.isReduced() ? 'none' : 'transform .3s') + '">▾</span>';
         var p = U.el('div'); U.css(p, { height: '0', overflow: 'hidden', transition: UIK.isReduced() ? 'none' : 'height .32s cubic-bezier(.4,0,.2,1)' });
-        var inner = U.el('div'); U.css(inner, { padding: '0 12px 12px', color: '#98a1b8', fontSize: '11.5px' });
+        var inner = U.el('div'); U.css(inner, { padding: '0 12px 12px', color: 'var(--d-dim)', fontSize: '11.5px' });
         inner.textContent = g[1];
         p.appendChild(inner); item.appendChild(h); item.appendChild(p); box.appendChild(item);
         return { item: item, h: h, p: p, cv: h.querySelector('.cv'), open: false };
@@ -37,13 +37,13 @@
           var willOpen = !g.open;
           groups.forEach(function (o) {
             o.open = false; panelHeight(o.p, false);
-            o.item.style.borderColor = '#2b3348';
+            o.item.style.borderColor = 'var(--d-border)';
             o.cv.style.transform = 'rotate(0)';
             o.h.setAttribute('aria-expanded', 'false');
           });
           g.open = willOpen;
           panelHeight(g.p, willOpen);
-          g.item.style.borderColor = willOpen ? '#6ea8fe' : '#2b3348';
+          g.item.style.borderColor = willOpen ? 'var(--d-accent)' : 'var(--d-border)';
           g.cv.style.transform = willOpen ? 'rotate(180deg)' : 'rotate(0)';
           g.h.setAttribute('aria-expanded', willOpen ? 'true' : 'false');
         });
@@ -60,12 +60,12 @@
     mount: function (stage, ctx) {
       var box = U.el('div'); U.css(box, { width: '100%' });
       [['订单信息', '订单编号、创建时间、关联客户与负责人。'], ['付款计划', '分三期回款，首期 30%，验收后付清尾款。']].forEach(function (g) {
-        var item = U.el('div'); U.css(item, { border: '1px solid #2b3348', borderRadius: '10px', marginBottom: '8px', background: '#161a24', overflow: 'hidden' });
+        var item = U.el('div'); U.css(item, { border: '1px solid var(--d-border)', borderRadius: '10px', marginBottom: '8px', background: 'var(--d-panel-2)', overflow: 'hidden' });
         var h = U.el('button'); h.type = 'button';
-        U.css(h, { width: '100%', display: 'flex', justifyContent: 'space-between', background: 'transparent', border: 'none', color: '#e6e9f2', padding: '10px 12px', fontSize: '12.5px', cursor: 'pointer' });
-        h.innerHTML = '<span>' + g[0] + '</span><span class="cv" style="color:#98a1b8;transition:' + (UIK.isReduced() ? 'none' : 'transform .3s') + '">▾</span>';
+        U.css(h, { width: '100%', display: 'flex', justifyContent: 'space-between', background: 'transparent', border: 'none', color: 'var(--d-text)', padding: '10px 12px', fontSize: '12.5px', cursor: 'pointer' });
+        h.innerHTML = '<span>' + g[0] + '</span><span class="cv" style="color:var(--d-dim);transition:' + (UIK.isReduced() ? 'none' : 'transform .3s') + '">▾</span>';
         var p = U.el('div'); U.css(p, { height: '0', overflow: 'hidden', transition: UIK.isReduced() ? 'none' : 'height .32s cubic-bezier(.4,0,.2,1)' });
-        var inner = U.el('div'); U.css(inner, { padding: '0 12px 12px', color: '#98a1b8', fontSize: '11.5px' });
+        var inner = U.el('div'); U.css(inner, { padding: '0 12px 12px', color: 'var(--d-dim)', fontSize: '11.5px' });
         inner.textContent = g[1];
         p.appendChild(inner); item.appendChild(h); item.appendChild(p); box.appendChild(item);
         var open = false;
@@ -89,15 +89,15 @@
       var box = U.el('div'); U.css(box, { position: 'relative', width: '200px' });
       var btn = U.el('button', 'd-btn', '排序方式：默认 ▾'); btn.type = 'button';
       var menu = U.el('div'); U.css(menu, {
-        position: 'absolute', top: '38px', left: '0', right: '0', background: '#1c2130', border: '1px solid #2b3348',
+        position: 'absolute', top: '38px', left: '0', right: '0', background: 'var(--d-panel)', border: '1px solid var(--d-border)',
         borderRadius: '10px', overflow: 'hidden', opacity: '0', transform: 'translateY(-6px)', pointerEvents: 'none', zIndex: 6
       });
       UIK.tx(menu, 'opacity .18s,transform .18s');
       ['默认', '创建时间', '金额从高到低', '临近截止'].forEach(function (t) {
         var o = U.el('button'); o.type = 'button';
-        U.css(o, { display: 'block', width: '100%', textAlign: 'left', background: 'transparent', border: 'none', color: '#e6e9f2', padding: '9px 12px', fontSize: '12px', cursor: 'pointer' });
+        U.css(o, { display: 'block', width: '100%', textAlign: 'left', background: 'transparent', border: 'none', color: 'var(--d-text)', padding: '9px 12px', fontSize: '12px', cursor: 'pointer' });
         o.textContent = t;
-        o.addEventListener('mouseenter', function () { o.style.background = '#232b3d'; });
+        o.addEventListener('mouseenter', function () { o.style.background = 'var(--d-track)'; });
         o.addEventListener('mouseleave', function () { o.style.background = 'transparent'; });
         ctx.on(o, 'click', function () { btn.textContent = '排序方式：' + t + ' ▾'; close(); btn.focus(); });
         menu.appendChild(o);
@@ -130,10 +130,10 @@
         items.forEach(function (item) {
           var row = U.el('div'); U.css(row, {
             display: 'flex', alignItems: 'center', gap: '7px', padding: '5px 6px', borderRadius: '7px',
-            cursor: item.c ? 'pointer' : 'default', color: item.c ? '#e6e9f2' : '#98a1b8', paddingLeft: (6 + depth * 15) + 'px'
+            cursor: item.c ? 'pointer' : 'default', color: item.c ? 'var(--d-text)' : 'var(--d-dim)', paddingLeft: (6 + depth * 15) + 'px'
           });
           var cv = U.el('span', null, item.c ? '▸' : '·');
-          U.css(cv, { color: '#6f7994', display: 'inline-block', transition: UIK.isReduced() ? 'none' : 'transform .25s', width: '10px' });
+          U.css(cv, { color: 'var(--d-dim-2)', display: 'inline-block', transition: UIK.isReduced() ? 'none' : 'transform .25s', width: '10px' });
           row.appendChild(cv); row.appendChild(U.el('span', null, item.t));
           host.appendChild(row);
           if (!item.c) return;
@@ -162,13 +162,13 @@
     hint: '点击卡片就地展开，不跳转到新页面。',
     mount: function (stage, ctx) {
       var card = U.el('div'); U.css(card, {
-        width: '100%', background: '#161a24', border: '1px solid #2b3348', borderRadius: '12px', overflow: 'hidden', cursor: 'pointer'
+        width: '100%', background: 'var(--d-panel-2)', border: '1px solid var(--d-border)', borderRadius: '12px', overflow: 'hidden', cursor: 'pointer'
       });
       var head = U.el('div'); U.css(head, { padding: '12px 14px' });
-      head.innerHTML = '<div style="display:flex;justify-content:space-between;align-items:center"><span style="font-size:13px;font-weight:600">商机 #2041</span><span style="font-size:11px;color:#6ea8fe">展开 ▾</span></div>' +
-        '<div style="font-size:11.5px;color:#98a1b8;margin-top:4px">摘要：市政管网改造 · 预计 320 万 · 当前阶段 L4</div>';
+      head.innerHTML = '<div style="display:flex;justify-content:space-between;align-items:center"><span style="font-size:13px;font-weight:600">商机 #2041</span><span style="font-size:11px;color:var(--d-accent)">展开 ▾</span></div>' +
+        '<div style="font-size:11.5px;color:var(--d-dim);margin-top:4px">摘要：市政管网改造 · 预计 320 万 · 当前阶段 L4</div>';
       var body = U.el('div'); U.css(body, { height: '0', overflow: 'hidden', transition: UIK.isReduced() ? 'none' : 'height .34s cubic-bezier(.4,0,.2,1)' });
-      var inner = U.el('div'); U.css(inner, { padding: '0 14px 14px', fontSize: '11.5px', color: '#98a1b8' });
+      var inner = U.el('div'); U.css(inner, { padding: '0 14px 14px', fontSize: '11.5px', color: 'var(--d-dim)' });
       inner.innerHTML = '负责人：张三 · 创建时间：2026-08-12<br>最新跟进：已完成方案评审，等待预算批复。<br>下一步：9 月 10 日前提交报价单。';
       body.appendChild(inner); card.appendChild(head); card.appendChild(body); stage.appendChild(card);
       var open = false;
@@ -188,20 +188,20 @@
     mount: function (stage, ctx) {
       var wrap = U.el('div'); U.css(wrap, { display: 'flex', width: '100%', height: '176px', gap: '10px' });
       var sb = U.el('div'); U.css(sb, {
-        width: '56px', background: '#161a24', border: '1px solid #2b3348', borderRadius: '12px', padding: '10px 0',
+        width: '56px', background: 'var(--d-panel-2)', border: '1px solid var(--d-border)', borderRadius: '12px', padding: '10px 0',
         display: 'flex', flexDirection: 'column', gap: '6px', overflow: 'hidden', flex: '0 0 auto'
       });
       UIK.tx(sb, 'width .38s cubic-bezier(.4,0,.2,1)');
       var items = [];
       [['◎', '工作台'], ['▤', '客户'], ['◈', '商机'], ['▣', '项目'], ['⚙', '设置']].forEach(function (p, i) {
-        var r = U.el('div'); U.css(r, { display: 'flex', alignItems: 'center', gap: '10px', padding: '8px 16px', cursor: 'pointer', color: i === 0 ? '#6ea8fe' : '#98a1b8', whiteSpace: 'nowrap' });
+        var r = U.el('div'); U.css(r, { display: 'flex', alignItems: 'center', gap: '10px', padding: '8px 16px', cursor: 'pointer', color: i === 0 ? 'var(--d-accent)' : 'var(--d-dim)', whiteSpace: 'nowrap' });
         var ic = U.el('span', null, p[0]); U.css(ic, { width: '16px', textAlign: 'center', flex: '0 0 16px' });
         var tx = U.el('span', null, p[1]); U.css(tx, { fontSize: '12px', opacity: '0', transition: UIK.isReduced() ? 'none' : 'opacity .25s' });
         r.appendChild(ic); r.appendChild(tx); sb.appendChild(r); items.push(tx);
       });
       var main = U.el('div'); U.css(main, {
-        flex: '1', background: '#10141d', border: '1px solid #232b3a', borderRadius: '12px',
-        display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#6f7994', fontSize: '11.5px'
+        flex: '1', background: 'var(--d-hole)', border: '1px solid var(--d-track)', borderRadius: '12px',
+        display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--d-dim-2)', fontSize: '11.5px'
       });
       main.textContent = '内容区';
       wrap.appendChild(sb); wrap.appendChild(main); stage.appendChild(wrap);
@@ -228,15 +228,15 @@
       var hub = U.el('button'); hub.type = 'button';
       U.css(hub, {
         width: '48px', height: '48px', borderRadius: '50%', border: 'none', cursor: 'pointer', zIndex: 3,
-        background: 'linear-gradient(135deg,#6ea8fe,#a78bfa)', color: '#0b0d12', fontSize: '18px', fontWeight: '700'
+        background: 'var(--d-accent)', color: 'var(--d-inv-text)', fontSize: '18px', fontWeight: '700'
       });
       hub.textContent = '+';
       host.appendChild(hub);
       var items = ['新建', '导入', '扫描', '分享'].map(function (t, i) {
         var b = U.el('button'); b.type = 'button';
         U.css(b, {
-          position: 'absolute', width: '46px', height: '46px', borderRadius: '50%', border: '1px solid #3a4255',
-          background: '#1c2130', color: '#e6e9f2', fontSize: '11px', cursor: 'pointer', left: '50%', top: '50%',
+          position: 'absolute', width: '46px', height: '46px', borderRadius: '50%', border: '1px solid var(--d-border)',
+          background: 'var(--d-panel)', color: 'var(--d-text)', fontSize: '11px', cursor: 'pointer', left: '50%', top: '50%',
           marginLeft: '-23px', marginTop: '-23px', transition: UIK.isReduced() ? 'none' : 'transform .42s cubic-bezier(.34,1.4,.64,1),opacity .3s',
           transform: 'translate(0,0) scale(.4)', opacity: '0'
         });
@@ -268,20 +268,20 @@
     mount: function (stage, ctx) {
       var host = U.el('div'); U.css(host, { position: 'relative', width: '100%', height: '190px' });
       var card = U.el('div', 'grab'); U.css(card, {
-        width: '120px', height: '80px', borderRadius: '12px', background: 'linear-gradient(135deg,#34d399,#6ea8fe)',
-        cursor: 'pointer', display: 'flex', alignItems: 'flex-end', padding: '8px', color: '#0b0d12', fontSize: '11.5px', fontWeight: '600'
+        width: '120px', height: '80px', borderRadius: '12px', background: 'var(--d-ok)',
+        cursor: 'pointer', display: 'flex', alignItems: 'flex-end', padding: '8px', color: 'var(--d-inv-text)', fontSize: '11.5px', fontWeight: '600'
       });
       card.textContent = '项目概览';
       U.css(card, { position: 'absolute', left: '12px', top: '16px' });
       host.appendChild(card);
       var detail = U.el('div'); U.css(detail, {
         position: 'absolute', left: '12px', top: '16px', width: '120px', height: '80px', borderRadius: '12px',
-        background: '#1c2130', border: '1px solid #2b3348', overflow: 'hidden', opacity: '0', pointerEvents: 'none', zIndex: 5
+        background: 'var(--d-panel)', border: '1px solid var(--d-border)', overflow: 'hidden', opacity: '0', pointerEvents: 'none', zIndex: 5
       });
       UIK.tx(detail, 'left .44s cubic-bezier(.3,1,.4,1),top .44s cubic-bezier(.3,1,.4,1),width .44s cubic-bezier(.3,1,.4,1),height .44s cubic-bezier(.3,1,.4,1),opacity .3s,border-radius .44s');
-      var hd = U.el('div'); U.css(hd, { height: '46px', background: 'linear-gradient(135deg,#34d399,#6ea8fe)' });
-      var bd = U.el('div'); U.css(bd, { padding: '10px 12px', fontSize: '11.5px', color: '#98a1b8', opacity: '0', transition: UIK.isReduced() ? 'none' : 'opacity .3s .16s' });
-      bd.innerHTML = '<div style="color:#e6e9f2;font-size:13px;font-weight:600;margin-bottom:4px">项目详情</div>容器从小卡片连续放大到详情视图，主体不跳变。';
+      var hd = U.el('div'); U.css(hd, { height: '46px', background: 'var(--d-ok)' });
+      var bd = U.el('div'); U.css(bd, { padding: '10px 12px', fontSize: '11.5px', color: 'var(--d-dim)', opacity: '0', transition: UIK.isReduced() ? 'none' : 'opacity .3s .16s' });
+      bd.innerHTML = '<div style="color:var(--d-text);font-size:13px;font-weight:600;margin-bottom:4px">项目详情</div>容器从小卡片连续放大到详情视图，主体不跳变。';
       detail.appendChild(hd); detail.appendChild(bd); host.appendChild(detail);
       host.appendChild(card); stage.appendChild(host);
       var open = false;

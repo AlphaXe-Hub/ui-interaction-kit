@@ -1,4 +1,4 @@
-/* 01 质感动效 · Motion Texture (8) */
+﻿/* 01 质感动效 · Motion Texture (8) */
 (function () {
   var U = UIK.util;
 
@@ -13,19 +13,19 @@
       [[0.24, 0.62], [0.76, 0.62]].forEach(function (p, i) {
         var s = U.el('div'); U.css(s, {
           position: 'absolute', width: '62px', height: '62px', borderRadius: '14px',
-          border: '2px dashed #3a4255', left: 'calc(' + (p[0] * 100) + '% - 31px)', top: 'calc(' + (p[1] * 100) + '% - 31px)',
-          display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#6f7994', fontSize: '11px', transition: 'border-color .2s,background .2s,color .2s'
+          border: '2px dashed var(--d-border)', left: 'calc(' + (p[0] * 100) + '% - 31px)', top: 'calc(' + (p[1] * 100) + '% - 31px)',
+          display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--d-dim-2)', fontSize: '11px', transition: 'border-color .2s,background .2s,color .2s'
         });
         s.textContent = '槽位 ' + (i ? 'B' : 'A');
         box.appendChild(s); slots.push(s);
       });
       var ball = U.el('div', 'grab'); U.css(ball, {
         position: 'absolute', width: '44px', height: '44px', borderRadius: '50%',
-        background: 'linear-gradient(145deg,#6ea8fe,#a78bfa)', boxShadow: '0 6px 18px rgba(110,168,254,.35)',
+        background: 'var(--d-accent)', boxShadow: '0 6px 18px rgba(110,168,254,.35)',
         left: '0px', top: '0px', zIndex: 3
       });
       box.appendChild(ball);
-      var info = U.el('div', 'd-val'); U.css(info, { position: 'absolute', left: '0', top: '0', color: '#98a1b8' });
+      var info = U.el('div', 'd-val'); U.css(info, { position: 'absolute', left: '0', top: '0', color: 'var(--d-dim)' });
       box.appendChild(info);
       stage.appendChild(box);
 
@@ -41,7 +41,7 @@
       ctx.on(window, 'resize', function () { W = box.clientWidth; H = box.clientHeight; home = { x: W / 2, y: 34 }; });
 
       ctx.clean(U.drag(ball, {
-        onStart: function () { dragging = true; if (placed >= 0) { slots[placed].style.borderColor = '#3a4255'; slots[placed].style.background = 'transparent'; slots[placed].style.color = '#6f7994'; placed = -1; } },
+        onStart: function () { dragging = true; if (placed >= 0) { slots[placed].style.borderColor = 'var(--d-border)'; slots[placed].style.background = 'transparent'; slots[placed].style.color = 'var(--d-dim-2)'; placed = -1; } },
         onMove: function (e) {
           var b = box.getBoundingClientRect();
           raw.x = U.clamp(e.clientX - b.left, 22, W - 22);
@@ -57,7 +57,7 @@
           if (bd < 46) {
             var c = slotCenter(best);
             placed = best; raw.x = c.x; raw.y = c.y;
-            slots[best].style.borderColor = '#4ade80'; slots[best].style.background = 'rgba(74,222,128,.12)'; slots[best].style.color = '#4ade80';
+            slots[best].style.borderColor = 'var(--d-ok)'; slots[best].style.background = 'rgba(74,222,128,.12)'; slots[best].style.color = 'var(--d-ok)';
           } else { raw.x = home.x; raw.y = home.y; }
         }
       }));
@@ -97,15 +97,15 @@
       var shell = U.el('div', 'grab');
       U.css(shell, {
         position: 'absolute', width: '176px', height: '104px', borderRadius: '16px',
-        background: 'linear-gradient(145deg,#2a3348,#1b2233)', border: '1px solid #2f3850',
+        background: 'var(--d-panel)', border: '1px solid var(--d-border)',
         boxShadow: '0 10px 26px rgba(0,0,0,.35)', willChange: 'transform', transformOrigin: 'center'
       });
       var inner = U.el('div');
       U.css(inner, { position: 'absolute', inset: '0', padding: '12px 14px', transformOrigin: 'center' });
       inner.innerHTML = '<div style="font-size:13px;font-weight:600">可拖动卡片</div>' +
-        '<div style="font-size:11.5px;color:#98a1b8;margin-top:6px">外壳随速度形变，正文反向补偿保持可读。</div>';
+        '<div style="font-size:11.5px;color:var(--d-dim);margin-top:6px">外壳随速度形变，正文反向补偿保持可读。</div>';
       shell.appendChild(inner); box.appendChild(shell);
-      var meter = U.el('div', 'd-val'); U.css(meter, { position: 'absolute', right: '0', top: '0', color: '#98a1b8' });
+      var meter = U.el('div', 'd-val'); U.css(meter, { position: 'absolute', right: '0', top: '0', color: 'var(--d-dim)' });
       box.appendChild(meter); stage.appendChild(box);
 
       var W = box.clientWidth, H = box.clientHeight;
@@ -132,7 +132,7 @@
         if (!dragging) { var f = Math.pow(0.001, dt); vx *= f; vy *= f; }
         else if (performance.now() - (last ? last.t : 0) > 60) { vx *= 0.85; vy *= 0.85; }
         var sp = Math.hypot(vx, vy);
-        var amp = Math.min(sp * 0.55, 0.26);           // 幅度上限
+        var amp = Math.min(sp * 0.26, 0.11);           // 幅度上限（克制，不遮挡正文）
         var ang = sp > 0.02 ? Math.atan2(vy, vx) * 180 / Math.PI : sAng.t;
         sAmp.t = amp; sAng.t = ang;
         sAmp.step(dt); sAng.step(dt);
@@ -141,7 +141,7 @@
         inner.style.transform = 'rotate(' + (-d) + 'deg) scale(' + (1 - a * 0.72) + ',' + (1 + a * 0.45) + ') rotate(' + d + 'deg)';
         meter.textContent = '速度 ' + (sp * 1000).toFixed(0) + ' px/s · 形变 ' + (a * 100).toFixed(0) + '%';
       });
-      ctx.hint('同样距离、不同速度 → 形变不同；上限 26%');
+      ctx.hint('同样距离、不同速度 → 形变不同；上限 11%，正文保持可读');
     }
   });
 
@@ -154,20 +154,25 @@
       var wrap = U.el('div'); U.css(wrap, { perspective: '700px', width: '100%', display: 'flex', justifyContent: 'center' });
       var card = U.el('div'); U.css(card, {
         position: 'relative', width: '250px', height: '150px', borderRadius: '16px', overflow: 'hidden',
-        transformStyle: 'preserve-3d', background: '#141a28', border: '1px solid #2b3348', willChange: 'transform'
+        transformStyle: 'preserve-3d', background: 'var(--d-panel-2)', border: '1px solid var(--d-border)', willChange: 'transform'
       });
       var bg = U.el('div'); U.css(bg, {
-        position: 'absolute', inset: '-14%', background: 'radial-gradient(80% 80% at 30% 20%,#3b4a72,#111726 70%)'
+        position: 'absolute', inset: '-14%', background: 'var(--d-hole)'
       });
       var mid = U.el('div'); U.css(mid, {
         position: 'absolute', left: '50%', top: '46%', width: '86px', height: '86px', marginLeft: '-43px', marginTop: '-43px',
-        borderRadius: '24px', background: 'linear-gradient(145deg,#a78bfa,#6ea8fe)', opacity: '.95'
+        borderRadius: '24px', background: 'var(--d-accent-2)', opacity: '.95'
       });
       var fg = U.el('div'); U.css(fg, {
         position: 'absolute', left: '0', right: '0', bottom: '14px', textAlign: 'center'
       });
-      fg.innerHTML = '<div style="font-size:14px;font-weight:600">前景标题</div><div style="font-size:11px;color:#98a1b8">中景 / 背景按不同深度位移</div>';
-      card.appendChild(bg); card.appendChild(mid); card.appendChild(fg);
+      fg.innerHTML = '<div style="font-size:14px;font-weight:600">前景标题</div><div style="font-size:11px;color:var(--d-dim)">中景 / 背景按不同深度位移</div>';
+      var near = U.el('div'); U.css(near, {
+        position: 'absolute', right: '14px', top: '12px', padding: '4px 9px', borderRadius: '999px',
+        background: 'var(--d-accent)', color: 'var(--d-inv-text)', fontSize: '10.5px', fontWeight: '600'
+      });
+      near.textContent = '最前景 NEW';
+      card.appendChild(bg); card.appendChild(mid); card.appendChild(fg); card.appendChild(near);
       wrap.appendChild(card); stage.appendChild(wrap);
 
       var nx = new U.Spring(0, 120, 18), ny = new U.Spring(0, 120, 18);
@@ -184,11 +189,12 @@
         nx.step(dt); ny.step(dt);
         var x = nx.v, y = ny.v;
         card.style.transform = 'rotateX(' + (-y * 8) + 'deg) rotateY(' + (x * 9) + 'deg)';
+        near.style.transform = 'translate3d(' + (x * 24) + 'px,' + (y * 18) + 'px,60px)';
         fg.style.transform = 'translate3d(' + (x * 16) + 'px,' + (y * 12) + 'px,42px)';
         mid.style.transform = 'translate3d(' + (x * 9) + 'px,' + (y * 7) + 'px,20px)';
         bg.style.transform = 'translate3d(' + (x * 4) + 'px,' + (y * 3) + 'px,0) scale(1.06)';
       });
-      ctx.hint('前景 16px / 中景 9px / 背景 4px，最大倾斜 9°');
+      ctx.hint('四层深度：最前景 24px / 前景 16px / 中景 9px / 背景 4px，最大倾斜 9°');
     }
   });
 
@@ -206,9 +212,9 @@
       ['一月', '二月', '三月', '四月', '五月', '六月', '七月'].forEach(function (t, i) {
         var c = U.el('div'); U.css(c, {
           flex: '0 0 auto', width: '96px', height: '132px', borderRadius: '14px',
-          background: 'linear-gradient(160deg,#' + (30 + i * 6) + '3450,#1a2135)',
-          border: '1px solid #2c3550', display: 'flex', alignItems: 'center', justifyContent: 'center',
-          fontSize: '13px', color: '#dbe3f5', willChange: 'transform'
+          background: 'var(--d-panel-2)',
+          border: '1px solid var(--d-border)', display: 'flex', alignItems: 'center', justifyContent: 'center',
+          fontSize: '13px', color: 'var(--d-text)', willChange: 'transform'
         });
         c.textContent = t; scroller.appendChild(c); cards.push(c);
       });
@@ -232,7 +238,7 @@
           var s = 1.14 - 0.24 * d, o = 1 - 0.42 * d;
           c.style.transform = 'scale(' + s.toFixed(3) + ')';
           c.style.opacity = o.toFixed(2);
-          c.style.borderColor = d < 0.18 ? '#6ea8fe' : '#2c3550';
+          c.style.borderColor = d < 0.18 ? 'var(--d-accent)' : 'var(--d-border)';
         });
       }
       ctx.raf(function () { if (dirty) apply(); });
@@ -249,12 +255,12 @@
     hint: '连续快速点击各标签；指示块从当前形态接续，最终停在最后一次选择。',
     mount: function (stage, ctx) {
       var bar = U.el('div'); U.css(bar, {
-        position: 'relative', display: 'flex', gap: '2px', background: '#121724',
-        border: '1px solid #262e40', borderRadius: '999px', padding: '5px', width: '100%'
+        position: 'relative', display: 'flex', gap: '2px', background: 'var(--d-chip)',
+        border: '1px solid var(--d-border)', borderRadius: '999px', padding: '5px', width: '100%'
       });
       var ind = U.el('div'); U.css(ind, {
         position: 'absolute', top: '5px', bottom: '5px', left: '0', width: '0',
-        borderRadius: '999px', background: 'linear-gradient(90deg,#6ea8fe,#a78bfa)', zIndex: 0
+        borderRadius: '999px', background: 'var(--d-accent)', zIndex: 0
       });
       bar.appendChild(ind);
       var labels = ['首页', '发现推荐', '消息', '我的'];
@@ -263,7 +269,7 @@
         b.type = 'button';
         U.css(b, {
           position: 'relative', zIndex: 1, flex: '1 1 auto', background: 'transparent', border: 'none',
-          color: '#98a1b8', padding: '8px 6px', fontSize: '12.5px', cursor: 'pointer', borderRadius: '999px', minHeight: '34px'
+          color: 'var(--d-dim)', padding: '8px 6px', fontSize: '12.5px', cursor: 'pointer', borderRadius: '999px', minHeight: '34px'
         });
         b.setAttribute('role', 'tab');
         bar.appendChild(b); return b;
@@ -277,7 +283,7 @@
         cur = i;
         var br = bar.getBoundingClientRect(), r = tabs[i].getBoundingClientRect();
         a.t = r.left - br.left; b2.t = r.right - br.left;
-        tabs.forEach(function (t, k) { t.style.color = k === i ? '#0b0d12' : '#98a1b8'; t.setAttribute('aria-selected', k === i ? 'true' : 'false'); });
+        tabs.forEach(function (t, k) { t.style.color = k === i ? 'var(--d-panel)' : 'var(--d-dim)'; t.setAttribute('aria-selected', k === i ? 'true' : 'false'); });
       }
       tabs.forEach(function (t, i) {
         ctx.on(t, 'click', function () { go(i); });
@@ -306,11 +312,11 @@
     mount: function (stage, ctx) {
       var grid = U.el('div'); U.css(grid, { display: 'flex', gap: '10px', width: '100%' });
       var thumbs = [];
-      [['linear-gradient(135deg,#f472b6,#a78bfa)', '作品 A'], ['linear-gradient(135deg,#34d399,#6ea8fe)', '作品 B'], ['linear-gradient(135deg,#fbbf24,#f87171)', '作品 C']].forEach(function (p, i) {
+      [['var(--d-accent-2)', '作品 A'], ['var(--d-ok)', '作品 B'], ['var(--d-warn)', '作品 C']].forEach(function (p, i) {
         var t = U.el('div', 'grab');
         U.css(t, {
           flex: '1 1 0', height: '112px', borderRadius: '12px', background: p[0], cursor: 'pointer',
-          display: 'flex', alignItems: 'flex-end', padding: '8px', color: '#0b0d12', fontSize: '11.5px', fontWeight: '600', transition: 'transform .18s'
+          display: 'flex', alignItems: 'flex-end', padding: '8px', color: 'var(--d-inv-text)', fontSize: '11.5px', fontWeight: '600', transition: 'transform .18s'
         });
         t.textContent = p[1]; grid.appendChild(t); thumbs.push(t);
       });
@@ -329,7 +335,7 @@
           transition: UIK.isReduced() ? 'none' : 'left .42s cubic-bezier(.2,.8,.2,1),top .42s cubic-bezier(.2,.8,.2,1),width .42s cubic-bezier(.2,.8,.2,1),height .42s cubic-bezier(.2,.8,.2,1),border-radius .42s'
         });
         var cap = U.el('div'); U.css(cap, {
-          position: 'fixed', left: '0', right: '0', bottom: '34px', textAlign: 'center', color: '#e6e9f2',
+          position: 'fixed', left: '0', right: '0', bottom: '34px', textAlign: 'center', color: 'var(--d-text)',
           fontSize: '13px', zIndex: 1001, opacity: '0', transition: UIK.isReduced() ? 'none' : 'opacity .3s .18s'
         });
         cap.textContent = '全屏视图 · 文字与按钮独立呈现，不随图片拉伸';
@@ -379,7 +385,7 @@
     mount: function (stage, ctx) {
       var box = U.el('div'); U.css(box, {
         position: 'relative', width: '100%', maxWidth: '300px', height: '168px',
-        borderRadius: '14px', overflow: 'hidden', background: '#0e121b', border: '1px solid #262e40'
+        borderRadius: '14px', overflow: 'hidden', background: 'var(--d-hole)', border: '1px solid var(--d-border)'
       });
       function page(txt, color, sub) {
         var p = U.el('div'); U.css(p, {
@@ -389,7 +395,7 @@
         p.innerHTML = '<div style="font-size:15px;font-weight:600">' + txt + '</div><div style="font-size:11.5px;opacity:.75;margin-top:4px">' + sub + '</div>';
         return p;
       }
-      var pages = [page('页面 A', 'linear-gradient(160deg,#1f2b47,#141a28)', '当前页面'), page('页面 B', 'linear-gradient(160deg,#3a2a4d,#1b2233)', '下一页')];
+      var pages = [page('页面 A', 'var(--d-panel)', '当前页面'), page('页面 B', 'var(--d-panel-2)', '下一页')];
       pages.forEach(function (p) { box.appendChild(p); });
       var bar = U.el('div', 'd-row'); U.css(bar, { marginTop: '10px', justifyContent: 'center' });
       var back = U.el('button', 'd-btn', '返回上一页'); var next = U.el('button', 'd-btn primary', '下一页');
@@ -397,16 +403,38 @@
       var wrap = U.el('div'); U.css(wrap, { display: 'flex', flexDirection: 'column', alignItems: 'center', width: '100%' });
       wrap.appendChild(box); wrap.appendChild(bar); stage.appendChild(wrap);
 
-      var prog = new U.Spring(0, 200, 26), dragging = false, startX = 0, startY = 0, lastX = 0, lastT = 0, vel = 0, dir = 0, cur = 0;
-      function reset() { prog.v = 0; prog.t = 0; prog.vel = 0; pages[0].style.opacity = '1'; }
+      var W = box.clientWidth || 280;
+      var prog = new U.Spring(0, 220, 28), dragging = false, startX = 0, startY = 0, lastX = 0, lastT = 0, vel = 0, dir = 0;
+      var mode = 'idle';              // idle = 跟随输入 / anim = 释放后收尾
+      var pendingFinalize = false;    // 收尾结束后需要交换层内容
+      var hist = [];                  // 返回用的历史
+
+      function render(p) {
+        p = U.clamp(p, 0, 1);
+        pages[1].style.transform = 'translateX(' + ((1 - p) * W) + 'px)';
+        pages[0].style.transform = 'translateX(' + (-p * W * 0.32) + 'px) scale(' + (1 - p * 0.06) + ')';
+        pages[0].style.opacity = String(1 - p);
+      }
+      function finalize() {
+        var h = pages[0].innerHTML, b = pages[0].style.background;
+        pages[0].innerHTML = pages[1].innerHTML; pages[0].style.background = pages[1].style.background;
+        pages[1].innerHTML = h; pages[1].style.background = b;
+        prog.v = 0; prog.t = 0; prog.vel = 0;
+        render(0);
+      }
+      ctx.on(window, 'resize', function () { W = box.clientWidth || W; render(prog.v); });
+
       ctx.clean(U.drag(box, {
-        onStart: function (e) { dragging = true; startX = lastX = e.clientX; startY = e.clientY; lastT = performance.now(); vel = 0; dir = 0; },
+        onStart: function (e) {
+          dragging = true; startX = lastX = e.clientX; startY = e.clientY;
+          lastT = performance.now(); vel = 0; dir = 0; mode = 'idle'; pendingFinalize = false;
+        },
         onMove: function (e) {
           var dx = e.clientX - startX, dy = e.clientY - startY;
           if (!dir && Math.abs(dx) > 10 && Math.abs(dx) > Math.abs(dy)) dir = dx < 0 ? -1 : 1;
           if (dir === -1) {
-            var w = box.clientWidth;
-            prog.t = U.clamp((startX - e.clientX) / w, 0, 1);
+            prog.t = U.clamp((startX - e.clientX) / W, 0, 1);
+            prog.v = prog.t; prog.vel = 0;            // 拖动期间直接映射，输入与画面同步
             var now = performance.now();
             vel = ((e.clientX - lastX) / Math.max(now - lastT, 8)) * 0.4 + vel * 0.6;
             lastX = e.clientX; lastT = now;
@@ -415,36 +443,42 @@
         onEnd: function () {
           dragging = false;
           if (dir === -1) {
-            if (vel < -0.45 || prog.t > 0.42) { commit(); } else { prog.t = 0; }
+            if (vel < -0.45 || prog.t > 0.42) {
+              hist.push({ html: pages[0].innerHTML, bg: pages[0].style.background });
+              prog.t = 1; mode = 'anim'; pendingFinalize = true;
+            } else { prog.t = 0; mode = 'anim'; }
           }
           dir = 0;
         }
       }));
-      function commit() {
-        prog.t = 1;
-        var done = false;
-        var stop = ctx.raf(function () {
-          if (!done && Math.abs(prog.v - 1) < 0.01) {
-            done = true; stop();
-            var t = pages[0].innerHTML; pages[0].innerHTML = pages[1].innerHTML;
-            pages[1].innerHTML = t;
-            var bg = pages[0].style.background; pages[0].style.background = pages[1].style.background; pages[1].style.background = bg;
-            cur = cur ? 0 : 1; reset();
-          }
-        });
+      function goBack() {
+        if (!hist.length) return;
+        var prev = hist.pop();
+        if (UIK.isReduced()) { pages[0].innerHTML = prev.html; pages[0].style.background = prev.bg; return; }
+        var h = pages[0].innerHTML, b = pages[0].style.background;
+        pages[0].innerHTML = prev.html; pages[0].style.background = prev.bg;
+        pages[1].innerHTML = h; pages[1].style.background = b;
+        prog.v = 1; prog.vel = 0; prog.t = 0; render(1);
+        mode = 'anim'; pendingFinalize = false;
       }
-      ctx.on(next, 'click', function () { if (UIK.isReduced()) { var t = pages[0].innerHTML; pages[0].innerHTML = pages[1].innerHTML; pages[1].innerHTML = t; } else commit(); });
-      ctx.on(back, 'click', function () { reset(); });
+      ctx.on(next, 'click', function () {
+        if (UIK.isReduced()) { finalize(); return; }
+        hist.push({ html: pages[0].innerHTML, bg: pages[0].style.background });
+        prog.t = 1; mode = 'anim'; pendingFinalize = true;
+      });
+      ctx.on(back, 'click', goBack);
 
       ctx.raf(function (dt) {
-        if (!dragging && prog.t !== 1) { /* spring handles */ }
-        prog.step(dt);
-        var p = prog.v, w = box.clientWidth;
-        pages[1].style.transform = 'translateX(' + ((1 - p) * w) + 'px)';
-        pages[0].style.transform = 'translateX(' + (-p * w * 0.32) + 'px) scale(' + (1 - p * 0.06) + ')';
-        pages[0].style.opacity = String(1 - p * 0.5);
+        if (mode === 'anim') {
+          prog.step(dt);
+          if (Math.abs(prog.v - prog.t) < 0.004 && Math.abs(prog.vel) < 0.06) {
+            prog.v = prog.t; prog.vel = 0; mode = 'idle';
+            if (pendingFinalize) { pendingFinalize = false; finalize(); }
+          }
+        }
+        render(prog.v);
       });
-      ctx.hint('甩动速度 < -0.45 px/ms 或进度 > 0.42 判定完成；取消回弹到 0');
+      ctx.hint('拖动时进度直接映射（跟手不抖动）；甩动 < -0.45 px/ms 或进度 > 0.42 判定完成');
     }
   });
 
@@ -456,11 +490,11 @@
     mount: function (stage, ctx) {
       var box = U.el('div'); U.css(box, {
         position: 'relative', width: '100%', height: '180px', borderRadius: '12px',
-        background: '#0e121b', border: '1px solid #262e40', overflow: 'hidden', touchAction: 'none'
+        background: 'var(--d-hole)', border: '1px solid var(--d-border)', overflow: 'hidden', touchAction: 'none'
       });
       stage.appendChild(box);
       var W = box.clientWidth, H = box.clientHeight;
-      var colors = ['#6ea8fe', '#a78bfa', '#4ade80', '#fbbf24', '#f87171', '#38bdf8', '#f472b6', '#34d399'];
+      var colors = ['var(--d-accent)', 'var(--d-accent-2)', 'var(--d-ok)', 'var(--d-warn)', 'var(--d-danger)', 'var(--d-accent)', 'var(--d-accent-2)', 'var(--d-ok)'];
       var names = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'];
       var bodies = [], nodes = [];
       for (var i = 0; i < 8; i++) {
@@ -472,7 +506,7 @@
         bodies.push(b);
         var n = U.el('div', 'grab'); U.css(n, {
           position: 'absolute', width: (r * 2) + 'px', height: (r * 2) + 'px', borderRadius: '50%',
-          background: colors[i], color: '#0b0d12', fontSize: '11px', fontWeight: '700',
+          background: colors[i], color: 'var(--d-inv-text)', fontSize: '11px', fontWeight: '700',
           display: 'flex', alignItems: 'center', justifyContent: 'center', left: '0', top: '0', willChange: 'transform'
         });
         n.textContent = names[i]; box.appendChild(n); nodes.push(n);

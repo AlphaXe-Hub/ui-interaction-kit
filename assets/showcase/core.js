@@ -220,6 +220,22 @@
     });
     document.getElementById('search').addEventListener('input', function (e) { filter(e.target.value); });
 
+    var themeBtn = document.getElementById('theme');
+    if (themeBtn) {
+      var saved = 'dark';
+      try { saved = localStorage.getItem('uik-theme') || 'dark'; } catch (e) {}
+      function applyTheme(t) {
+        document.documentElement.setAttribute('data-theme', t);
+        themeBtn.textContent = t === 'light' ? '深色主题' : '浅色主题';
+      }
+      applyTheme(saved);
+      themeBtn.addEventListener('click', function () {
+        var next = document.documentElement.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+        applyTheme(next);
+        try { localStorage.setItem('uik-theme', next); } catch (e) {}
+      });
+    }
+
     render();
   }
 
