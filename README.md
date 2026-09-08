@@ -4,7 +4,7 @@
 
 > 让 AI 选对交互：8 种质感动效、7 种图表交互、10 种 App 模式、7 + 8 展开与折叠、7 种导航、7 种弹窗、7 种加载，共 61 个词条，每个词条都有可运行的 Demo。
 
-**English version → [README_EN.md](./README_EN.md)**
+**English version → [README_EN.md](./README_EN.md)** · **在线 Demo → https://alphaxe-hub.github.io/ui-interaction-kit/**
 
 ![Demo overview](./docs/demo-overview.png)
 
@@ -127,6 +127,10 @@ Page Loader 整页加载 · Skeleton 骨架屏 · Shimmer 微光扫过 · Spinne
 </details>
 
 ## Demo：61 个可操作示例
+
+**在线体验（GitHub Pages，无需安装）**：https://alphaxe-hub.github.io/ui-interaction-kit/
+
+本地运行：
 
 ```bash
 # 方式一：直接双击打开（脚本非 module，file:// 可用）

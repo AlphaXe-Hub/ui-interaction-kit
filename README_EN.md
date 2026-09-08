@@ -4,7 +4,7 @@
 
 > Pick the right interaction before writing a line of code. 8 motion textures, 7 chart interactions, 10 app patterns, 7 + 8 expand & collapse, 7 navigation, 7 overlays, 7 loading states — 61 entries, each with a runnable demo.
 
-**中文版 → [README.md](./README.md)**
+**中文版 → [README.md](./README.md)** · **Live demo → https://alphaxe-hub.github.io/ui-interaction-kit/**
 
 ![Demo overview](./docs/demo-overview.png)
 
@@ -127,6 +127,10 @@ Page Loader · Skeleton · Shimmer · Spinner · Progress Bar · Circular Progre
 </details>
 
 ## Demo: 61 playable examples
+
+**Live demo (GitHub Pages, nothing to install)**: https://alphaxe-hub.github.io/ui-interaction-kit/
+
+Run locally:
 
 ```bash
 # Option 1: open directly (scripts are not ES modules, file:// works)
