@@ -6,7 +6,10 @@
 
 **中文版 → [README.md](./README.md)** · **Live demo → https://alphaxe-hub.github.io/ui-interaction-kit/**
 
-![Demo overview](./docs/demo-overview.png)
+<p>
+  <img src="./docs/demo-overview.png" alt="Dark theme" width="49%">
+  <img src="./docs/demo-overview-light.png" alt="Light theme" width="49%">
+</p>
 
 ## What it is
 
@@ -129,6 +132,8 @@ Page Loader · Skeleton · Shimmer · Spinner · Progress Bar · Circular Progre
 ## Demo: 61 playable examples
 
 **Live demo (GitHub Pages, nothing to install)**: https://alphaxe-hub.github.io/ui-interaction-kit/
+
+Toggle dark / light theme from the top-right button (the choice is remembered); use the "Reduce motion" switch to check the static fallback.
 
 Run locally:
 

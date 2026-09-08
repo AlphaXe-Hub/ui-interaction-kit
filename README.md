@@ -6,7 +6,10 @@
 
 **English version → [README_EN.md](./README_EN.md)** · **在线 Demo → https://alphaxe-hub.github.io/ui-interaction-kit/**
 
-![Demo overview](./docs/demo-overview.png)
+<p>
+  <img src="./docs/demo-overview.png" alt="深色主题" width="49%">
+  <img src="./docs/demo-overview-light.png" alt="浅色主题" width="49%">
+</p>
 
 ## 这是什么
 
@@ -129,6 +132,8 @@ Page Loader 整页加载 · Skeleton 骨架屏 · Shimmer 微光扫过 · Spinne
 ## Demo：61 个可操作示例
 
 **在线体验（GitHub Pages，无需安装）**：https://alphaxe-hub.github.io/ui-interaction-kit/
+
+右上角按钮可切换深色 / 浅色主题（选择会被记住），左上角可开启"减少动效"验证静态降级。
 
 本地运行：
 
