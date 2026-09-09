@@ -3,9 +3,42 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>UI Interaction Kit · 61 个前端交互词条 Demo</title>
+<title>UI Interaction Kit · 61 Front-end Interaction Patterns &amp; Motion Prompts for AI Coding Agents</title>
+<meta name="description" content="61 个前端交互与动效词条的可运行 Demo：磁吸 Magnetic Attraction、液态形变 Velocity-driven Deformation、3D 视差 Layered Parallax、液态 Tab Liquid Tab Indicator、手势转场 Gesture-driven Transition、图表交互、加载动效……为 AI 编码助手（CodeBuddy / Claude Code / Cursor）提供交互选型规则与英文 Copyable prompt。">
+<meta name="keywords" content="UI interaction, motion design, micro interaction, magnetic attraction, liquid tab, 3D parallax, gesture transition, chart interaction, loading skeleton, design system, prompt library, AI coding agent, CodeBuddy skill, Claude Code skill, Cursor, frontend animation, 前端交互, 动效, 交互选型">
+<meta name="author" content="ChangerXu">
+<link rel="canonical" href="https://alphaxe-hub.github.io/ui-interaction-kit/">
+<meta name="robots" content="index,follow">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="UI Interaction Kit">
+<meta property="og:title" content="UI Interaction Kit · 61 Front-end Interaction Patterns">
+<meta property="og:description" content="给 AI 编码助手的交互选型知识库：61 个词条、可运行 Demo、英文 Copyable prompt。">
+<meta property="og:url" content="https://alphaxe-hub.github.io/ui-interaction-kit/">
+<meta property="og:image" content="https://raw.githubusercontent.com/AlphaXe-Hub/ui-interaction-kit/main/docs/demo-overview.png">
+<meta property="og:locale" content="zh_CN">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="UI Interaction Kit · 61 Front-end Interaction Patterns">
+<meta name="twitter:description" content="给 AI 编码助手的交互选型知识库：61 个词条、可运行 Demo、英文 Copyable prompt。">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/AlphaXe-Hub/ui-interaction-kit/main/docs/demo-overview.png">
+
 <link rel="stylesheet" href="styles.css">
 <script src="core.js"></script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareSourceCode",
+  "name": "UI Interaction Kit",
+  "alternateName": "ui-interaction-kit",
+  "description": "A selection-and-implementation knowledge base for front-end interactions: 61 interaction and motion patterns with copyable prompts and a runnable demo, built for AI coding agents.",
+  "codeRepository": "https://github.com/AlphaXe-Hub/ui-interaction-kit",
+  "url": "https://alphaxe-hub.github.io/ui-interaction-kit/",
+  "programmingLanguage": "JavaScript",
+  "license": "https://opensource.org/licenses/MIT",
+  "author": { "@type": "Person", "name": "ChangerXu" },
+  "keywords": "UI interaction, motion design, micro interaction, prompt library, AI coding agent"
+}
+</script>
 </head>
 <body>
 <header class="topbar">
@@ -16,6 +49,7 @@
     </div>
     <div class="controls">
       <input id="search" type="search" placeholder="搜索词条 / 中文名 / 场景" autocomplete="off">
+      <a class="d-btn gh-link" href="https://github.com/AlphaXe-Hub/ui-interaction-kit" target="_blank" rel="noopener">GitHub 仓库 ↗</a>
       <button class="d-btn" id="theme" type="button">浅色主题</button>
       <label class="switch">
         <input type="checkbox" id="reduced">
@@ -27,11 +61,38 @@
   <nav class="catnav" id="catnav"></nav>
 </header>
 
+<section class="intro" id="about">
+  <h2>给 AI 编码助手的交互选型知识库：61 个词条，选对一个再写代码</h2>
+  <p>
+    UI Interaction Kit 把「有质感」「跟手」「像液体」「更高级」这类模糊的动效需求，翻译成 61 个已定义的交互词条
+    （interaction patterns / motion textures），让 AI 编码助手在动手前先选对一个主交互，再按明确的规则实现。
+    它不是组件库，也不绑定框架：每个词条都写清了触发方式、开始状态、变化过程、结束状态、取消状态，可直接用于网页、原生 App 与小程序。
+  </p>
+  <p>
+    本页是这 61 个词条的可运行 Demo（纯原生 JavaScript，零依赖），支持深色 / 浅色主题与减少动效降级。
+    Skill 本体可安装到 CodeBuddy、Claude Code、Cursor 等支持 <code>SKILL.md</code> 的 AI 编码工具。
+  </p>
+  <div class="intro-cols">
+    <div><strong>质感动效 8</strong><br>Magnetic Attraction 磁吸 · Velocity-driven Deformation 液态形变 · Layered Parallax 3D 视差 · Center-focus Scaling 中心聚焦 · Liquid Tab Indicator 液态 Tab · Shared-element Image Expansion 图片展开 · Gesture-driven Transition 手势转场 · Collision and Spring Response 碰撞回弹</div>
+    <div><strong>图表交互 7</strong><br>Brush Selection 框选 · Crosshair 十字线 · Data Point Highlight 数据点高亮 · Tooltip 数据提示框 · Legend Filter 图例筛选 · Zoom 缩放 · Drill Down 数据下钻</div>
+    <div><strong>高级交互模式 10</strong><br>Radial Theme Transition · Drag-to-Reorder · Staggered Bulk Selection · Velocity-Based Slider Snap · Animated Text Disclosure · Spring Stepper Progress · Ripple Feedback for Related Switches · Curved Card Deletion · Stacked Card Scroll · Expanding Tag Selection</div>
+    <div><strong>展开与折叠 15</strong><br>Circle to Pill · Pill to Card · Compact to Expand · Corner Radius Morph · Size Morph · Content Reflow · Reverse Collapse · Accordion · Collapse · Dropdown · Treeview · Expandable Card · Sidebar · Radio Menu · Container Transform</div>
+    <div><strong>导航 · 弹窗 · 加载 21</strong><br>Tabs · Segment Control · Breadcrumb · Pagination · Stepper · Sidebar · Bottom Navigation · Tooltip · Popover · Dropdown Menu · Drawer · Bottom Sheet · Modal · Toast · Page Loader · Skeleton · Shimmer · Spinner · Progress Bar · Circular Progress · Button Loader</div>
+  </div>
+  <p class="intro-links">
+    <a href="https://github.com/AlphaXe-Hub/ui-interaction-kit" target="_blank" rel="noopener">GitHub 仓库</a> ·
+    <a href="https://github.com/AlphaXe-Hub/ui-interaction-kit/blob/main/SKILL.md" target="_blank" rel="noopener">SKILL.md 决策入口</a> ·
+    <a href="https://github.com/AlphaXe-Hub/ui-interaction-kit/tree/main/references" target="_blank" rel="noopener">references 规则与验收</a> ·
+    <a href="https://github.com/AlphaXe-Hub/ui-interaction-kit#readme" target="_blank" rel="noopener">README / 安装方式</a>
+  </p>
+</section>
+
 <main id="main"></main>
 
 <footer class="foot">
   分类顺序：质感动效 8 · 图表交互 7 · 高级交互模式 10 · 展开动画 7 · 折叠组件 8 · 导航组件 7 · 弹窗组件 7 · 加载动效 7
   <br>参考 <code>ui-interaction-kit/references/*.md</code> 获取每个词条的选型边界、关键规则与验收清单。
+  <br><a href="https://github.com/AlphaXe-Hub/ui-interaction-kit" target="_blank" rel="noopener">Star / Fork on GitHub</a> · MIT License · © 2026 ChangerXu
 </footer>
 
 <script src="demos/01-motion.js"></script>
