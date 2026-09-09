@@ -120,4 +120,9 @@ section{margin:34px 0 0;scroll-margin-top:120px}
 .intro-links{margin:14px 0 0 !important;font-size:12.5px}
 .intro-links a,.foot a{color:var(--acc);text-decoration:none}
 .intro-links a:hover,.foot a:hover{text-decoration:underline}
+
+/* ---------- bilingual (zh default, en on [data-lang="en"]) ---------- */
+.i-en{display:none}
+[data-lang="en"] .i-en{display:block}
+[data-lang="en"] .i-zh{display:none}
 .foot{padding:26px 24px 40px;color:var(--dim2);font-size:11.5px;line-height:1.9;text-align:center}

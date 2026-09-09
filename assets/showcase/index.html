@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="zh-CN" data-lang="zh">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -17,9 +17,10 @@
 <meta property="og:url" content="https://alphaxe-hub.github.io/ui-interaction-kit/">
 <meta property="og:image" content="https://raw.githubusercontent.com/AlphaXe-Hub/ui-interaction-kit/main/docs/demo-overview.png">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:locale:alternate" content="en_US">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="UI Interaction Kit · 61 Front-end Interaction Patterns">
-<meta name="twitter:description" content="给 AI 编码助手的交互选型知识库：61 个词条、可运行 Demo、英文 Copyable prompt。">
+<meta name="twitter:description" content="A selection-and-implementation knowledge base for front-end interactions: 61 entries, runnable demo, English copyable prompts.">
 <meta name="twitter:image" content="https://raw.githubusercontent.com/AlphaXe-Hub/ui-interaction-kit/main/docs/demo-overview.png">
 
 <link rel="stylesheet" href="styles.css">
@@ -36,6 +37,7 @@
   "programmingLanguage": "JavaScript",
   "license": "https://opensource.org/licenses/MIT",
   "author": { "@type": "Person", "name": "ChangerXu" },
+  "inLanguage": ["zh-CN", "en"],
   "keywords": "UI interaction, motion design, micro interaction, prompt library, AI coding agent"
 }
 </script>
@@ -45,15 +47,16 @@
   <div class="topbar-main">
     <div class="titles">
       <h1>UI Interaction Kit</h1>
-      <p>61 个前端交互与动效词条 · 每个演示都可直接操作 · 原生 JS 无依赖</p>
+      <p id="subtitle">61 个前端交互与动效词条 · 每个演示都可直接操作 · 原生 JS 无依赖</p>
     </div>
     <div class="controls">
       <input id="search" type="search" placeholder="搜索词条 / 中文名 / 场景" autocomplete="off">
-      <a class="d-btn gh-link" href="https://github.com/AlphaXe-Hub/ui-interaction-kit" target="_blank" rel="noopener">GitHub 仓库 ↗</a>
+      <a class="d-btn gh-link" id="gh-link" href="https://github.com/AlphaXe-Hub/ui-interaction-kit" target="_blank" rel="noopener">GitHub 仓库 ↗</a>
       <button class="d-btn" id="theme" type="button">浅色主题</button>
+      <button class="d-btn" id="lang" type="button">EN</button>
       <label class="switch">
         <input type="checkbox" id="reduced">
-        <span>减少动效</span>
+        <span id="reduced-label">减少动效</span>
       </label>
       <span class="count" id="count"></span>
     </div>
@@ -61,7 +64,7 @@
   <nav class="catnav" id="catnav"></nav>
 </header>
 
-<section class="intro" id="about">
+<section class="intro i-zh">
   <h2>给 AI 编码助手的交互选型知识库：61 个词条，选对一个再写代码</h2>
   <p>
     UI Interaction Kit 把「有质感」「跟手」「像液体」「更高级」这类模糊的动效需求，翻译成 61 个已定义的交互词条
@@ -87,12 +90,48 @@
   </p>
 </section>
 
+<section class="intro i-en">
+  <h2>UI Interaction Kit: 61 front-end interaction patterns — pick the right one before writing code</h2>
+  <p>
+    UI Interaction Kit turns vague motion requests — "make it feel snappier", "follow my finger", "like liquid" —
+    into 61 well-defined interaction patterns (motion textures, chart interactions, app patterns, overlays, loading states),
+    so an AI coding assistant chooses one primary interaction before touching the code. It is not a component library
+    and it is framework-agnostic: every entry documents its trigger, start state, motion, end state and cancel state,
+    and applies to the web, native apps and mini programs alike.
+  </p>
+  <p>
+    This page is the runnable demo for all 61 entries (vanilla JavaScript, zero dependencies) with dark / light themes
+    and a reduced-motion fallback. The Skill itself installs into CodeBuddy, Claude Code, Cursor and any other AI coding
+    tool that supports <code>SKILL.md</code>.
+  </p>
+  <div class="intro-cols">
+    <div><strong>Motion Texture (8)</strong><br>Magnetic Attraction · Velocity-driven Deformation · Layered Parallax · Center-focus Scaling · Liquid Tab Indicator · Shared-element Image Expansion · Gesture-driven Transition · Collision and Spring Response</div>
+    <div><strong>Chart Interaction (7)</strong><br>Brush Selection · Crosshair · Data Point Highlight · Tooltip · Legend Filter · Zoom · Drill Down</div>
+    <div><strong>App Interaction Patterns (10)</strong><br>Radial Theme Transition · Drag-to-Reorder · Staggered Bulk Selection · Velocity-Based Slider Snap · Animated Text Disclosure · Spring Stepper Progress · Ripple Feedback for Related Switches · Curved Card Deletion · Stacked Card Scroll · Expanding Tag Selection</div>
+    <div><strong>Expand &amp; Collapse (15)</strong><br>Circle to Pill · Pill to Card · Compact to Expand · Corner Radius Morph · Size Morph · Content Reflow · Reverse Collapse · Accordion · Collapse · Dropdown · Treeview · Expandable Card · Sidebar · Radio Menu · Container Transform</div>
+    <div><strong>Navigation · Overlays · Loading (21)</strong><br>Tabs · Segment Control · Breadcrumb · Pagination · Stepper · Sidebar · Bottom Navigation · Tooltip · Popover · Dropdown Menu · Drawer · Bottom Sheet · Modal · Toast · Page Loader · Skeleton · Shimmer · Spinner · Progress Bar · Circular Progress · Button Loader</div>
+  </div>
+  <p class="intro-links">
+    <a href="https://github.com/AlphaXe-Hub/ui-interaction-kit" target="_blank" rel="noopener">GitHub repository</a> ·
+    <a href="https://github.com/AlphaXe-Hub/ui-interaction-kit/blob/main/SKILL.md" target="_blank" rel="noopener">SKILL.md decision entry</a> ·
+    <a href="https://github.com/AlphaXe-Hub/ui-interaction-kit/tree/main/references" target="_blank" rel="noopener">References: rules &amp; acceptance</a> ·
+    <a href="https://github.com/AlphaXe-Hub/ui-interaction-kit#readme" target="_blank" rel="noopener">README / install</a>
+  </p>
+</section>
+
 <main id="main"></main>
 
 <footer class="foot">
-  分类顺序：质感动效 8 · 图表交互 7 · 高级交互模式 10 · 展开动画 7 · 折叠组件 8 · 导航组件 7 · 弹窗组件 7 · 加载动效 7
-  <br>参考 <code>ui-interaction-kit/references/*.md</code> 获取每个词条的选型边界、关键规则与验收清单。
-  <br><a href="https://github.com/AlphaXe-Hub/ui-interaction-kit" target="_blank" rel="noopener">Star / Fork on GitHub</a> · MIT License · © 2026 ChangerXu
+  <div class="i-zh">
+    分类顺序：质感动效 8 · 图表交互 7 · 高级交互模式 10 · 展开动画 7 · 折叠组件 8 · 导航组件 7 · 弹窗组件 7 · 加载动效 7
+    <br>参考 <code>ui-interaction-kit/references/*.md</code> 获取每个词条的选型边界、关键规则与验收清单。
+    <br><a href="https://github.com/AlphaXe-Hub/ui-interaction-kit" target="_blank" rel="noopener">Star / Fork on GitHub</a> · MIT License · © 2026 ChangerXu
+  </div>
+  <div class="i-en">
+    Sections: Motion Texture 8 · Chart Interaction 7 · App Patterns 10 · Expand Animations 7 · Collapse Components 8 · Navigation 7 · Overlays 7 · Loading States 7
+    <br>See <code>ui-interaction-kit/references/*.md</code> for selection boundaries, key rules and acceptance checks.
+    <br><a href="https://github.com/AlphaXe-Hub/ui-interaction-kit" target="_blank" rel="noopener">Star / Fork on GitHub</a> · MIT License · © 2026 ChangerXu
+  </div>
 </footer>
 
 <script src="demos/01-motion.js"></script>
