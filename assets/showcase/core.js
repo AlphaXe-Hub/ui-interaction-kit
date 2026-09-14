@@ -10,13 +10,14 @@
     { id: 'collapse', n: '05', title: '折叠组件', enTitle: 'Collapse Components', en: 'Collapse Components (8)', desc: '内容从隐藏变为显示的 8 种组织方式', enDesc: 'Eight ways to reveal hidden content' },
     { id: 'nav', n: '06', title: '导航组件', enTitle: 'Navigation', en: 'Navigation (7)', desc: '组件类型 / 放置位置 / 切换内容 / 高亮方式', enDesc: 'Component type / placement / content / highlight' },
     { id: 'overlay', n: '07', title: '弹窗组件', enTitle: 'Overlays', en: 'Overlays (7)', desc: '触发方式 / 出现位置 / 是否阻断交互', enDesc: 'Trigger / position / whether it blocks interaction' },
-    { id: 'loading', n: '08', title: '加载动效', enTitle: 'Loading States', en: 'Loading States (7)', desc: '动效类型 / 预计等待时间 / 具体场景', enDesc: 'Pattern / expected wait / where it is used' }
+    { id: 'loading', n: '08', title: '加载动效', enTitle: 'Loading States', en: 'Loading States (7)', desc: '动效类型 / 预计等待时间 / 具体场景', enDesc: 'Pattern / expected wait / where it is used' },
+    { id: 'scroll', n: '09', title: '滚动驱动官网', enTitle: 'Scroll-Driven Site', en: 'Scroll-Driven Official Site (3)', desc: '用滚动位置驱动产品叙事：开场、横向检视、拆解内部', enDesc: 'Scroll position drives the story: opening, sideways inspection, exploded view' }
   ];
 
   /* ---------------- English copy (keyed by category + English term) ---------------- */
   var I18N = {
     ui: {
-      subtitle: '61 front-end interaction entries · every demo is playable · vanilla JS, zero dependencies',
+      subtitle: '64 front-end interaction entries · every demo is playable · vanilla JS, zero dependencies',
       search: 'Search term / Chinese name / scenario',
       github: 'GitHub repo',
       themeToLight: 'Light theme',
@@ -95,7 +96,11 @@
       'loading|Spinner': { desc: 'For tasks with unknown duration — shows the system is still working, never fakes a percentage.', hint: 'Delay ~200ms on fast tasks to avoid flashing.' },
       'loading|Progress Bar': { desc: 'When progress can be computed, show the percentage so users know how much is left.', hint: 'Auto-loops 0 → 100%.' },
       'loading|Circular Progress': { desc: 'Same job as a progress bar, for tight spaces such as buttons and cards.', hint: 'Auto-loops the ring fill with the value in the center.' },
-      'loading|Button Loader': { desc: 'After submit, the button enters a loading state and blocks duplicate submissions.', hint: 'Click submit — it stays disabled until done.' }
+      'loading|Button Loader': { desc: 'After submit, the button enters a loading state and blocks duplicate submissions.', hint: 'Click submit — it stays disabled until done.' },
+
+      'scroll|Scroll-driven Opening': { desc: 'A tall section with a sticky viewport: the product starts closed and quiet, opens around its real pivot as you scroll, and the copy eases out without colliding with it.', hint: 'Scroll inside the window: the screen rotates around the bottom hinge while the base stays still. Full version in scroll.html.' },
+      'scroll|Horizontal Scroll Section': { desc: 'A pinned viewport while a horizontal track travels right to left — you keep scrolling down, the content moves sideways, and the input direction never changes.', hint: 'Keep scrolling inside the window; the distance comes from the real track width, never hard-coded.' },
+      'scroll|Scroll-driven Exploded View': { desc: 'The product stays optically centered while independent parts separate in a planned order: shell first, core next, details last — and every part reassembles along the same path when you scroll back.', hint: 'Scroll down inside the window to split it apart, scroll back up to put it together.' }
     }
   };
 
@@ -301,7 +306,7 @@
     try { localStorage.setItem('uik-lang', lang); } catch (e) {}
 
     var sub = document.getElementById('subtitle');
-    if (sub) sub.textContent = lang === 'en' ? t('subtitle') : '61 个前端交互与动效词条 · 每个演示都可直接操作 · 原生 JS 无依赖';
+    if (sub) sub.textContent = lang === 'en' ? t('subtitle') : '64 个前端交互与动效词条 · 每个演示都可直接操作 · 原生 JS 无依赖';
     var search = document.getElementById('search');
     if (search) search.placeholder = lang === 'en' ? t('search') : '搜索词条 / 中文名 / 场景';
     var gh = document.getElementById('gh-link');

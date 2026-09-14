@@ -1,13 +1,13 @@
 ---
 name: ui-interaction-kit
-description: 前端 UI 交互与动效选型知识库。当用户要为页面、组件或图表选择、描述、实现交互效果时使用。覆盖 8 种质感动效（磁吸、液态形变、3D 视差、中心聚焦、液态 Tab、图片展开、手势转场、碰撞回弹）、7 种图表交互（框选、十字线、数据点高亮、数据提示框、图例筛选、缩放、下钻）、10 种 App 高级交互模式（圆形主题切换、拖拽排序、批量勾选、滑杆惯性吸附、文本展开、步骤条回弹、开关联动涟漪、曲线删除、卡片堆叠滚动、标签挤开）、7 种展开动画、8 种折叠组件、7 种导航组件、7 种弹窗组件、7 种加载动效。触发词包括：质感动效、有质感、更顺滑、跟手、像液体、磁吸、液态、回弹、视差、手势转场、动效优化、交互选型、copyable prompt、图表交互、展开动画、导航组件、弹窗、加载动效。
+description: 前端 UI 交互与动效选型知识库。当用户要为页面、组件或图表选择、描述、实现交互效果时使用。覆盖 8 种质感动效（磁吸、液态形变、3D 视差、中心聚焦、液态 Tab、图片展开、手势转场、碰撞回弹）、7 种图表交互（框选、十字线、数据点高亮、数据提示框、图例筛选、缩放、下钻）、10 种 App 高级交互模式（圆形主题切换、拖拽排序、批量勾选、滑杆惯性吸附、文本展开、步骤条回弹、开关联动涟漪、曲线删除、卡片堆叠滚动、标签挤开）、7 种展开动画、8 种折叠组件、7 种导航组件、7 种弹窗组件、7 种加载动效，以及 3 种滚动驱动官网模式（滚动驱动开场、横向滚动区段、可反向的爆炸视图）。触发词包括：质感动效、有质感、更顺滑、跟手、像液体、磁吸、液态、回弹、视差、手势转场、动效优化、交互选型、copyable prompt、图表交互、展开动画、导航组件、弹窗、加载动效、滚动驱动、scroll-driven、Apple 风格产品页、产品官网、爆炸视图、exploded view。
 ---
 
 # UI Interaction Kit｜前端交互与动效选型
 
 ## 目的
 
-把模糊的动效需求（"有质感""跟手""像液体""更高级""更顺滑"）翻译成可实现的输入、状态与运动规则，然后从 61 个已定义词条中选出最匹配的一个（最多主 1 + 辅 1），再实现。
+把模糊的动效需求（"有质感""跟手""像液体""更高级""更顺滑"）翻译成可实现的输入、状态与运动规则，然后从 64 个已定义词条中选出最匹配的一个（最多主 1 + 辅 1），再实现。
 
 ## 核心原则
 
@@ -33,6 +33,7 @@ description: 前端 UI 交互与动效选型知识库。当用户要为页面、
 | App/小程序界面里，变化从哪里发生、落在哪里、谁跟着回应、周围是否让位？ | 高级交互模式（10） |
 | 内容从隐藏变为显示？ | 折叠组件（8）／展开动画（7） |
 | 是导航、弹窗、加载状态这类基础组件？ | 导航（7）／弹窗（7）／加载（7） |
+| 要用滚动位置本身驱动一段产品叙事（开场镜头、横向检视、拆解内部结构）？ | 滚动驱动官网（3） |
 
 ### 第 3 步：选词条并解释
 
@@ -56,6 +57,7 @@ description: 前端 UI 交互与动效选型知识库。当用户要为页面、
 | 6 | 导航组件 | Tabs / Segment Control / Breadcrumb / Pagination / Stepper / Sidebar / Bottom Navigation | `references/05-navigation.md` |
 | 7 | 弹窗组件 | Tooltip / Popover / Dropdown Menu / Drawer / Bottom Sheet / Modal / Toast（补充） | `references/06-overlays.md` |
 | 8 | 加载动效 | Page Loader / Skeleton / Shimmer / Spinner / Progress Bar / Circular Progress / Button Loader | `references/07-loading.md` |
+| 9 | 滚动驱动官网 | Scroll-driven Opening / Horizontal Scroll Section / Scroll-driven Exploded View | `references/08-scroll-driven.md` |
 
 需求落到具体分类后，再读取对应 reference 获取"必须保留"的约束、Copyable prompt 与验收清单。不要一次性加载全部 reference。
 
@@ -77,6 +79,7 @@ description: 前端 UI 交互与动效选型知识库。当用户要为页面、
 - 结束后清理事件监听、计时器、渲染循环与临时图层。
 - 验证要区分代码检查、真实界面操作与性能测量；未做的验证直接说明，编译通过不能替代交互验收。
 - 不承诺未经测量的帧率或"所有设备兼容"。
+- 滚动驱动场景另有三条硬约束：**滚动位置是唯一事实来源**（由区段真实起止位置推导进度）；**反向滚动必须沿同一路径回到同一状态**；**不要给每次滚动更新挂 CSS transition**（用逐帧同步或插值循环）。
 
 ## 资源
 
@@ -87,9 +90,11 @@ description: 前端 UI 交互与动效选型知识库。当用户要为页面、
 - `references/05-navigation.md` – 7 种导航组件与描述要素
 - `references/06-overlays.md` – 7 种弹窗组件与描述要素
 - `references/07-loading.md` – 7 种加载动效与描述要素
+- `references/08-scroll-driven.md` – 3 种滚动驱动官网模式：共享交互规则、三个 pattern 的实现要点、构建与评审流程、完成标准
 - `references/prompt-templates.md` – Copyable prompt 模板与输出格式
-- `assets/showcase/index.html` – 61 个词条的可运行 Demo，每个卡片标注词条英文名与中文名；可直接用浏览器打开
+- `assets/showcase/index.html` – 64 个词条的可运行 Demo，每个卡片标注词条英文名与中文名；可直接用浏览器打开
+- `assets/showcase/scroll.html` – 滚动驱动官网的完整示例页（开场 → 横向滚段 → 爆炸视图 → 结尾），支持双向 scrub 与 reduced-motion 静态兜底
 
 ## 使用 Demo
 
-向用户交付或自查时，打开 `assets/showcase/index.html`：按 8 个分类分组，每个词条一张卡片，卡片内是可真实操作的迷你示例，支持"减少动效"开关。实现同类效果时优先复用其中的原生 JS 片段（无第三方依赖）。
+向用户交付或自查时，打开 `assets/showcase/index.html`：按 9 个分类分组，每个词条一张卡片，卡片内是可真实操作的迷你示例，支持"减少动效"开关与中英切换。滚动驱动的三个词条在卡片里只放缩略预览，点"打开完整演示"进入 `scroll.html` 看真实的长滚动 + sticky 效果。实现同类效果时优先复用其中的原生 JS 片段（无第三方依赖）。

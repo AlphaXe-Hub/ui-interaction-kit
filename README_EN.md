@@ -1,8 +1,8 @@
 # UI Interaction Kit
 
-**61 patterns** · **No dependencies** · **MIT License** · **CodeBuddy Skill**
+**64 patterns** · **No dependencies** · **MIT License** · **CodeBuddy Skill**
 
-> Pick the right interaction before writing a line of code. 8 motion textures, 7 chart interactions, 10 app patterns, 7 + 8 expand & collapse, 7 navigation, 7 overlays, 7 loading states — 61 entries, each with a runnable demo.
+> Pick the right interaction before writing a line of code. 8 motion textures, 7 chart interactions, 10 app patterns, 7 + 8 expand & collapse, 7 navigation, 7 overlays, 7 loading states, 3 scroll-driven site patterns — 64 entries, each with a runnable demo.
 
 **中文版 → [README.md](./README.md)** · **Live demo → https://alphaxe-hub.github.io/ui-interaction-kit/**
 
@@ -13,7 +13,7 @@
 
 ## What it is
 
-A selection-and-implementation knowledge base for front-end interactions. Turns vague asks like *"make it feel snappier"*, *"follow my finger"*, *"like liquid"* into 61 well-defined terms so the AI picks the right one before touching code. The rule baked into `SKILL.md` is simple: **understand the task → choose one interaction → then code**. Every interaction spec must cover trigger, start state, motion, end state, and cancel state.
+A selection-and-implementation knowledge base for front-end interactions. Turns vague asks like *"make it feel snappier"*, *"follow my finger"*, *"like liquid"* into 64 well-defined terms so the AI picks the right one before touching code. The rule baked into `SKILL.md` is simple: **understand the task → choose one interaction → then code**. Every interaction spec must cover trigger, start state, motion, end state, and cancel state.
 
 ## Install in one minute
 
@@ -43,7 +43,7 @@ When the conversation contains any of these, the AI coding assistant will pull t
 
 > motion texture · feel snappier · smoother · follow my finger · liquid · magnetic · spring · parallax · gesture transition · animation tuning · interaction selection · copyable prompt · chart interaction · expand animation · navigation component · overlay · loading state
 
-## 61-entry catalog
+## 64-entry catalog
 
 <details>
 <summary>01 Motion Texture (8)</summary>
@@ -129,11 +129,26 @@ Page Loader · Skeleton · Shimmer · Spinner · Progress Bar · Circular Progre
 
 </details>
 
-## Demo: 61 playable examples
+<details>
+<summary>09 Scroll-Driven Official Site (3)</summary>
+
+| English | Chinese | One-line scenario |
+|---|---|---|
+| Scroll-driven Opening | 滚动驱动开场 | The product starts closed and opens around its real hinge as you scroll |
+| Horizontal Scroll Section | 横向滚动区段 | Pinned viewport, vertical scroll drives a horizontal track until the last item is fully inside |
+| Scroll-driven Exploded View | 滚动驱动爆炸视图 | Parts separate in a planned order and reassemble along the same path on reverse scroll |
+
+Full example page: **https://alphaxe-hub.github.io/ui-interaction-kit/scroll.html**
+
+</details>
+
+## Demo: 64 playable examples
 
 **Live demo (GitHub Pages, nothing to install)**: https://alphaxe-hub.github.io/ui-interaction-kit/
 
-Toggle dark / light theme from the top-right button (the choice is remembered); use the "Reduce motion" switch to check the static fallback.
+**Scroll-driven example site (full-length scroll + sticky)**: https://alphaxe-hub.github.io/ui-interaction-kit/scroll.html
+
+Toggle dark / light theme from the top-right button (the choice is remembered); use the "Reduce motion" switch to check the static fallback. The scroll-driven page also accepts `?scrub=js` (force the JS interpolation path) and `?motion=reduce` (force the static path) for verification.
 
 Run locally:
 
@@ -188,12 +203,14 @@ ui-interaction-kit/
 │   ├── 05-navigation.md        # 7 navigation components
 │   ├── 06-overlays.md          # 7 overlays
 │   ├── 07-loading.md           # 7 loading states
+│   ├── 08-scroll-driven.md     # 3 scroll-driven site patterns (shared rules, patterns, completion criteria)
 │   └── prompt-templates.md     # Unified prompt templates
 ├── assets/showcase/            # Demo
-│   ├── index.html
-│   ├── core.js                 # Registry + runtime + reduced-motion toggle
+│   ├── index.html              # 64-entry card grid
+│   ├── core.js                 # Registry + runtime + reduced-motion toggle + zh/en switch
 │   ├── styles.css
-│   └── demos/01..08-*.js       # 8 files, 61 demos
+│   ├── scroll.html / .css / .js  # Scroll-driven example site (opening → horizontal → exploded → outro)
+│   └── demos/01..09-*.js       # 9 files, 64 demos
 ├── docs/demo-overview.png      # Screenshot for this README
 └── LICENSE                     # MIT
 ```
@@ -207,6 +224,8 @@ ui-interaction-kit/
 - **Platform differences**: web, native app, and mini-program each need their own implementation. Check platform capabilities first and coordinate with system gestures, back, and scroll when in conflict.
 - **No frame-rate promises**: real performance depends on device and implementation. Passing a build does not replace a real interaction test.
 - **No bloat**: don't pull in a full physics engine, animation library, or routing framework for a decorative effect. Use what the project already has.
+- **Scroll-driven has three hard rules**: scroll position is the single source of truth (derive progress from the section's real start and end, never a global scroll ratio); a reverse scroll must return along the same path to the same state; and never attach a CSS `transition` to every scroll update (use frame-synced updates, a scrubbed timeline, or an interpolation loop).
+- **Be honest about teardowns**: without separable assets, draw the internals in SVG and label it a concept visualization — do not claim reconstructed internals.
 
 ## Contributing
 

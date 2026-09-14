@@ -1,8 +1,8 @@
 # UI Interaction Kit
 
-**61 patterns** · **No dependencies** · **MIT License** · **CodeBuddy Skill**
+**64 patterns** · **No dependencies** · **MIT License** · **CodeBuddy Skill**
 
-> 让 AI 选对交互：8 种质感动效、7 种图表交互、10 种 App 模式、7 + 8 展开与折叠、7 种导航、7 种弹窗、7 种加载，共 61 个词条，每个词条都有可运行的 Demo。
+> 让 AI 选对交互：8 种质感动效、7 种图表交互、10 种 App 模式、7 + 8 展开与折叠、7 种导航、7 种弹窗、7 种加载、3 种滚动驱动官网模式，共 64 个词条，每个词条都有可运行的 Demo。
 
 **English version → [README_EN.md](./README_EN.md)** · **在线 Demo → https://alphaxe-hub.github.io/ui-interaction-kit/**
 
@@ -13,7 +13,7 @@
 
 ## 这是什么
 
-把模糊的动效需求（"有质感""跟手""像液体""更高级"）翻译成 61 个已定义词条；让 AI 在动手前先选对一个，主交互一个就够。规则写进了 `SKILL.md`：**先理解任务 → 选一个主交互 → 再写代码**，描述任何交互必须写清触发、开始状态、变化过程、结束状态、取消状态。
+把模糊的动效需求（"有质感""跟手""像液体""更高级"）翻译成 64 个已定义词条；让 AI 在动手前先选对一个，主交互一个就够。规则写进了 `SKILL.md`：**先理解任务 → 选一个主交互 → 再写代码**，描述任何交互必须写清触发、开始状态、变化过程、结束状态、取消状态。
 
 ## 一分钟安装
 
@@ -129,11 +129,26 @@ Page Loader 整页加载 · Skeleton 骨架屏 · Shimmer 微光扫过 · Spinne
 
 </details>
 
-## Demo：61 个可操作示例
+<details>
+<summary>09 滚动驱动官网 · Scroll-Driven Official Site（3）</summary>
+
+| 英文 | 中文 | 一句话场景 |
+|---|---|---|
+| Scroll-driven Opening | 滚动驱动开场 | 产品从闭合状态开始，滚动时绕真实转轴打开 |
+| Horizontal Scroll Section | 横向滚动区段 | 固定视口，纵向滚动驱动横向轨道，最后一项完整露出才解除固定 |
+| Scroll-driven Exploded View | 滚动驱动爆炸视图 | 部件按计划顺序分离，反向滚动沿原路径装回 |
+
+完整示例官网：**https://alphaxe-hub.github.io/ui-interaction-kit/scroll.html**
+
+</details>
+
+## Demo：64 个可操作示例
 
 **在线体验（GitHub Pages，无需安装）**：https://alphaxe-hub.github.io/ui-interaction-kit/
 
-右上角按钮可切换深色 / 浅色主题（选择会被记住），左上角可开启"减少动效"验证静态降级。
+**滚动驱动示例官网（完整长滚动 + sticky）**：https://alphaxe-hub.github.io/ui-interaction-kit/scroll.html
+
+右上角按钮可切换深色 / 浅色主题（选择会被记住），左上角可开启"减少动效"验证静态降级。滚动驱动页还支持 `?scrub=js`（强制 JS 插值路径）与 `?motion=reduce`（强制静态路径）两个验证开关。
 
 本地运行：
 
@@ -188,12 +203,14 @@ ui-interaction-kit/
 │   ├── 05-navigation.md        # 7 种导航
 │   ├── 06-overlays.md          # 7 种弹窗
 │   ├── 07-loading.md           # 7 种加载
+│   ├── 08-scroll-driven.md     # 3 种滚动驱动官网模式（共享规则、三个 pattern、完成标准）
 │   └── prompt-templates.md     # 统一提示词模板
 ├── assets/showcase/            # Demo
-│   ├── index.html
-│   ├── core.js                 # 注册表 + 运行时 + reduced-motion 开关
+│   ├── index.html              # 64 个词条总览（卡片网格）
+│   ├── core.js                 # 注册表 + 运行时 + reduced-motion 开关 + 中英切换
 │   ├── styles.css
-│   └── demos/01..08-*.js       # 8 个分类共 61 个 demo
+│   ├── scroll.html / .css / .js  # 滚动驱动示例官网（开场 → 横向滚段 → 爆炸视图 → 结尾）
+│   └── demos/01..09-*.js       # 9 个分类共 64 个 demo
 ├── docs/demo-overview.png      # README 用的首屏截图
 └── LICENSE                     # MIT
 ```
@@ -207,6 +224,8 @@ ui-interaction-kit/
 - **平台差异**：网页 / 原生 App / 小程序不默认使用同一套实现；先检查目标平台能力，与系统手势、返回、滚动冲突时优先协调现有行为。
 - **不承诺帧率**：实际性能依赖设备和实现细节，编译通过不能替代真实交互验收。
 - **不堆库**：不要为装饰效果引入完整物理引擎、动画库或路由框架，必要时优先用项目已有的依赖。
+- **滚动驱动另有三条硬约束**：滚动位置是唯一事实来源（由区段真实起止位置推导进度，不用全局滚动比例）；反向滚动必须沿同一路径回到同一状态；不要给每次滚动更新挂 CSS `transition`（用逐帧同步、scrub 时间线或插值循环）。
+- **拆解内部结构要诚实**：拿不到可分层素材时，用 SVG 自绘并明确标注"概念可视化"，不要声称重建了真实内部结构。
 
 ## 贡献指南
 

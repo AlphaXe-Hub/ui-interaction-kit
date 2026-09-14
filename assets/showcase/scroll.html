@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-lang="zh" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lumen Book 14 · Scroll-driven product page demo · UI Interaction Kit</title>
+<meta name="description" content="Scroll-driven official site demo: a sticky opening that opens a laptop around its real hinge, a pinned horizontal track, and a reversible exploded view. Built with CSS scroll-driven animations and a JS fallback.">
+<meta name="author" content="ChangerXu">
+<link rel="canonical" href="https://alphaxe-hub.github.io/ui-interaction-kit/scroll.html">
+<meta name="robots" content="index,follow">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Scroll-driven product page demo · UI Interaction Kit">
+<meta property="og:description" content="Sticky opening, pinned horizontal track and a reversible exploded view — driven by scroll position.">
+<meta property="og:url" content="https://alphaxe-hub.github.io/ui-interaction-kit/scroll.html">
+<link rel="stylesheet" href="scroll.css">
+</head>
+<body>
+
+<a class="skip" href="#scene-open">Skip to content</a>
+
+<header class="nav">
+  <div class="nav-inner">
+    <a class="brand" href="./index.html">Lumen<span>Book 14</span></a>
+    <nav class="chapters" aria-label="Sections">
+      <a href="#scene-open" data-i18n="navOpen">Opening</a>
+      <a href="#scene-horizontal" data-i18n="navFeatures">Features</a>
+      <a href="#scene-exploded" data-i18n="navInside">Inside</a>
+      <a href="#scene-specs" data-i18n="navSpecs">Specs</a>
+    </nav>
+    <div class="nav-actions">
+      <span class="badge" data-i18n="conceptBadge">Concept visualization</span>
+      <button class="btn" id="langBtn" type="button">EN</button>
+      <button class="btn" id="themeBtn" type="button">Light</button>
+      <a class="btn" href="./index.html" data-i18n="backKit">All 64 patterns</a>
+    </div>
+  </div>
+  <div class="nav-progress"><span id="navProgress"></span></div>
+</header>
+
+<main>
+
+  <!-- ============ Pattern 1 · scroll-driven opening ============ -->
+  <section class="scene scene-open" id="scene-open">
+    <div class="sticky">
+      <div class="open-copy">
+        <p class="eyebrow" data-i18n="openEyebrow">Lumen · notebook</p>
+        <h1 data-i18n="openTitle">Opens the way you work.</h1>
+        <p class="lede" data-i18n="openLede">A 14-inch machine that starts closed and quiet. Scroll to open it around its real hinge — the screen surface stays attached to the lid.</p>
+        <p class="scroll-hint" data-i18n="scrollHint">Scroll to open ↓</p>
+      </div>
+
+      <div class="stage" aria-label="Laptop opening animation">
+        <div class="laptop">
+          <div class="lid" data-anim="rotateX" data-from="-92" data-to="-6" data-unit="deg" data-range="0,1">
+            <div class="lid-inner">
+              <div class="screen-ui">
+                <div class="screen-bar"><i></i><i></i><i></i></div>
+                <div class="screen-grid">
+                  <div class="screen-card">
+                    <span class="sc-k" data-i18n="uiKey1">Active projects</span>
+                    <strong class="sc-v">12</strong>
+                  </div>
+                  <div class="screen-card">
+                    <span class="sc-k" data-i18n="uiKey2">Focus today</span>
+                    <strong class="sc-v">4h 20m</strong>
+                  </div>
+                  <div class="screen-card wide">
+                    <span class="sc-k" data-i18n="uiKey3">Build</span>
+                    <span class="sc-bar"><i style="width:72%"></i></span>
+                  </div>
+                </div>
+              </div>
+              <div class="screen-glow"></div>
+            </div>
+          </div>
+          <div class="base">
+            <div class="keyboard">
+              <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+            </div>
+            <div class="trackpad"></div>
+          </div>
+        </div>
+        <p class="stage-note" data-i18n="openNote">Screen rotates around the bottom hinge; the base stays still. Surfaces, not a flat photo.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ Pattern 2 · horizontal scroll section ============ -->
+  <section class="scene scene-horizontal" id="scene-horizontal">
+    <div class="sticky">
+      <div class="h-head">
+        <p class="eyebrow" data-i18n="hEyebrow">Features</p>
+        <h2 data-i18n="hTitle">Keep scrolling down, the row moves sideways.</h2>
+      </div>
+
+      <div class="h-viewport" id="hViewport">
+        <div class="h-track" id="hTrack">
+          <article class="h-card">
+            <span class="h-index">01 · <em data-i18n="hCatDisplay">Display</em></span>
+            <div class="h-media"><img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=1200&q=80&auto=format" alt="A bright screen in a dark room, illustrating the 14-inch display"></div>
+            <h3 data-i18n="h1t">14.2-inch 3K at 120Hz</h3>
+            <p data-i18n="h1d">Colour-accurate at low brightness, so the screen stops glowing like a torch at night.</p>
+          </article>
+          <article class="h-card">
+            <span class="h-index">02 · <em data-i18n="hCatBattery">Battery</em></span>
+            <div class="h-media"><img src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=1200&q=80&auto=format" alt="A desk setup with a laptop, illustrating all-day battery life"></div>
+            <h3 data-i18n="h2t">18 hours, honestly measured</h3>
+            <p data-i18n="h2d">Real workloads with the browser open, not a looping video at 10% brightness.</p>
+          </article>
+          <article class="h-card">
+            <span class="h-index">03 · <em data-i18n="hCatChassis">Chassis</em></span>
+            <div class="h-media"><img src="https://images.unsplash.com/photo-1518770660439-4636190af475?w=1200&q=80&auto=format" alt="Close-up of a circuit board, illustrating the machined chassis"></div>
+            <h3 data-i18n="h3t">Unibody shell, 1.19kg</h3>
+            <p data-i18n="h3d">One piece of machined aluminium. No flex under the palms, no creak when you lift it.</p>
+          </article>
+          <article class="h-card">
+            <span class="h-index">04 · <em data-i18n="hCatCooling">Cooling</em></span>
+            <div class="h-media"><img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=1200&q=80&auto=format" alt="Abstract blue airflow visual, illustrating the cooling system"></div>
+            <h3 data-i18n="h4t">Two fans, one vapour plate</h3>
+            <p data-i18n="h4d">Sustained load sits at 38 dBA. The fans ramp, but you stop noticing them.</p>
+          </article>
+          <article class="h-card">
+            <span class="h-index">05 · <em data-i18n="hCatPorts">Ports</em></span>
+            <div class="h-media"><img src="https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=1200&q=80&auto=format" alt="Cables and code on a desk, illustrating the port selection"></div>
+            <h3 data-i18n="h5t">Two USB-C, HDMI, 3.5mm</h3>
+            <p data-i18n="h5d">Enough to leave the dongle at home on a normal working day.</p>
+          </article>
+          <article class="h-card">
+            <span class="h-index">06 · <em data-i18n="hCatKeyboard">Keyboard</em></span>
+            <div class="h-media"><img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=1200&q=80&auto=format" alt="People working together, illustrating the typing experience"></div>
+            <h3 data-i18n="h6t">1.5mm travel, quiet switches</h3>
+            <p data-i18n="h6d">Built for shared rooms. Tactile enough to type on, quiet enough not to be the loudest thing in the meeting.</p>
+          </article>
+        </div>
+      </div>
+
+      <div class="h-foot">
+        <div class="h-bar"><span id="hBar"></span></div>
+        <p class="h-counter"><span id="hCounter">01</span> / 06 · <span data-i18n="hFootNote">The row stays pinned until the last card is fully inside.</span></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ Pattern 3 · scroll-driven exploded view ============ -->
+  <section class="scene scene-exploded" id="scene-exploded">
+    <div class="sticky">
+      <div class="x-head">
+        <p class="eyebrow" data-i18n="xEyebrow">Inside</p>
+        <h2 data-i18n="xTitle">What is actually in there.</h2>
+        <p class="lede" data-i18n="xLede">Six layers separate in a fixed order and reassemble when you scroll back up. Concept visualization — drawn as SVG, not a reconstructed teardown.</p>
+      </div>
+
+      <div class="x-stage">
+        <svg class="x-svg" viewBox="0 0 560 360" role="img" aria-label="Exploded view of the laptop: top shell, keyboard deck, mainboard, battery, cooling and ports, bottom shell">
+          <!-- bottom shell -->
+          <g class="x-layer" data-layer="bottom" data-anim="translateY" data-from="0" data-to="34" data-unit="px" data-range="0.06,0.30">
+            <rect class="shape-metal" x="120" y="196" width="320" height="26" rx="10"/>
+            <rect class="shape-detail" x="140" y="204" width="60" height="8" rx="4"/>
+            <rect class="shape-detail" x="360" y="204" width="60" height="8" rx="4"/>
+          </g>
+
+          <!-- cooling + ports -->
+          <g class="x-layer" data-layer="cooling" data-anim="translateY" data-from="0" data-to="16" data-unit="px" data-range="0.20,0.44">
+            <rect class="shape-accent-soft" x="392" y="150" width="48" height="40" rx="8"/>
+            <circle class="shape-accent" cx="404" cy="164" r="7"/>
+            <circle class="shape-accent" cx="428" cy="176" r="7"/>
+          </g>
+
+          <!-- battery -->
+          <g class="x-layer" data-layer="battery" data-anim="translateY" data-from="0" data-to="-14" data-unit="px" data-range="0.30,0.54">
+            <rect class="shape-battery" x="140" y="150" width="230" height="44" rx="9"/>
+            <rect class="shape-detail" x="152" y="162" width="40" height="20" rx="4"/>
+            <rect class="shape-detail" x="200" y="162" width="40" height="20" rx="4"/>
+            <rect class="shape-detail" x="248" y="162" width="40" height="20" rx="4"/>
+          </g>
+
+          <!-- mainboard -->
+          <g class="x-layer" data-layer="board" data-anim="translateY" data-from="0" data-to="-30" data-unit="px" data-range="0.42,0.66">
+            <rect class="shape-board" x="150" y="104" width="260" height="34" rx="8"/>
+            <rect class="shape-accent-soft" x="164" y="112" width="34" height="18" rx="3"/>
+            <rect class="shape-detail" x="208" y="112" width="70" height="18" rx="3"/>
+            <circle class="shape-accent" cx="330" cy="121" r="9"/>
+          </g>
+
+          <!-- keyboard deck -->
+          <g class="x-layer" data-layer="deck" data-anim="translateY" data-from="0" data-to="-50" data-unit="px" data-range="0.54,0.76">
+            <rect class="shape-metal" x="126" y="56" width="308" height="34" rx="9"/>
+            <rect class="shape-detail" x="146" y="64" width="196" height="18" rx="4"/>
+            <rect class="shape-detail" x="352" y="64" width="62" height="18" rx="4"/>
+          </g>
+
+          <!-- top shell -->
+          <g class="x-layer" data-layer="shell" data-anim="translateY" data-from="0" data-to="-76" data-unit="px" data-range="0.66,0.90">
+            <rect class="shape-metal" x="120" y="16" width="320" height="26" rx="10"/>
+            <circle class="shape-detail" cx="280" cy="29" r="4"/>
+          </g>
+        </svg>
+
+        <div class="x-labels">
+          <span data-for="shell" data-i18n="layerShell" style="top:4%;left:20%">Top shell</span>
+          <span data-for="deck" data-i18n="layerDeck" style="top:15%;left:20%">Keyboard deck</span>
+          <span data-for="board" data-i18n="layerBoard" style="top:28%;left:25%">Mainboard</span>
+          <span data-for="battery" data-i18n="layerBattery" style="top:42%;left:24%">Battery</span>
+          <span data-for="cooling" data-i18n="layerCooling" style="top:42%;left:68%">Cooling &amp; ports</span>
+          <span data-for="bottom" data-i18n="layerBottom" style="top:70%;left:20%">Bottom shell</span>
+        </div>
+      </div>
+
+      <p class="stage-note" data-i18n="xNote">One layer at a time — the shell leaves first, the core shows up next, details move last. Scroll back up and everything returns along the same path.</p>
+    </div>
+  </section>
+
+  <!-- ============ Specs / outro ============ -->
+  <section class="scene scene-specs" id="scene-specs">
+    <div class="spec-wrap">
+      <p class="eyebrow" data-i18n="sEyebrow">Specs</p>
+      <h2 data-i18n="sTitle">Numbers, without the asterisks.</h2>
+      <dl class="spec-grid">
+        <div><dt data-i18n="s1k">Display</dt><dd data-i18n="s1v">14.2" 3K · 120Hz · 500 nits</dd></div>
+        <div><dt data-i18n="s2k">Battery</dt><dd data-i18n="s2v">72Wh · 18h mixed use</dd></div>
+        <div><dt data-i18n="s3k">Weight</dt><dd data-i18n="s3v">1.19kg</dd></div>
+        <div><dt data-i18n="s4k">Ports</dt><dd data-i18n="s4v">2× USB-C · HDMI 2.1 · 3.5mm</dd></div>
+        <div><dt data-i18n="s5k">Cooling</dt><dd data-i18n="s5v">Dual fan · vapour plate · 38 dBA sustained</dd></div>
+        <div><dt data-i18n="s6k">Materials</dt><dd data-i18n="s6v">Recycled aluminium unibody</dd></div>
+      </dl>
+
+      <div class="outro">
+        <img src="https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?w=1600&q=80&auto=format" alt="A quiet forest scene used as the closing visual" loading="lazy">
+        <div class="outro-text">
+          <h3 data-i18n="outroTitle">This whole page is one skill entry.</h3>
+          <p data-i18n="outroBody">Opening, horizontal track and exploded view are the three scroll-driven patterns in UI Interaction Kit — including the rules this page is built to follow: scroll position as the single source of truth, a reversible path, and no transition on every scroll update.</p>
+          <p class="outro-links">
+            <a href="./index.html" data-i18n="outroCta">See all 64 patterns →</a>
+            <a href="https://github.com/AlphaXe-Hub/ui-interaction-kit/blob/main/references/08-scroll-driven.md" target="_blank" rel="noopener" data-i18n="outroDoc">Read the spec</a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="foot">
+  <p>
+    <span data-i18n="footLeft">Demo page for UI Interaction Kit · scroll-driven patterns.</span>
+    <span class="dot">·</span>
+    <span data-i18n="footRight">Product and all internals are a concept visualization drawn in SVG/CSS, not a real teardown.</span>
+  </p>
+  <p class="foot-links">
+    <a href="./index.html" data-i18n="footIndex">Pattern index</a> ·
+    <a href="https://github.com/AlphaXe-Hub/ui-interaction-kit" target="_blank" rel="noopener">GitHub</a> ·
+    <span>MIT © 2026 ChangerXu</span>
+  </p>
+</footer>
+
+<script src="scroll.js"></script>
+</body>
+</html>

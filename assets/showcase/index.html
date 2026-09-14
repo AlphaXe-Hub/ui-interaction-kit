@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>UI Interaction Kit · 61 Front-end Interaction Patterns &amp; Motion Prompts for AI Coding Agents</title>
-<meta name="description" content="61 个前端交互与动效词条的可运行 Demo：磁吸 Magnetic Attraction、液态形变 Velocity-driven Deformation、3D 视差 Layered Parallax、液态 Tab Liquid Tab Indicator、手势转场 Gesture-driven Transition、图表交互、加载动效……为 AI 编码助手（CodeBuddy / Claude Code / Cursor）提供交互选型规则与英文 Copyable prompt。">
+<title>UI Interaction Kit · 64 Front-end Interaction Patterns &amp; Motion Prompts for AI Coding Agents</title>
+<meta name="description" content="64 个前端交互与动效词条的可运行 Demo：磁吸 Magnetic Attraction、液态形变 Velocity-driven Deformation、3D 视差 Layered Parallax、液态 Tab Liquid Tab Indicator、手势转场 Gesture-driven Transition、图表交互、加载动效……为 AI 编码助手（CodeBuddy / Claude Code / Cursor）提供交互选型规则与英文 Copyable prompt。">
 <meta name="keywords" content="UI interaction, motion design, micro interaction, magnetic attraction, liquid tab, 3D parallax, gesture transition, chart interaction, loading skeleton, design system, prompt library, AI coding agent, CodeBuddy skill, Claude Code skill, Cursor, frontend animation, 前端交互, 动效, 交互选型">
 <meta name="author" content="ChangerXu">
 <link rel="canonical" href="https://alphaxe-hub.github.io/ui-interaction-kit/">
@@ -65,14 +65,15 @@
 </header>
 
 <section class="intro i-zh">
-  <h2>给 AI 编码助手的交互选型知识库：61 个词条，选对一个再写代码</h2>
+  <h2>给 AI 编码助手的交互选型知识库：64 个词条，选对一个再写代码</h2>
   <p>
-    UI Interaction Kit 把「有质感」「跟手」「像液体」「更高级」这类模糊的动效需求，翻译成 61 个已定义的交互词条
+    UI Interaction Kit 把「有质感」「跟手」「像液体」「更高级」这类模糊的动效需求，翻译成 64 个已定义的交互词条
     （interaction patterns / motion textures），让 AI 编码助手在动手前先选对一个主交互，再按明确的规则实现。
     它不是组件库，也不绑定框架：每个词条都写清了触发方式、开始状态、变化过程、结束状态、取消状态，可直接用于网页、原生 App 与小程序。
   </p>
   <p>
-    本页是这 61 个词条的可运行 Demo（纯原生 JavaScript，零依赖），支持深色 / 浅色主题与减少动效降级。
+    本页是这 64 个词条的可运行 Demo（纯原生 JavaScript，零依赖），支持深色 / 浅色主题与减少动效降级。
+    滚动驱动的三个模式另有独立的完整示例页 <a href="./scroll.html">scroll.html</a>。
     Skill 本体可安装到 CodeBuddy、Claude Code、Cursor 等支持 <code>SKILL.md</code> 的 AI 编码工具。
   </p>
   <div class="intro-cols">
@@ -81,6 +82,7 @@
     <div><strong>高级交互模式 10</strong><br>Radial Theme Transition · Drag-to-Reorder · Staggered Bulk Selection · Velocity-Based Slider Snap · Animated Text Disclosure · Spring Stepper Progress · Ripple Feedback for Related Switches · Curved Card Deletion · Stacked Card Scroll · Expanding Tag Selection</div>
     <div><strong>展开与折叠 15</strong><br>Circle to Pill · Pill to Card · Compact to Expand · Corner Radius Morph · Size Morph · Content Reflow · Reverse Collapse · Accordion · Collapse · Dropdown · Treeview · Expandable Card · Sidebar · Radio Menu · Container Transform</div>
     <div><strong>导航 · 弹窗 · 加载 21</strong><br>Tabs · Segment Control · Breadcrumb · Pagination · Stepper · Sidebar · Bottom Navigation · Tooltip · Popover · Dropdown Menu · Drawer · Bottom Sheet · Modal · Toast · Page Loader · Skeleton · Shimmer · Spinner · Progress Bar · Circular Progress · Button Loader</div>
+    <div><strong>滚动驱动官网 3</strong><br>Scroll-driven Opening 滚动驱动开场 · Horizontal Scroll Section 横向滚动区段 · Scroll-driven Exploded View 滚动驱动爆炸视图（完整示例页 <a href="./scroll.html">scroll.html</a>）</div>
   </div>
   <p class="intro-links">
     <a href="https://github.com/AlphaXe-Hub/ui-interaction-kit" target="_blank" rel="noopener">GitHub 仓库</a> ·
@@ -91,10 +93,10 @@
 </section>
 
 <section class="intro i-en">
-  <h2>UI Interaction Kit: 61 front-end interaction patterns — pick the right one before writing code</h2>
+  <h2>UI Interaction Kit: 64 front-end interaction patterns — pick the right one before writing code</h2>
   <p>
     UI Interaction Kit turns vague motion requests — "make it feel snappier", "follow my finger", "like liquid" —
-    into 61 well-defined interaction patterns (motion textures, chart interactions, app patterns, overlays, loading states),
+    into 64 well-defined interaction patterns (motion textures, chart interactions, app patterns, overlays, loading states, scroll-driven scenes),
     so an AI coding assistant chooses one primary interaction before touching the code. It is not a component library
     and it is framework-agnostic: every entry documents its trigger, start state, motion, end state and cancel state,
     and applies to the web, native apps and mini programs alike.
@@ -110,6 +112,7 @@
     <div><strong>App Interaction Patterns (10)</strong><br>Radial Theme Transition · Drag-to-Reorder · Staggered Bulk Selection · Velocity-Based Slider Snap · Animated Text Disclosure · Spring Stepper Progress · Ripple Feedback for Related Switches · Curved Card Deletion · Stacked Card Scroll · Expanding Tag Selection</div>
     <div><strong>Expand &amp; Collapse (15)</strong><br>Circle to Pill · Pill to Card · Compact to Expand · Corner Radius Morph · Size Morph · Content Reflow · Reverse Collapse · Accordion · Collapse · Dropdown · Treeview · Expandable Card · Sidebar · Radio Menu · Container Transform</div>
     <div><strong>Navigation · Overlays · Loading (21)</strong><br>Tabs · Segment Control · Breadcrumb · Pagination · Stepper · Sidebar · Bottom Navigation · Tooltip · Popover · Dropdown Menu · Drawer · Bottom Sheet · Modal · Toast · Page Loader · Skeleton · Shimmer · Spinner · Progress Bar · Circular Progress · Button Loader</div>
+    <div><strong>Scroll-Driven Official Site (3)</strong><br>Scroll-driven Opening · Horizontal Scroll Section · Scroll-driven Exploded View — full example in <a href="./scroll.html">scroll.html</a></div>
   </div>
   <p class="intro-links">
     <a href="https://github.com/AlphaXe-Hub/ui-interaction-kit" target="_blank" rel="noopener">GitHub repository</a> ·
@@ -123,12 +126,12 @@
 
 <footer class="foot">
   <div class="i-zh">
-    分类顺序：质感动效 8 · 图表交互 7 · 高级交互模式 10 · 展开动画 7 · 折叠组件 8 · 导航组件 7 · 弹窗组件 7 · 加载动效 7
+    分类顺序：质感动效 8 · 图表交互 7 · 高级交互模式 10 · 展开动画 7 · 折叠组件 8 · 导航组件 7 · 弹窗组件 7 · 加载动效 7 · 滚动驱动官网 3
     <br>参考 <code>ui-interaction-kit/references/*.md</code> 获取每个词条的选型边界、关键规则与验收清单。
     <br><a href="https://github.com/AlphaXe-Hub/ui-interaction-kit" target="_blank" rel="noopener">Star / Fork on GitHub</a> · MIT License · © 2026 ChangerXu
   </div>
   <div class="i-en">
-    Sections: Motion Texture 8 · Chart Interaction 7 · App Patterns 10 · Expand Animations 7 · Collapse Components 8 · Navigation 7 · Overlays 7 · Loading States 7
+    Sections: Motion Texture 8 · Chart Interaction 7 · App Patterns 10 · Expand Animations 7 · Collapse Components 8 · Navigation 7 · Overlays 7 · Loading States 7 · Scroll-Driven Site 3
     <br>See <code>ui-interaction-kit/references/*.md</code> for selection boundaries, key rules and acceptance checks.
     <br><a href="https://github.com/AlphaXe-Hub/ui-interaction-kit" target="_blank" rel="noopener">Star / Fork on GitHub</a> · MIT License · © 2026 ChangerXu
   </div>
@@ -142,5 +145,6 @@
 <script src="demos/06-nav.js"></script>
 <script src="demos/07-overlay.js"></script>
 <script src="demos/08-loading.js"></script>
+<script src="demos/09-scroll.js"></script>
 </body>
 </html>
