@@ -57,7 +57,7 @@ description: 前端 UI 交互与动效选型知识库。当用户要为页面、
 | 6 | 导航组件 | Tabs / Segment Control / Breadcrumb / Pagination / Stepper / Sidebar / Bottom Navigation | `references/05-navigation.md` |
 | 7 | 弹窗组件 | Tooltip / Popover / Dropdown Menu / Drawer / Bottom Sheet / Modal / Toast（补充） | `references/06-overlays.md` |
 | 8 | 加载动效 | Page Loader / Skeleton / Shimmer / Spinner / Progress Bar / Circular Progress / Button Loader | `references/07-loading.md` |
-| 9 | 滚动驱动官网 | Scroll-driven Opening / Horizontal Scroll Section / Scroll-driven Exploded View | `references/08-scroll-driven.md` |
+| 9 | 滚动驱动官网 | Scroll-driven Opening / Horizontal Scroll Section / Scroll-driven Hologram Scan | `references/08-scroll-driven.md` |
 
 需求落到具体分类后，再读取对应 reference 获取"必须保留"的约束、Copyable prompt 与验收清单。不要一次性加载全部 reference。
 
@@ -93,7 +93,7 @@ description: 前端 UI 交互与动效选型知识库。当用户要为页面、
 - `references/08-scroll-driven.md` – 3 种滚动驱动官网模式：共享交互规则、三个 pattern 的实现要点、构建与评审流程、完成标准
 - `references/prompt-templates.md` – Copyable prompt 模板与输出格式
 - `assets/showcase/index.html` – 64 个词条的可运行 Demo，每个卡片标注词条英文名与中文名；可直接用浏览器打开
-- `assets/showcase/scroll.html` – 滚动驱动官网的完整示例页（开场 → 横向滚段 → 爆炸视图 → 结尾），支持双向 scrub 与 reduced-motion 静态兜底
+- `assets/showcase/scroll.html` – 滚动驱动官网的完整示例页（开场 → 横向滚段 → 全息扫描 → 结尾），支持双向 scrub 与 reduced-motion 静态兜底；全息扫描用 Three.js WebGL 实现，加载失败时降级为静态示意
 
 ## 使用 Demo
 

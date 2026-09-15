@@ -1,6 +1,6 @@
 # UI Interaction Kit
 
-**64 patterns** · **No dependencies** · **MIT License** · **CodeBuddy Skill**
+**64 patterns** · **No build step** · **MIT License** · **CodeBuddy Skill**
 
 > Pick the right interaction before writing a line of code. 8 motion textures, 7 chart interactions, 10 app patterns, 7 + 8 expand & collapse, 7 navigation, 7 overlays, 7 loading states, 3 scroll-driven site patterns — 64 entries, each with a runnable demo.
 
@@ -136,7 +136,7 @@ Page Loader · Skeleton · Shimmer · Spinner · Progress Bar · Circular Progre
 |---|---|---|
 | Scroll-driven Opening | 滚动驱动开场 | The product starts closed and opens around its real hinge as you scroll |
 | Horizontal Scroll Section | 横向滚动区段 | Pinned viewport, vertical scroll drives a horizontal track until the last item is fully inside |
-| Scroll-driven Exploded View | 滚动驱动爆炸视图 | Parts separate in a planned order and reassemble along the same path on reverse scroll |
+| Scroll-driven Hologram Scan | 滚动驱动全息扫描 | A clip plane climbs with the scroll: scanned parts render as a hologram, the rest stays a ghost, and reverse scroll unwinds it from the top |
 
 Full example page: **https://alphaxe-hub.github.io/ui-interaction-kit/scroll.html**
 
@@ -209,7 +209,7 @@ ui-interaction-kit/
 │   ├── index.html              # 64-entry card grid
 │   ├── core.js                 # Registry + runtime + reduced-motion toggle + zh/en switch
 │   ├── styles.css
-│   ├── scroll.html / .css / .js  # Scroll-driven example site (opening → horizontal → exploded → outro)
+│   ├── scroll.html / .css / .js  # Scroll-driven example site (opening → horizontal → hologram scan → outro)
 │   └── demos/01..09-*.js       # 9 files, 64 demos
 ├── docs/demo-overview.png      # Screenshot for this README
 └── LICENSE                     # MIT

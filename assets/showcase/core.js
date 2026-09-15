@@ -11,7 +11,7 @@
     { id: 'nav', n: '06', title: '导航组件', enTitle: 'Navigation', en: 'Navigation (7)', desc: '组件类型 / 放置位置 / 切换内容 / 高亮方式', enDesc: 'Component type / placement / content / highlight' },
     { id: 'overlay', n: '07', title: '弹窗组件', enTitle: 'Overlays', en: 'Overlays (7)', desc: '触发方式 / 出现位置 / 是否阻断交互', enDesc: 'Trigger / position / whether it blocks interaction' },
     { id: 'loading', n: '08', title: '加载动效', enTitle: 'Loading States', en: 'Loading States (7)', desc: '动效类型 / 预计等待时间 / 具体场景', enDesc: 'Pattern / expected wait / where it is used' },
-    { id: 'scroll', n: '09', title: '滚动驱动官网', enTitle: 'Scroll-Driven Site', en: 'Scroll-Driven Official Site (3)', desc: '用滚动位置驱动产品叙事：开场、横向检视、拆解内部', enDesc: 'Scroll position drives the story: opening, sideways inspection, exploded view' }
+    { id: 'scroll', n: '09', title: '滚动驱动官网', enTitle: 'Scroll-Driven Site', en: 'Scroll-Driven Official Site (3)', desc: '用滚动位置驱动产品叙事：开场、横向检视、全息扫描内部', enDesc: 'Scroll position drives the story: opening, sideways inspection, hologram scan' }
   ];
 
   /* ---------------- English copy (keyed by category + English term) ---------------- */
@@ -100,7 +100,7 @@
 
       'scroll|Scroll-driven Opening': { desc: 'A tall section with a sticky viewport: the product starts closed and quiet, opens around its real pivot as you scroll, and the copy eases out without colliding with it.', hint: 'Scroll inside the window: the screen rotates around the bottom hinge while the base stays still. Full version in scroll.html.' },
       'scroll|Horizontal Scroll Section': { desc: 'A pinned viewport while a horizontal track travels right to left — you keep scrolling down, the content moves sideways, and the input direction never changes.', hint: 'Keep scrolling inside the window; the distance comes from the real track width, never hard-coded.' },
-      'scroll|Scroll-driven Exploded View': { desc: 'The product stays optically centered while independent parts separate in a planned order: shell first, core next, details last — and every part reassembles along the same path when you scroll back.', hint: 'Scroll down inside the window to split it apart, scroll back up to put it together.' }
+      'scroll|Scroll-driven Hologram Scan': { desc: 'Scrolling pushes a clip plane up through the machine: everything below the plane renders as a hologram, everything above stays a faint ghost, and reverse scrolling unwinds the render from the top.', hint: 'Scroll inside the window: the scan ring climbs and each layer below it renders in turn. The full WebGL version lives in scroll.html.' }
     }
   };
 

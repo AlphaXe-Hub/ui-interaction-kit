@@ -14,6 +14,14 @@
   --accent:#6ea8fe;
   --accent-soft:rgba(110,168,254,.18);
   --shadow:0 24px 60px rgba(0,0,0,.45);
+  --holo-bg:#05070c;
+  --holo-fill:#123a63;
+  --holo-emis:#3b82f6;
+  --holo-wire:#bfdbfe;
+  --holo-ghost:#31405f;
+  --holo-disc:#93c5fd;
+  --track2:#2f3b52;
+  --ok:#4ade80;
 
   --x-metal:#2a3145;
   --x-metal-2:#1d2431;
@@ -40,6 +48,14 @@
   --accent:#2563eb;
   --accent-soft:rgba(37,99,235,.12);
   --shadow:0 20px 48px rgba(20,30,60,.14);
+  --holo-bg:#eaeef6;
+  --holo-fill:#c7d9f2;
+  --holo-emis:#2563eb;
+  --holo-wire:#1e40af;
+  --holo-ghost:#b3c1d6;
+  --holo-disc:#2563eb;
+  --track2:#c9d3e4;
+  --ok:#16a34a;
 
   --x-metal:#e6eaf2;
   --x-metal-2:#d7dde9;
@@ -193,27 +209,42 @@ h3{font-size:17px;margin:0 0 6px}
 .h-counter{margin:9px 0 0;font-size:12.5px;color:var(--dim-2)}
 .h-counter span{color:var(--text);font-weight:600}
 
-/* ---------------- Pattern 3 · exploded view ---------------- */
-.scene-exploded{height:340vh}
+/* ---------------- Pattern 3 · scroll-driven hologram scan ---------------- */
+.scene-holo{height:340vh}
 .x-head{max-width:760px}
-.x-stage{position:relative;margin-top:8px}
-.x-svg{width:100%;max-width:620px;height:auto;display:block;margin:0 auto;overflow:visible}
-.x-layer{will-change:transform}
-.shape-metal{fill:var(--x-metal);stroke:var(--x-line);stroke-width:1}
-.shape-detail{fill:var(--x-detail)}
-.shape-board{fill:var(--x-board);stroke:var(--x-line);stroke-width:1}
-.shape-battery{fill:var(--x-battery);stroke:var(--x-line);stroke-width:1}
-.shape-accent{fill:var(--x-accent)}
-.shape-accent-soft{fill:var(--x-accent-soft);stroke:var(--x-accent);stroke-width:1}
-/* labels live in their own UI layer so they stay crisp while the model moves */
-.x-labels{position:absolute;inset:0;pointer-events:none}
-.x-labels span{
-  position:absolute;transform:translate(-100%,-50%);white-space:nowrap;
-  font-size:11.5px;letter-spacing:.04em;color:var(--dim-2);opacity:0;
+.holo-stage{
+  position:relative;margin-top:4px;flex:1;min-height:0;
+  border:1px solid var(--line);border-radius:14px;overflow:hidden;
+  background:var(--holo-bg);
 }
-.x-labels span[data-for="cooling"]{transform:translate(12px,-50%)}
-.x-labels span.is-past{opacity:.45}
-.x-labels span.is-current{opacity:1;color:var(--accent);font-weight:600}
+#holoCanvas{display:block;width:100%;height:100%;min-height:240px}
+.holo-hud{
+  position:absolute;left:14px;bottom:12px;font-variant-numeric:tabular-nums;
+  font-size:11.5px;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--accent);opacity:.9;pointer-events:none;
+}
+.holo-parts{
+  position:absolute;right:14px;top:12px;display:flex;flex-direction:column;gap:5px;
+  align-items:flex-end;pointer-events:none;
+}
+.holo-parts span{
+  font-size:11px;letter-spacing:.04em;color:var(--dim-2);opacity:.5;
+  transition:none;
+}
+.holo-parts span.on{color:var(--accent);opacity:1;font-weight:600}
+.holo-fallback{
+  position:absolute;inset:0;display:flex;flex-direction:column;gap:14px;
+  align-items:center;justify-content:center;text-align:center;padding:24px;
+  background:var(--holo-bg);color:var(--dim);font-size:13px;
+}
+.holo-fallback[hidden]{display:none}
+.holo-fallback-art{display:flex;flex-direction:column;gap:7px;width:min(340px,80%)}
+.holo-fallback-art i{display:block;height:14px;border-radius:4px;border:1px solid var(--line);background:var(--panel-2)}
+.holo-fallback-art i:nth-child(1){background:var(--panel)}
+.holo-fallback-art i:nth-child(3){background:var(--accent);opacity:.55}
+.holo-fallback-art i:nth-child(4){background:var(--ok);opacity:.45}
+.holo-fallback-art i:nth-child(5){background:var(--track2)}
+.holo-fallback-note{font-size:12px;color:var(--dim-2)}
 .stage-note.center{text-align:center}
 
 /* ---------------- specs / outro ---------------- */
@@ -247,7 +278,7 @@ h3{font-size:17px;margin:0 0 6px}
 @supports (animation-timeline: view()) {
   .scene-open{view-timeline-name:--open;view-timeline-axis:block}
   .scene-horizontal{view-timeline-name:--hscroll;view-timeline-axis:block}
-  .scene-exploded{view-timeline-name:--explode;view-timeline-axis:block}
+  .scene-holo{view-timeline-name:--holo;view-timeline-axis:block}
 
   .lid{
     animation:lid-open linear both;
@@ -302,19 +333,10 @@ h3{font-size:17px;margin:0 0 6px}
   }
   @keyframes h-fill{from{width:0}to{width:100%}}
 
-  /* Pattern 3 — one progress window per part */
-  .x-layer{
-    animation:xl-move linear both;
-    animation-timeline:--explode;
-    animation-range:var(--range);
-  }
-  @keyframes xl-move{from{transform:translateY(0)}to{transform:translateY(var(--dy))}}
-  .x-layer[data-layer="bottom"]{--dy:34px;--range:contain 6% contain 30%}
-  .x-layer[data-layer="cooling"]{--dy:16px;--range:contain 20% contain 44%}
-  .x-layer[data-layer="battery"]{--dy:-14px;--range:contain 30% contain 54%}
-  .x-layer[data-layer="board"]{--dy:-30px;--range:contain 42% contain 66%}
-  .x-layer[data-layer="deck"]{--dy:-50px;--range:contain 54% contain 76%}
-  .x-layer[data-layer="shell"]{--dy:-76px;--range:contain 66% contain 90%}
+  /* Pattern 3 — the hologram scan is a WebGL canvas: the clipping plane,
+     the scan disc and the camera all read the same scrubbed progress value
+     from JS, so nothing here needs a CSS animation. The timeline below stays
+     declared so the section still exposes a view timeline to any future use. */
 }
 
 @media (prefers-reduced-motion: reduce){
@@ -327,8 +349,7 @@ h3{font-size:17px;margin:0 0 6px}
   .base{animation:none !important}
   .h-viewport{overflow-x:auto;-webkit-overflow-scrolling:touch}
   .h-track{animation:none !important;transform:none !important}
-  .x-layer{animation:none !important;transform:none !important}
-  .x-labels span{opacity:1 !important}
+  .holo-fallback{position:static}
 }
 
 /* same static path, reachable without changing OS settings:
@@ -344,8 +365,7 @@ html[data-motion="reduce"] .scroll-hint{animation:none !important;opacity:1;tran
 html[data-motion="reduce"] .base{animation:none !important}
 html[data-motion="reduce"] .h-viewport{overflow-x:auto;-webkit-overflow-scrolling:touch}
 html[data-motion="reduce"] .h-track{animation:none !important;transform:none !important}
-html[data-motion="reduce"] .x-layer{animation:none !important;transform:none !important}
-html[data-motion="reduce"] .x-labels span{opacity:1 !important}
+html[data-motion="reduce"] .holo-fallback{position:static}
 
 /* ---------------- responsive ---------------- */
 @media (max-width:1080px){
@@ -355,7 +375,7 @@ html[data-motion="reduce"] .x-labels span{opacity:1 !important}
   :root{--nav-h:58px}
   .scene-open{height:240vh}
   .scene-horizontal{height:auto}
-  .scene-exploded{height:280vh}
+  .scene-holo{height:280vh}
   .scene .sticky{padding:18px 16px}
   .badge{display:none}
   .laptop{width:min(400px,86vw);height:250px}
@@ -365,7 +385,7 @@ html[data-motion="reduce"] .x-labels span{opacity:1 !important}
   .h-card{flex:0 0 78vw}
   .h-track{transform:none !important}
   .outro{grid-template-columns:1fr}
-  .x-svg{max-width:100%}
+  .holo-parts{display:none}
 }
 @media (max-width:520px){
   h1{font-size:28px}

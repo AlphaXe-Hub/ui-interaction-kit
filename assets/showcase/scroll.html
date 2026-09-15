@@ -24,7 +24,7 @@
     <nav class="chapters" aria-label="Sections">
       <a href="#scene-open" data-i18n="navOpen">Opening</a>
       <a href="#scene-horizontal" data-i18n="navFeatures">Features</a>
-      <a href="#scene-exploded" data-i18n="navInside">Inside</a>
+      <a href="#scene-holo" data-i18n="navInside">Inside</a>
       <a href="#scene-specs" data-i18n="navSpecs">Specs</a>
     </nav>
     <div class="nav-actions">
@@ -141,72 +141,33 @@
     </div>
   </section>
 
-  <!-- ============ Pattern 3 · scroll-driven exploded view ============ -->
-  <section class="scene scene-exploded" id="scene-exploded">
+  <!-- ============ Pattern 3 · scroll-driven hologram scan ============ -->
+  <section class="scene scene-holo" id="scene-holo">
     <div class="sticky">
       <div class="x-head">
         <p class="eyebrow" data-i18n="xEyebrow">Inside</p>
         <h2 data-i18n="xTitle">What is actually in there.</h2>
-        <p class="lede" data-i18n="xLede">Six layers separate in a fixed order and reassemble when you scroll back up. Concept visualization — drawn as SVG, not a reconstructed teardown.</p>
+        <p class="lede" data-i18n="xLede">Scrolling pushes a scan plane up through the machine. Everything below the plane is rendered as a hologram; everything above it stays a faint ghost until the scan reaches it.</p>
       </div>
 
-      <div class="x-stage">
-        <svg class="x-svg" viewBox="0 0 560 360" role="img" aria-label="Exploded view of the laptop: top shell, keyboard deck, mainboard, battery, cooling and ports, bottom shell">
-          <!-- bottom shell -->
-          <g class="x-layer" data-layer="bottom" data-anim="translateY" data-from="0" data-to="34" data-unit="px" data-range="0.06,0.30">
-            <rect class="shape-metal" x="120" y="196" width="320" height="26" rx="10"/>
-            <rect class="shape-detail" x="140" y="204" width="60" height="8" rx="4"/>
-            <rect class="shape-detail" x="360" y="204" width="60" height="8" rx="4"/>
-          </g>
-
-          <!-- cooling + ports -->
-          <g class="x-layer" data-layer="cooling" data-anim="translateY" data-from="0" data-to="16" data-unit="px" data-range="0.20,0.44">
-            <rect class="shape-accent-soft" x="392" y="150" width="48" height="40" rx="8"/>
-            <circle class="shape-accent" cx="404" cy="164" r="7"/>
-            <circle class="shape-accent" cx="428" cy="176" r="7"/>
-          </g>
-
-          <!-- battery -->
-          <g class="x-layer" data-layer="battery" data-anim="translateY" data-from="0" data-to="-14" data-unit="px" data-range="0.30,0.54">
-            <rect class="shape-battery" x="140" y="150" width="230" height="44" rx="9"/>
-            <rect class="shape-detail" x="152" y="162" width="40" height="20" rx="4"/>
-            <rect class="shape-detail" x="200" y="162" width="40" height="20" rx="4"/>
-            <rect class="shape-detail" x="248" y="162" width="40" height="20" rx="4"/>
-          </g>
-
-          <!-- mainboard -->
-          <g class="x-layer" data-layer="board" data-anim="translateY" data-from="0" data-to="-30" data-unit="px" data-range="0.42,0.66">
-            <rect class="shape-board" x="150" y="104" width="260" height="34" rx="8"/>
-            <rect class="shape-accent-soft" x="164" y="112" width="34" height="18" rx="3"/>
-            <rect class="shape-detail" x="208" y="112" width="70" height="18" rx="3"/>
-            <circle class="shape-accent" cx="330" cy="121" r="9"/>
-          </g>
-
-          <!-- keyboard deck -->
-          <g class="x-layer" data-layer="deck" data-anim="translateY" data-from="0" data-to="-50" data-unit="px" data-range="0.54,0.76">
-            <rect class="shape-metal" x="126" y="56" width="308" height="34" rx="9"/>
-            <rect class="shape-detail" x="146" y="64" width="196" height="18" rx="4"/>
-            <rect class="shape-detail" x="352" y="64" width="62" height="18" rx="4"/>
-          </g>
-
-          <!-- top shell -->
-          <g class="x-layer" data-layer="shell" data-anim="translateY" data-from="0" data-to="-76" data-unit="px" data-range="0.66,0.90">
-            <rect class="shape-metal" x="120" y="16" width="320" height="26" rx="10"/>
-            <circle class="shape-detail" cx="280" cy="29" r="4"/>
-          </g>
-        </svg>
-
-        <div class="x-labels">
-          <span data-for="shell" data-i18n="layerShell" style="top:4%;left:20%">Top shell</span>
-          <span data-for="deck" data-i18n="layerDeck" style="top:15%;left:20%">Keyboard deck</span>
-          <span data-for="board" data-i18n="layerBoard" style="top:28%;left:25%">Mainboard</span>
-          <span data-for="battery" data-i18n="layerBattery" style="top:42%;left:24%">Battery</span>
-          <span data-for="cooling" data-i18n="layerCooling" style="top:42%;left:68%">Cooling &amp; ports</span>
-          <span data-for="bottom" data-i18n="layerBottom" style="top:70%;left:20%">Bottom shell</span>
+      <div class="holo-stage" id="holoStage">
+        <canvas id="holoCanvas" role="img" aria-label="Scroll-driven hologram scan of the laptop and its internal parts"></canvas>
+        <div class="holo-hud">SCAN <span id="holoPct">0</span>%</div>
+        <div class="holo-fallback" id="holoFallback" hidden>
+          <p data-i18n="holoFallbackText">WebGL is unavailable or Three.js could not load, so this section shows a static section drawing instead of the live scan.</p>
+          <div class="holo-fallback-art" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
+          <p class="holo-fallback-note" data-i18n="holoFallbackNote">The scroll-driven behaviour is unchanged — only the rendering falls back.</p>
+        </div>
+        <div class="holo-parts">
+          <span data-range="0.72,1" data-i18n="partShell">Top shell &amp; screen</span>
+          <span data-range="0.54,0.80" data-i18n="partDeck">Keyboard deck</span>
+          <span data-range="0.36,0.62" data-i18n="partBoard">Mainboard</span>
+          <span data-range="0.18,0.44" data-i18n="partBattery">Battery</span>
+          <span data-range="0.04,0.30" data-i18n="partCooling">Cooling &amp; ports</span>
         </div>
       </div>
 
-      <p class="stage-note" data-i18n="xNote">One layer at a time — the shell leaves first, the core shows up next, details move last. Scroll back up and everything returns along the same path.</p>
+      <p class="stage-note" data-i18n="xNote">One height at a time — stop mid-scroll and you keep a live cross-section. Scroll back up and the render unwinds from the top. The clip plane, the scan ring and the camera all read the same progress value, so they cannot drift apart.</p>
     </div>
   </section>
 
@@ -228,7 +189,7 @@
         <img src="https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?w=1600&q=80&auto=format" alt="A quiet forest scene used as the closing visual" loading="lazy">
         <div class="outro-text">
           <h3 data-i18n="outroTitle">This whole page is one skill entry.</h3>
-          <p data-i18n="outroBody">Opening, horizontal track and exploded view are the three scroll-driven patterns in UI Interaction Kit — including the rules this page is built to follow: scroll position as the single source of truth, a reversible path, and no transition on every scroll update.</p>
+          <p data-i18n="outroBody">Opening, horizontal track and hologram scan are the three scroll-driven patterns in UI Interaction Kit — including the rules this page is built to follow: scroll position as the single source of truth, a reversible path, and no transition on every scroll update.</p>
           <p class="outro-links">
             <a href="./index.html" data-i18n="outroCta">See all 64 patterns →</a>
             <a href="https://github.com/AlphaXe-Hub/ui-interaction-kit/blob/main/references/08-scroll-driven.md" target="_blank" rel="noopener" data-i18n="outroDoc">Read the spec</a>
@@ -243,7 +204,7 @@
   <p>
     <span data-i18n="footLeft">Demo page for UI Interaction Kit · scroll-driven patterns.</span>
     <span class="dot">·</span>
-    <span data-i18n="footRight">Product and all internals are a concept visualization drawn in SVG/CSS, not a real teardown.</span>
+    <span data-i18n="footRight">Product and all internals are a procedurally generated concept visualization — not a real teardown or scan.</span>
   </p>
   <p class="foot-links">
     <a href="./index.html" data-i18n="footIndex">Pattern index</a> ·
@@ -252,6 +213,9 @@
   </p>
 </footer>
 
+<!-- Three.js only powers the hologram scan; everything else on this page is vanilla JS.
+     If it fails to load, the section falls back to a static drawing. -->
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/build/three.min.js"></script>
 <script src="scroll.js"></script>
 </body>
 </html>

@@ -154,60 +154,79 @@
     }
   });
 
-  /* 3 · scroll-driven exploded view */
+  /* 3 · scroll-driven hologram scan (canvas 2D preview of the Three.js section) */
   UIK.register('scroll', {
-    en: 'Scroll-driven Exploded View', zh: '滚动驱动爆炸视图',
-    desc: '产品保持视觉居中，独立部件按计划顺序分离（外壳先走、核心随后、细节件最后），反向滚动沿原路装回。',
-    hint: '在小窗里向下滚：外壳先移开，核心露出，细节最后。向上滚回原路径。',
+    en: 'Scroll-driven Hologram Scan', zh: '滚动驱动全息扫描',
+    desc: '滚动推动一个裁剪面从下往上扫过整机：平面以下以全息显形，平面以上只留残影；反向滚动自顶向下反渲染。',
+    hint: '在小窗里滚动：扫描环上移，下方逐层"渲染"出来。完整效果是 Three.js WebGL，见 scroll.html。',
     h: 300,
     mount: function (stage, ctx) {
       var s = scroller(stage, ctx, { winH: 160 });
 
-      var stack = U.el('div');
-      U.css(stack, { position: 'relative', width: '170px', height: '120px' });
+      var canvas = U.el('canvas');
+      U.css(canvas, { display: 'block', width: '100%', height: '100%' });
+      s.sticky.appendChild(canvas);
+      var c2d = canvas.getContext('2d');
 
-      var layers = [
-        { id: 'shell', w: '82%', top: 4, dy: -34, range: [0.30, 0.66], cls: 'mini-shell' },
-        { id: 'deck', w: '76%', top: 30, dy: -14, range: [0.42, 0.78], cls: 'mini-deck' },
-        { id: 'board', w: '60%', top: 52, dy: 10, range: [0.52, 0.88], cls: 'mini-board' },
-        { id: 'bottom', w: '82%', top: 78, dy: 26, range: [0.12, 0.46], cls: 'mini-bottom' }
+      /* the same stack the WebGL section draws, as a flat cross-section */
+      var LAYERS = [
+        { w: 0.72, y: 0.76, kind: 'shell' },
+        { w: 0.58, y: 0.64, kind: 'board' },
+        { w: 0.46, y: 0.54, kind: 'battery' },
+        { w: 0.66, y: 0.42, kind: 'deck' },
+        { w: 0.58, y: 0.24, kind: 'screen' }
       ];
-      var nodes = {};
-      layers.forEach(function (L) {
-        var n = U.el('div');
-        U.css(n, {
-          position: 'absolute', left: '50%', top: L.top + 'px', width: L.w, height: '18px',
-          marginLeft: '-41%', borderRadius: '5px', willChange: 'transform'
+
+      function color(name, fb) {
+        var v = getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+        return v || fb;
+      }
+
+      function draw(p) {
+        var w = s.sticky.clientWidth, h = s.sticky.clientHeight;
+        if (!w || !h) return;
+        if (canvas.width !== w || canvas.height !== h) { canvas.width = w; canvas.height = h; }
+        var accent = color('--d-accent', '#6ea8fe');
+        var border = color('--d-border', '#2b3348');
+        var hole = color('--d-hole', '#0e121b');
+
+        c2d.clearRect(0, 0, w, h);
+        c2d.fillStyle = hole; c2d.fillRect(0, 0, w, h);
+
+        var topY = h * 0.14, bottomY = h * 0.88;
+        var scanY = bottomY + (topY - bottomY) * p;      // p=0 bottom, p=1 top
+
+        var lh = Math.max(h * 0.055, 8);
+        LAYERS.forEach(function (L) {
+          var lw = w * L.w, x = (w - lw) / 2, y = h * L.y;
+          var scanned = y >= scanY;                       // below the plane = already rendered
+          if (UIK.isReduced()) scanned = true;
+          if (scanned) {
+            c2d.globalAlpha = 0.85;
+            c2d.fillStyle = accent; c2d.fillRect(x, y, lw, lh);
+            c2d.globalAlpha = 1;
+            c2d.strokeStyle = accent; c2d.lineWidth = 1.4; c2d.strokeRect(x + .5, y + .5, lw - 1, lh - 1);
+          } else {
+            c2d.globalAlpha = 0.22;
+            c2d.strokeStyle = border; c2d.lineWidth = 1; c2d.strokeRect(x + .5, y + .5, lw - 1, lh - 1);
+            c2d.globalAlpha = 1;
+          }
         });
-        if (L.cls === 'mini-shell') U.css(n, { background: 'var(--d-panel)', border: '1px solid var(--d-border)' });
-        if (L.cls === 'mini-deck') U.css(n, { background: 'var(--d-panel-2)', border: '1px solid var(--d-border)' });
-        if (L.cls === 'mini-board') U.css(n, { background: 'var(--d-accent)', opacity: '.9' });
-        if (L.cls === 'mini-bottom') U.css(n, { background: 'var(--d-track)', border: '1px solid var(--d-border)' });
-        stack.appendChild(n); nodes[L.id] = n;
-      });
 
-      var readout = U.el('div');
-      U.css(readout, { position: 'absolute', left: '0', bottom: '-2px', fontSize: '10.5px', color: 'var(--d-accent)', fontWeight: '600' });
-      stack.appendChild(readout);
-
-      s.sticky.appendChild(stack);
-
-      var order = ['bottom', 'board', 'deck', 'shell'];
-      s.bind(function (p) {
-        if (UIK.isReduced()) {
-          layers.forEach(function (L) { nodes[L.id].style.transform = 'translateY(' + L.dy + 'px)'; });
-          readout.textContent = 'concept exploded view';
-          return;
+        if (!UIK.isReduced() && p > 0.004 && p < 0.996) {
+          c2d.fillStyle = accent;
+          c2d.fillRect(0, scanY - 1, w, 2);
+          c2d.globalAlpha = 0.5;
+          for (var i = 0; i < 14; i++) {
+            var mx = (i / 14) * w + ((i * 37) % 11);
+            var my = scanY - ((i * 13) % 26);
+            c2d.fillRect(mx, my, 1.5, 1.5);
+          }
+          c2d.globalAlpha = 1;
         }
-        var cur = null;
-        layers.forEach(function (L) {
-          var local = clamp((p - L.range[0]) / (L.range[1] - L.range[0]), 0, 1);
-          if (p >= L.range[0]) cur = L.id;
-          nodes[L.id].style.transform = 'translateY(' + (L.dy * easeInOutCubic(local)) + 'px)';
-        });
-        var idx = order.indexOf(cur);
-        readout.textContent = idx >= 0 ? 'layer ' + order.slice(0, idx + 1).join(' → ') : '';
-      });
+      }
+
+      s.bind(draw);
     }
   });
 })();

@@ -1,6 +1,6 @@
 # 08 滚动驱动官网｜Scroll-Driven Official Site
 
-**用途**：构建响应式、可直接上线的网站，用滚动位置驱动产品叙事 —— 开场镜头、横向滚动区段、可反向的爆炸视图。
+**用途**：构建响应式、可直接上线的网站，用滚动位置驱动产品叙事 —— 开场镜头、横向滚动区段、可反向的全息扫描揭示。
 **适用**：用户想要 Apple 风格的产品页或作品集页，页面视觉由滚动控制。
 **不适用**：只要一段渲染视频。视频、静态拼贴、截图序列都不能替代网站本身。
 
@@ -14,7 +14,7 @@
 
 1. **滚动驱动开场**：介绍一个产品或界面。
 2. **横向滚动区段**：用户继续纵向滚动时，可以横向检视一排相关作品、功能或界面。
-3. **滚动驱动爆炸视图**：按刻意安排的顺序解释一台实体产品的各个部件。
+3. **滚动驱动全息扫描揭示**：用一个被滚动推动的裁剪面，逐层解释一台实体产品的内部结构。
 
 **只用内容真正需要的 pattern。** 三个都要时，必须是三个视觉上明确不同的区段，且中间有清晰过渡。不要把同一个卡片网格换个颜色就当成三个交互。
 
@@ -73,38 +73,50 @@ track.style.transform = `translate3d(${-distance * easeInOutCubic(progress)}px, 
 - 轨道很长时提供可见的进度指示。
 - 卡片宽度要足够检视内容；小屏幕改用**直接触控滚动、分页轮播或普通纵向堆叠**，不要把每张卡硬挤进窄列。
 
-## Pattern 3：滚动驱动爆炸视图
+## Pattern 3：滚动驱动全息扫描揭示
 
-适用于硬件、设备、组件系统，或任何需要解释内部结构的产品。产品保持视觉居中，独立部件按计划顺序分离。
+适用于硬件、设备、组件系统，或任何需要解释内部结构的产品。**一个裁剪面（clip plane）由滚动位置从下往上推过整机**：平面以下的部分以全息形式渲染出来，平面以上只留一层极淡的残影（"已探测、未渲染"），反向滚动则自顶向下反渲染。
 
-**首选顺序**：
+> 本 kit 用扫描揭示替代了原文的"爆炸视图（部件依次分离成层）"。两者目标相同 —— 讲清内部结构 —— 但扫描揭示有三个更实际的优势：停在半途能留下实时横截面；对素材要求更低（一份几何体即可，不需要每个部件单独分层）；进入与退出天然可逆。
 
-1. 完整产品状态。
-2. 外壳先移开。
-3. 内部驱动、主板或核心元件露出。
-4. 网罩、缓冲、连接器或最后的细节件最后移动。
-5. 标签与说明高亮当前部件。
-6. 反向滚动让每个部件沿原路径装回。
+**必备的三份渲染（共享同一份几何体）**：
 
-只有当前层应该获得强烈强调。**不要一次把所有部件散开**，观看者必须始终知道该看哪里。装配状态要在时间线两端都可用，以便双向 scrub。
+| 渲染 | 材质 | 是否被裁剪 | 作用 |
+|---|---|---|---|
+| 全息填充 | 半透明发光材质（`DoubleSide`） | 是 | 被扫过的实体体积 |
+| 投射线框 | `wireframe: true` | 是 | 结构线，让"扫描"可见 |
+| 残影 | 极低透明度线框（约 6%） | 否 | 未扫到区域的轮廓提示 |
 
-**素材策略（三选一）**：
+**必须保留的规则**：
 
-- 带独立可寻址节点的真实 3D 模型。
-- 每个部件一张透明渲染图或 SVG 图层。
-- 浏览器无法产出所需透视或材质时，用预渲染状态序列。
-
-> **诚实性约束**：如果素材只有一张普通产品照片，**不要声称隐藏的内部部件被准确重建**。要么索要合适素材，要么把结果明确标注为"概念可视化"。
-
-用进度窗口，而不是让所有部件响应同一个值：
+1. **裁剪面与可见扫描环读同一个值**，相邻两行赋值，避免错位。
+2. 用**平面法线**决定保留哪一侧：法线 `(0, -1, 0)` 时保留 `y ≤ constant`，于是 `plane.constant` 本身就是扫描高度。
+3. 只让**当前正在扫描的那一层**获得强强调（标签高亮），不要一次点亮全部。
+4. 扫描环在区间两端隐藏（`prog ≤ 0.005` 或 `≥ 0.995`），避免留下悬空的圆环。
+5. 闪烁用**两个不可通约频率的乘积**做阈值（如 `sin(t*23) * sin(t*7.3) > 0.93`），单个正弦会像节拍器，读起来像加载指示器。
+6. 粒子用**回绕而不是重生**：每帧 `y += v`，超过上限直接回到下限，只改同一个 `Float32Array` 后置 `needsUpdate`。
+7. 相机缓慢环绕并随进度微调高度，始终 `lookAt` 产品中心。
 
 ```js
-const shell  = remap(progress, 0.16, 0.40);
-const driver = remap(progress, 0.34, 0.64);
-const detail = remap(progress, 0.58, 0.86);
+// 一份被 scrub 的值同时驱动四件事，它们不可能漂移
+clipPlane.constant = h;      // GPU 真实裁剪高度
+scanDisc.position.y = h;     // 可见扫描环
+const prog = (h - MIN) / (MAX - MIN);   // HUD 百分比、相机、粒子透明度
 ```
 
-每个 `remap` 结果都要**先缓动**再驱动位置、旋转、透明度或缩放。标签放在独立的 UI 层，这样模型运动时标签始终清晰。
+**常见坑**：Three.js 的裁剪是 **opt-in** —— 创建 renderer 后必须立刻 `renderer.localClippingEnabled = true`，否则 `material.clippingPlanes` 会被**静默忽略**（无报错、无警告）。第二个常见原因是平面法线翻转，导致保留侧反了。
+
+**素材策略**：
+
+- 带独立可寻址节点的真实 3D 模型或 GLTF 网格（把同一 `clippingPlanes` 数组赋给它的材质即可复用）。
+- 没有模型时用基础几何体**程序生成**产品（本 kit 的 demo 就是这么做的：底壳、键盘面、主板、电池、风扇、热管、屏幕各自成组）。
+- 需要特定材质或透视时，用预渲染状态序列。
+
+> **诚实性约束**：如果素材只有一张普通产品照片，**不要声称隐藏的内部部件被准确重建或扫描过**。要么索要合适素材，要么把结果明确标注为"程序生成的概念可视化"。
+
+**降级**：WebGL 不可用或 3D 库加载失败时，必须保留一个设计好的静态兜底（剖面示意或最终状态图），并让页面仍然能讲故事。本 kit 的做法：`<canvas>` 之外放一个 `hidden` 的 fallback 区块，检测失败时显示它并隐藏 canvas。
+
+*参考实现：`fwdtools.com/ui-snippets/three-scroll-hologram-scan/` 给出了裁剪面扫描的完整参数与坑位（该示例用 GSAP ScrollTrigger 驱动；本 kit 改用页面已有的 sticky + 进度值驱动，避免两套 pin 机制冲突）。*
 
 ## 视觉方向
 
@@ -144,7 +156,7 @@ const detail = remap(progress, 0.58, 0.86);
 - 开场从产品预期的闭合/安静状态开始，并绕正确的转轴打开。
 - 标题与注释的淡出或位移不会与产品碰撞。
 - 横向区段完整露出每一项，并在正确的时点解除固定。
-- 爆炸视图一次只揭示一个可理解的层，反向滚动时能装回。
+- 扫描揭示一次只强调一个正在扫描的层，停在中途能看到实时横截面，反向滚动能自顶向下收回。
 - 没有主体被裁切、压扁或被挤出移动端安全区。
 - 页面有 reduced-motion 行为与可用的静态兜底。
 - 真实浏览器路由已在**区段边界**与**反向滚动**时检查过。
@@ -169,10 +181,13 @@ Sections (keep them visually distinct, with a clear transition between them):
    Compute the distance from track.scrollWidth - viewport.clientWidth, keep the section pinned
    until the last item is fully inside, and recalculate after font loading, image loading and
    resize. On small screens switch to touch scrolling or a vertical stack.
-3. Scroll-driven exploded view: keep the product optically centered while independent parts
-   separate in a planned order (shell first, then the core component, then the final detail),
-   with progress windows per part and labels in a separate UI layer. Reverse scroll must
-   reassemble every part along the same path. Only the current layer gets strong emphasis.
+3. Scroll-driven hologram scan: push a clipping plane up through the machine as the user
+   scrolls. Everything below the plane renders as a holographic fill plus a wireframe
+   overlay; everything above it stays a faint, unclipped ghost. Drive the clip plane, the
+   visible scan ring, the camera orbit and the rising motes from the same scrubbed progress
+   value so they cannot drift apart. Hide the scan ring at both ends of the range, only give
+   the layer currently being scanned the strong emphasis, and unwind the render from the top
+   when the user scrolls back.
 
 Rules: drive visual motion with an easeInOutCubic / smoothstep mapping; never attach a CSS
 transition to every scroll update (frame-synced updates or a small interpolation loop only);
