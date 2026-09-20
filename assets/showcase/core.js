@@ -11,13 +11,14 @@
     { id: 'nav', n: '06', title: '导航组件', enTitle: 'Navigation', en: 'Navigation (7)', desc: '组件类型 / 放置位置 / 切换内容 / 高亮方式', enDesc: 'Component type / placement / content / highlight' },
     { id: 'overlay', n: '07', title: '弹窗组件', enTitle: 'Overlays', en: 'Overlays (7)', desc: '触发方式 / 出现位置 / 是否阻断交互', enDesc: 'Trigger / position / whether it blocks interaction' },
     { id: 'loading', n: '08', title: '加载动效', enTitle: 'Loading States', en: 'Loading States (7)', desc: '动效类型 / 预计等待时间 / 具体场景', enDesc: 'Pattern / expected wait / where it is used' },
-    { id: 'scroll', n: '09', title: '滚动驱动官网', enTitle: 'Scroll-Driven Site', en: 'Scroll-Driven Official Site (3)', desc: '用滚动位置驱动产品叙事：开场、横向检视、全息扫描内部', enDesc: 'Scroll position drives the story: opening, sideways inspection, hologram scan' }
+    { id: 'scroll', n: '09', title: '滚动驱动官网', enTitle: 'Scroll-Driven Site', en: 'Scroll-Driven Official Site (3)', desc: '用滚动位置驱动产品叙事：开场、横向检视、全息扫描内部', enDesc: 'Scroll position drives the story: opening, sideways inspection, hologram scan' },
+    { id: 'texture', n: '10', title: '质感组件交互', enTitle: 'Texture Components', en: 'Texture Components (6)', desc: '组件自身形态的深浅变化：重叠、填充、展开、托盘、跟手、下拉', enDesc: 'Component-level form details: overlap, fill, expansion, tray, proximity, pull-down' }
   ];
 
   /* ---------------- English copy (keyed by category + English term) ---------------- */
   var I18N = {
     ui: {
-      subtitle: '64 front-end interaction entries · every demo is playable · vanilla JS, zero dependencies',
+      subtitle: '70 front-end interaction entries · every demo is playable · vanilla JS, zero dependencies',
       search: 'Search term / Chinese name / scenario',
       github: 'GitHub repo',
       themeToLight: 'Light theme',
@@ -100,7 +101,14 @@
 
       'scroll|Scroll-driven Opening': { desc: 'A tall section with a sticky viewport: the product starts closed and quiet, opens around its real pivot as you scroll, and the copy eases out without colliding with it.', hint: 'Scroll inside the window: the screen rotates around the bottom hinge while the base stays still. Full version in scroll.html.' },
       'scroll|Horizontal Scroll Section': { desc: 'A pinned viewport while a horizontal track travels right to left — you keep scrolling down, the content moves sideways, and the input direction never changes.', hint: 'Keep scrolling inside the window; the distance comes from the real track width, never hard-coded.' },
-      'scroll|Scroll-driven Hologram Scan': { desc: 'Scrolling pushes a clip plane up through the machine: everything below the plane renders as a hologram, everything above stays a faint ghost, and reverse scrolling unwinds the render from the top.', hint: 'Scroll inside the window: the scan ring climbs and each layer below it renders in turn. The full WebGL version lives in scroll.html.' }
+      'scroll|Scroll-driven Hologram Scan': { desc: 'Scrolling pushes a clip plane up through the machine: everything below the plane renders as a hologram, everything above stays a faint ghost, and reverse scrolling unwinds the render from the top.', hint: 'Scroll inside the window: the scan ring climbs and each layer below it renders in turn. The full WebGL version lives in scroll.html.' },
+
+      'texture|Overlapping Stack': { desc: 'Similar items overlap by a third with a trailing count badge; clicking fans them out one by one with names, clicking again gathers them back.', hint: 'Click the stack: items stagger open, the badge hides; click again to collapse in reverse order.' },
+      'texture|Progress-fill Background': { desc: 'Completion is shown by the fill width of the component background: each check pushes it forward, and the whole component lifts once everything is done.', hint: 'Tick the items: the fill follows the real ratio and can move back; the component brightens once at 100%.' },
+      'texture|Horizontal Accordion': { desc: 'Panels sit side by side as equal narrow bars showing only an icon and vertical text; clicking one widens it and the others shrink to make room.', hint: 'Click any bar: it expands about 3.6x, the rest shrink, only one stays open and the container height never changes.' },
+      'texture|Component Tray': { desc: 'A darker tray sits under the main component showing a single summary line; clicking draws it out to reveal details while the main component never moves.', hint: 'Click the tray: it slides down with details; the summary line stays readable and the main component keeps its position.' },
+      'texture|Proximity-scale Icons': { desc: 'Icons in a row scale smoothly with the distance to the pointer, and neighbours shift aside along the same falloff curve.', hint: 'Press and drag across the row: the nearest icon grows, neighbours make room; release to reset.' },
+      'texture|Pull-down Summary': { desc: 'A single row of pills at the top: drag down and the panel height follows the finger, then it expands into a full stats panel or springs back by distance and velocity.', hint: 'Drag the top row down: past 120px or a quick flick expands; otherwise it springs back to one row.' }
     }
   };
 
@@ -306,7 +314,7 @@
     try { localStorage.setItem('uik-lang', lang); } catch (e) {}
 
     var sub = document.getElementById('subtitle');
-    if (sub) sub.textContent = lang === 'en' ? t('subtitle') : '64 个前端交互与动效词条 · 每个演示都可直接操作 · 原生 JS 无依赖';
+    if (sub) sub.textContent = lang === 'en' ? t('subtitle') : '70 个前端交互与动效词条 · 每个演示都可直接操作 · 原生 JS 无依赖';
     var search = document.getElementById('search');
     if (search) search.placeholder = lang === 'en' ? t('search') : '搜索词条 / 中文名 / 场景';
     var gh = document.getElementById('gh-link');

@@ -1,0 +1,45 @@
+#AOCI-CODE-VOLUME: 1
+
+===D:/Users/user/My Document/skill/ui-interaction-kit/===
+.gitattributes[CG7T]: F:声明全仓文本文件以LF检出 | R:code:.aoci/baseline.json | A:- | S:AOCI基线按字节比对,该行是抑制Windows autocrlf重写行尾的唯一开关,缺失会让检出后的整树标记为stale;二进制由auto规则识别,不参与转换
+AGENTS.md[SG6S]: F:承载AOCI仓库认知区块与Agent接入指令 | R:code:aoci.txt | A:- | S:aoci:begin与aoci:end之间的区块由aoci init生成并维护,区块内手工改动会在下次init时被覆盖;区块外内容不受管理
+LICENSE[FG3T]: F:声明MIT许可条款与版权归属 | R:- | A:MIT License | S:-
+README.md[SG8M]: F:项目主说明与安装入口 | R:code:README_EN.md,code:SKILL.md,code:docs/demo-overview.png | A:- | S:词条总数在标题、速览表与分类表三处重复出现,改动必须同步;正文截图悬挂在docs目录,改文件名会同时断开中英两份README的图片引用
+README_EN.md[SG7M]: F:README的英文镜像 | R:code:README.md | A:- | S:与README.md内容必须对等,改动须同步两份;正文的在线Demo地址与仓库账号绑定,迁移账号会同时失效
+SKILL.md[SG9S]: F:交互选型决策入口与实现工作流 | R:code:README.md,code:references/01-motion-texture.md,code:references/02-chart-interaction.md,code:references/03-app-patterns.md,code:references/04-expand-collapse.md | A:- | S:描述任何交互必须写清触发方式、开始状态、变化过程、结束状态与取消状态五项;reference按需求命中的分类取用,不得一次性全量加载;词条总数与分类边界在总索引表与references间重复,改动须同步
+
+===D:/Users/user/My/.github/workflows/===
+pages.yml[OV7T]: F:构建并部署showcase静态站点到GitHub Pages | R:code:assets/showcase/index.html | A:- | S:触发条件限定assets/showcase/**路径,上传artifact的path即站点根目录,改动这两处会改变线上站点的发布范围与可达文件
+
+===D:/Users/user/My/assets/showcase/===
+core.js[AU8M]: F:showcase站点运行时与词条注册中心 | R:code:assets/showcase/index.html | A:UIK.register,UIK.util | S:英文文案在I18N中按「分类|英文名」键索引,中文desc与hint写在各demo文件里,新增词条须两处同时写入;分类元数据在CATS中单点定义,九个demo脚本由index.html固定顺序加载并各自调用UIK.register注册
+google6f6978649ce337d0.html[FV4T]: F:Google站点所有权验证令牌 | R:- | A:- | S:文件名与文件内容必须逐字保持,改名或改动任一字节都会使Search Console的验证失效
+index.html[EU8S]: F:showcase站点入口页与词条卡片容器 | R:code:assets/showcase/core.js | A:- | S:词条总数在title、description、og:title与twitter元信息中多处硬编码,当前值与正文实际数量不一致,改动须逐处核对;九个demo脚本按01至09固定顺序加载,顺序或遗漏会静默丢掉整个分类
+robots.txt[FV5T]: F:放行全站抓取并声明sitemap地址 | R:code:assets/showcase/sitemap.xml | A:- | S:Sitemap地址与index.html的canonical、sitemap.xml必须同域,更换账号或仓库名时三者需同时更新
+scroll.css[AU7M]: F:滚动驱动示例页的主题令牌与场景样式 | R:code:assets/showcase/scroll.html | A:- | S:令牌集中在:root定义后由各场景消费;滚动位置是唯一事实来源,场景动效以逐帧同步更新实现,加transition会让物体追着滚动跑
+scroll.html[EU7M]: F:滚动驱动官网的可交互完整示例页 | R:code:assets/showcase/scroll.css,code:assets/showcase/scroll.js | A:- | S:三个区段各承担一种模式且视觉上必须可区分,同一卡片网格换色不算三个交互;交付物必须是浏览器里真实可交互的页面,视频与静态拼贴不能替代
+scroll.js[AU7L]: F:滚动驱动示例页的进度映射与降级运行时 | R:code:assets/showcase/scroll.html | A:- | S:CSS路径与JS路径共享同一个progress定义,两条路径的数值必须一致;?scrub=js与?motion=reduce是复核用开关;Three.js只服务全息扫描段,该库缺失时此段降级为静态示意
+sitemap.xml[FV4T]: F:声明站点可收录URL与更新频率 | R:code:assets/showcase/robots.txt | A:- | S:loc必须与canonical和robots.txt同域;独立页面须逐条补录,否则不会被收录
+styles.css[AU7S]: F:showcase主页的页面级与demo级样式令牌 | R:code:assets/showcase/index.html | A:- | S:--d-*令牌是九个demo文件内联样式的取色契约,重命名会使demo失去配色;深色浅色主题与减少动效降级都由这些令牌驱动
+
+===D:/Users/user/My/assets/showcase/demos/===
+01-motion.js[AU7L]: F:质感动效8个词条的演示实现 | R:code:assets/showcase/core.js | A:- | S:中文desc与hint在本文件,对应英文文案在core.js的I18N中按「motion|英文名」键维护,两处须同步;hint文案中写明的数值阈值必须与实现中的实际参数一致
+02-chart.js[AU7M]: F:图表交互7个词条的演示实现 | R:code:assets/showcase/core.js | A:- | S:中文desc与hint在本文件,对应英文文案在core.js的I18N中按「chart|英文名」键维护,两处须同步
+03-patterns.js[AU7L]: F:App高级交互模式10个词条的演示实现 | R:code:assets/showcase/core.js | A:- | S:中文desc与hint在本文件,对应英文文案在core.js的I18N中按「patterns|英文名」键维护,两处须同步
+04-expand.js[AU6M]: F:展开动画7个词条的演示实现 | R:code:assets/showcase/core.js | A:- | S:中文desc与hint在本文件,对应英文文案在core.js的I18N中按「expand|英文名」键维护,两处须同步
+05-collapse.js[AU6M]: F:折叠组件8个词条的演示实现 | R:code:assets/showcase/core.js | A:- | S:中文desc与hint在本文件,对应英文文案在core.js的I18N中按「collapse|英文名」键维护,两处须同步
+06-nav.js[AU6M]: F:导航组件7个词条的演示实现 | R:code:assets/showcase/core.js | A:- | S:中文desc与hint在本文件,对应英文文案在core.js的I18N中按「nav|英文名」键维护,两处须同步
+07-overlay.js[AU6M]: F:弹窗组件7个词条的演示实现 | R:code:assets/showcase/core.js | A:- | S:中文desc与hint在本文件,对应英文文案在core.js的I18N中按「overlay|英文名」键维护,两处须同步
+08-loading.js[AU6M]: F:加载动效7个词条的演示实现 | R:code:assets/showcase/core.js | A:- | S:中文desc与hint在本文件,对应英文文案在core.js的I18N中按「loading|英文名」键维护,两处须同步
+09-scroll.js[AU6M]: F:滚动驱动官网3个词条的演示实现 | R:code:assets/showcase/core.js,code:assets/showcase/scroll.html | A:- | S:本文件内卡片仅为缩略预览,完整的长滚动与sticky效果由scroll.html独立承载;中文desc与hint在本文件,英文文案在core.js的I18N中按「scroll|英文名」键维护,两处须同步
+
+===D:/Users/user/My/references/===
+01-motion-texture.md[SG7S]: F:质感动效8种的选型表与实现规则 | R:code:SKILL.md,code:references/prompt-templates.md | A:- | S:参数是需结合项目调整的设计选择,不是固定行业标准;不得默认制作八宫格演示,也不把八种效果全部加进同一项目
+02-chart-interaction.md[SG6T]: F:图表交互7种的决策顺序与实现规则 | R:code:SKILL.md | A:- | S:顺序固定为先理解任务、再选择交互、最后编写代码;选型须先看数据跨度、系列数与层级,再看用户任务是比较、定位、读值、筛选还是深入
+03-app-patterns.md[SG7S]: F:App高级交互模式10种的选型规则与提示词 | R:code:SKILL.md,code:references/prompt-templates.md | A:- | S:所有Copyable prompt必须用英文,不得混入中文;默认只选一个最匹配的主交互,确有多层时拆成主交互加辅助交互并说明关系;须保留用户既有视觉风格与组件结构
+04-expand-collapse.md[SG6T]: F:展开动画7种与折叠组件8种的选择表 | R:code:SKILL.md | A:- | S:本文件同时承载展开动画与折叠组件两个分类,总索引表中两行指向同一文件,增删词条时两处计数需分别核对
+05-navigation.md[SG6T]: F:导航组件7种的速查表与实现要点 | R:code:SKILL.md,code:references/01-motion-texture.md,code:references/03-app-patterns.md | A:- | S:描述须包含组件名称、放置位置、切换内容与高亮方式四要素;Tabs的选中指示器可选液态Tab,Stepper的推进可选步骤条回弹,两者分别定义在01与03
+06-overlays.md[SG6T]: F:弹窗组件7种的速查表与选择依据 | R:code:SKILL.md | A:- | S:只说一个弹框不足以选型,触发方式、内容承载与交互逻辑的差异才是选择依据;Tooltip内容极少且不适合复杂操作,需要按钮时选Popover
+07-loading.md[SG6T]: F:加载动效7种的速查表与适用场景 | R:code:SKILL.md | A:- | S:描述动效时必须同时给出动效类型、预计等待时间与具体使用场景;七种动效都表示请稍等但适用场景各不相同
+08-scroll-driven.md[SG7M]: F:滚动驱动官网三种模式的规则与交付要求 | R:code:SKILL.md,code:assets/showcase/scroll.html | A:- | S:滚动位置是唯一事实来源,进度须由区段实际起止位置推导而非全局滚动比例;反向滚动必须沿同一路径回到同一状态;不得给每次滚动更新挂CSS transition;交付物必须是真实可交互页面
+prompt-templates.md[SG6T]: F:Copyable Prompt模板与回答输出格式 | R:code:SKILL.md,code:references/03-app-patterns.md | A:- | S:交互描述五要素为组件对象、触发、起止状态、具体变化、数据与视觉状态的先后;英文提示词不得混入中文,并须按落款统一拼接后再接选中的英文提示词
