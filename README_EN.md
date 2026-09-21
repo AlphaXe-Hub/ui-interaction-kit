@@ -1,8 +1,8 @@
 # UI Interaction Kit
 
-**70 patterns** · **No build step** · **MIT License** · **CodeBuddy Skill**
+**78 patterns** · **No build step** · **MIT License** · **CodeBuddy Skill**
 
-> Pick the right interaction before writing a line of code. 8 motion textures, 7 chart interactions, 10 app patterns, 7 + 8 expand & collapse, 7 navigation, 7 overlays, 7 loading states, 3 scroll-driven site patterns, 6 texture components — 70 entries, each with a runnable demo.
+> Pick the right interaction before writing a line of code. 8 motion textures, 7 chart interactions, 10 app patterns, 7 + 8 expand & collapse, 7 navigation, 7 overlays, 7 loading states, 3 scroll-driven site patterns, 6 texture components, 8 gesture & feedback patterns — 78 entries, each with a runnable demo.
 
 **中文版 → [README.md](./README.md)** · **Live demo → https://alphaxe-hub.github.io/ui-interaction-kit/**
 
@@ -13,7 +13,7 @@
 
 ## What it is
 
-A selection-and-implementation knowledge base for front-end interactions. Turns vague asks like *"make it feel snappier"*, *"follow my finger"*, *"like liquid"* into 70 well-defined terms so the AI picks the right one before touching code. The rule baked into `SKILL.md` is simple: **understand the task → choose one interaction → then code**. Every interaction spec must cover trigger, start state, motion, end state, and cancel state.
+A selection-and-implementation knowledge base for front-end interactions. Turns vague asks like *"make it feel snappier"*, *"follow my finger"*, *"like liquid"* into 78 well-defined terms so the AI picks the right one before touching code. The rule baked into `SKILL.md` is simple: **understand the task → choose one interaction → then code**. Every interaction spec must cover trigger, start state, motion, end state, and cancel state.
 
 ## Install in one minute
 
@@ -41,9 +41,9 @@ mkdir -p .cursor/skills && cp -r ui-interaction-kit .cursor/skills/
 
 When the conversation contains any of these, the AI coding assistant will pull this Skill in:
 
-> motion texture · feel snappier · smoother · follow my finger · liquid · magnetic · spring · parallax · gesture transition · animation tuning · interaction selection · copyable prompt · chart interaction · expand animation · navigation component · overlay · loading state · texture component · overlapping stack · progress fill · horizontal accordion · pull-down summary
+> motion texture · feel snappier · smoother · follow my finger · liquid · magnetic · spring · parallax · gesture transition · animation tuning · interaction selection · copyable prompt · chart interaction · expand animation · navigation component · overlay · loading state · texture component · overlapping stack · progress fill · horizontal accordion · pull-down summary · gesture feedback · pinch to zoom · motion blur · rubber band · snap to guides · arc reflow · adaptive contrast · focus mode
 
-## 70-entry catalog
+## 78-entry catalog
 
 <details>
 <summary>01 Motion Texture (8)</summary>
@@ -156,7 +156,23 @@ Full example page: **https://alphaxe-hub.github.io/ui-interaction-kit/scroll.htm
 
 </details>
 
-## Demo: 70 playable examples
+<details>
+<summary>11 Gesture &amp; Feedback (8)</summary>
+
+| English | Chinese | One-line scenario |
+|---|---|---|
+| Pinch to Zoom Density | 捏合改变内容密度 | Pinch between discrete densities (large image / multi-column grid / text rows), re-flowing the layout rather than scaling |
+| Scroll-driven Progress Animation | 滚动驱动进度动画 | Animation progress bound to the container scroll offset: forward, reversible, stable at any position |
+| Velocity-based Motion Blur | 快速滚动拖影 | Directional blur driven by real scroll velocity, decaying to perfectly sharp when scrolling stops |
+| Rubber-band Header Stretch | 下拉拉伸顶部图片 | Pulling down at the top stretches the header image and fades the caption, then springs back |
+| Snap to Guides | 拖拽元素自动吸附 | Snaps to guides with an alignment line, separate enter/exit thresholds and a single recoil |
+| Arc Grid Reflow | 网格重排走弧线 | Items travel along arcs with a staggered start when the column count changes, resuming mid-flight |
+| Adaptive Contrast Overlay | 悬浮元素自动反色 | Floating labels cross-fade between dark and light by the brightness behind them, with hysteresis |
+| Focus Mode Selection | 选中项突出显示 | The selected item scales up and brightens; peers lose saturation, shrink and blur slightly — still tappable |
+
+</details>
+
+## Demo: 78 playable examples
 
 **Live demo (GitHub Pages, nothing to install)**: https://alphaxe-hub.github.io/ui-interaction-kit/
 
@@ -192,6 +208,8 @@ Each card in the demo is one entry. Use the top-right *Reduce motion* toggle to 
 
 > These avatars overlap by a third with a badge showing how many are hidden; one click staggers them open with names, another click gathers them back in reverse order.
 
+> Add semantic pinch-to-zoom to this grid: the pinch ratio switches between large images, a three-column grid and compact text rows, the content transitions smoothly, and the last chosen density is remembered.
+
 ### Cross-tool English copyable prompt
 
 ```
@@ -210,7 +228,7 @@ Full prompt templates: [`references/prompt-templates.md`](./references/prompt-te
 
 ```
 ui-interaction-kit/
-├── SKILL.md                    # Decision entry: 4-step workflow + 70-entry index
+├── SKILL.md                    # Decision entry: 4-step workflow + 78-entry index
 ├── references/                 # Rules, acceptance checks, copyable prompts
 │   ├── 01-motion-texture.md    # 8 motion textures
 │   ├── 02-chart-interaction.md # 7 chart interactions
@@ -221,13 +239,14 @@ ui-interaction-kit/
 │   ├── 07-loading.md           # 7 loading states
 │   ├── 08-scroll-driven.md     # 3 scroll-driven site patterns (shared rules, patterns, completion criteria)
 │   ├── 09-texture-components.md # 6 texture components (shared rules, copyable prompts, acceptance, selection table)
+│   ├── 10-gesture-feedback.md  # 8 gesture & feedback patterns (input-to-feedback mapping, prompts, acceptance)
 │   └── prompt-templates.md     # Unified prompt templates
 ├── assets/showcase/            # Demo
-│   ├── index.html              # 70-entry card grid
+│   ├── index.html              # 78-entry card grid
 │   ├── core.js                 # Registry + runtime + reduced-motion toggle + zh/en switch
 │   ├── styles.css
 │   ├── scroll.html / .css / .js  # Scroll-driven example site (opening → horizontal → hologram scan → outro)
-│   └── demos/01..10-*.js       # 10 files, 70 demos
+│   └── demos/01..11-*.js       # 11 files, 78 demos
 ├── docs/demo-overview.png      # Screenshot for this README
 └── LICENSE                     # MIT
 ```
@@ -241,6 +260,7 @@ ui-interaction-kit/
 - **Platform differences**: web, native app, and mini-program each need their own implementation. Check platform capabilities first and coordinate with system gestures, back, and scroll when in conflict.
 - **No frame-rate promises**: real performance depends on device and implementation. Passing a build does not replace a real interaction test.
 - **No bloat**: don't pull in a full physics engine, animation library, or routing framework for a decorative effect. Use what the project already has.
+- **Every gesture needs an equivalent input**: pinch, two-finger and pull-down gestures must have a desktop / non-touch substitute (Ctrl/⌘ + wheel, buttons, keyboard, pointer drag). Never make touch the only way to finish the task.
 - **Separate component-level from flow-level**: overlapping stacks, progress fills, trays and pull-down summaries are alternative views of the same data and usually leave business state untouched. Only the checklist and the folding components sync state, and the state change must be committed before the animation.
 - **Scroll-driven has three hard rules**: scroll position is the single source of truth (derive progress from the section's real start and end, never a global scroll ratio); a reverse scroll must return along the same path to the same state; and never attach a CSS `transition` to every scroll update (use frame-synced updates, a scrubbed timeline, or an interpolation loop).
 - **Be honest about teardowns**: without separable assets, draw the internals in SVG and label it a concept visualization — do not claim reconstructed internals.

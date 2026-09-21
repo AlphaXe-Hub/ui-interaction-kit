@@ -12,13 +12,14 @@
     { id: 'overlay', n: '07', title: '弹窗组件', enTitle: 'Overlays', en: 'Overlays (7)', desc: '触发方式 / 出现位置 / 是否阻断交互', enDesc: 'Trigger / position / whether it blocks interaction' },
     { id: 'loading', n: '08', title: '加载动效', enTitle: 'Loading States', en: 'Loading States (7)', desc: '动效类型 / 预计等待时间 / 具体场景', enDesc: 'Pattern / expected wait / where it is used' },
     { id: 'scroll', n: '09', title: '滚动驱动官网', enTitle: 'Scroll-Driven Site', en: 'Scroll-Driven Official Site (3)', desc: '用滚动位置驱动产品叙事：开场、横向检视、全息扫描内部', enDesc: 'Scroll position drives the story: opening, sideways inspection, hologram scan' },
-    { id: 'texture', n: '10', title: '质感组件交互', enTitle: 'Texture Components', en: 'Texture Components (6)', desc: '组件自身形态的深浅变化：重叠、填充、展开、托盘、跟手、下拉', enDesc: 'Component-level form details: overlap, fill, expansion, tray, proximity, pull-down' }
+    { id: 'texture', n: '10', title: '质感组件交互', enTitle: 'Texture Components', en: 'Texture Components (6)', desc: '组件自身形态的深浅变化：重叠、填充、展开、托盘、跟手、下拉', enDesc: 'Component-level form details: overlap, fill, expansion, tray, proximity, pull-down' },
+    { id: 'gesture', n: '11', title: '手势与反馈', enTitle: 'Gesture & Feedback', en: 'Gesture & Feedback (8)', desc: '输入方式（捏合、快速滑动、下拉、拖拽、点选）到视觉反馈的映射关系', enDesc: 'Mapping user input (pinch, flick, pull, drag, tap) to immediate visual feedback' }
   ];
 
   /* ---------------- English copy (keyed by category + English term) ---------------- */
   var I18N = {
     ui: {
-      subtitle: '70 front-end interaction entries · every demo is playable · vanilla JS, zero dependencies',
+      subtitle: '78 front-end interaction entries · every demo is playable · vanilla JS, zero dependencies',
       search: 'Search term / Chinese name / scenario',
       github: 'GitHub repo',
       themeToLight: 'Light theme',
@@ -108,7 +109,16 @@
       'texture|Horizontal Accordion': { desc: 'Panels sit side by side as equal narrow bars showing only an icon and vertical text; clicking one widens it and the others shrink to make room.', hint: 'Click any bar: it expands about 3.6x, the rest shrink, only one stays open and the container height never changes.' },
       'texture|Component Tray': { desc: 'A darker tray sits under the main component showing a single summary line; clicking draws it out to reveal details while the main component never moves.', hint: 'Click the tray: it slides down with details; the summary line stays readable and the main component keeps its position.' },
       'texture|Proximity-scale Icons': { desc: 'Icons in a row scale smoothly with the distance to the pointer, and neighbours shift aside along the same falloff curve.', hint: 'Press and drag across the row: the nearest icon grows, neighbours make room; release to reset.' },
-      'texture|Pull-down Summary': { desc: 'A single row of pills at the top: drag down and the panel height follows the finger, then it expands into a full stats panel or springs back by distance and velocity.', hint: 'Drag the top row down: past 120px or a quick flick expands; otherwise it springs back to one row.' }
+      'texture|Pull-down Summary': { desc: 'A single row of pills at the top: drag down and the panel height follows the finger, then it expands into a full stats panel or springs back by distance and velocity.', hint: 'Drag the top row down: past 120px or a quick flick expands; otherwise it springs back to one row.' },
+
+      'gesture|Pinch to Zoom Density': { desc: 'Pinch to switch between discrete view densities — two large columns, a three-column grid, a compact text list; switching re-flows the layout instead of scaling the whole list.', hint: 'Buttons, Ctrl/⌘ + wheel and a two-finger pinch all change the level; the layout re-flows and the choice is remembered.' },
+      'gesture|Scroll-driven Progress Animation': { desc: 'The animation progress is bound to the container scroll offset: it plays forward as you scroll down, rewinds along the same path, and is stable at any intermediate position.', hint: 'Scroll inside the window: progress comes from the real scrollable range and rests wherever you stop.' },
+      'gesture|Velocity-based Motion Blur': { desc: 'Scrolling applies directional blur along the scroll axis, driven by real velocity and capped; it decays to perfectly sharp once the scroll stops.', hint: 'Flick the list: the blur follows the direction and caps out; it clears within a frame or two after you stop.' },
+      'gesture|Rubber-band Header Stretch': { desc: 'Pulling down while already at the top stretches the header image from its top origin and fades the overlaid text in proportion, then springs back with damping.', hint: 'Drag down inside the window: the image stretches, the caption fades; release to spring back with no blank gap.' },
+      'gesture|Snap to Guides': { desc: 'Dragging near a guide snaps the element and shows the alignment line; separate enter and exit thresholds stop it from flickering, with a single recoil when a snap engages.', hint: 'Drag the chip toward a guide line: it snaps with a short recoil and only releases past the wider exit threshold.' },
+      'gesture|Arc Grid Reflow': { desc: 'When the column count changes, every item travels to its new cell along a quadratic bezier curve with a staggered start, and a repeated switch resumes mid-flight.', hint: 'Switch between 2 and 3 columns: items travel along arcs one after another and land exactly on the layout position.' },
+      'gesture|Adaptive Contrast Overlay': { desc: 'Floating labels read the brightness of the region behind them and cross-fade between dark and light text, with hysteresis around the threshold so it never flickers.', hint: 'Drag the backdrop sideways: each label adapts to what is behind it, continuously and without hard switches.' },
+      'gesture|Focus Mode Selection': { desc: 'The selected item scales up and brightens while its peers lose saturation, shrink slightly and blur a little — still readable and still tappable.', hint: 'Click or use the arrow keys: the choice pops, the rest recede by a capped blur and a 10% shrink.' }
     }
   };
 
@@ -314,7 +324,7 @@
     try { localStorage.setItem('uik-lang', lang); } catch (e) {}
 
     var sub = document.getElementById('subtitle');
-    if (sub) sub.textContent = lang === 'en' ? t('subtitle') : '70 个前端交互与动效词条 · 每个演示都可直接操作 · 原生 JS 无依赖';
+    if (sub) sub.textContent = lang === 'en' ? t('subtitle') : '78 个前端交互与动效词条 · 每个演示都可直接操作 · 原生 JS 无依赖';
     var search = document.getElementById('search');
     if (search) search.placeholder = lang === 'en' ? t('search') : '搜索词条 / 中文名 / 场景';
     var gh = document.getElementById('gh-link');
