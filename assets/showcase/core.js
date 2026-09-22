@@ -13,13 +13,14 @@
     { id: 'loading', n: '08', title: '加载动效', enTitle: 'Loading States', en: 'Loading States (7)', desc: '动效类型 / 预计等待时间 / 具体场景', enDesc: 'Pattern / expected wait / where it is used' },
     { id: 'scroll', n: '09', title: '滚动驱动官网', enTitle: 'Scroll-Driven Site', en: 'Scroll-Driven Official Site (3)', desc: '用滚动位置驱动产品叙事：开场、横向检视、全息扫描内部', enDesc: 'Scroll position drives the story: opening, sideways inspection, hologram scan' },
     { id: 'texture', n: '10', title: '质感组件交互', enTitle: 'Texture Components', en: 'Texture Components (6)', desc: '组件自身形态的深浅变化：重叠、填充、展开、托盘、跟手、下拉', enDesc: 'Component-level form details: overlap, fill, expansion, tray, proximity, pull-down' },
-    { id: 'gesture', n: '11', title: '手势与反馈', enTitle: 'Gesture & Feedback', en: 'Gesture & Feedback (8)', desc: '输入方式（捏合、快速滑动、下拉、拖拽、点选）到视觉反馈的映射关系', enDesc: 'Mapping user input (pinch, flick, pull, drag, tap) to immediate visual feedback' }
+    { id: 'gesture', n: '11', title: '手势与反馈', enTitle: 'Gesture & Feedback', en: 'Gesture & Feedback (8)', desc: '输入方式（捏合、快速滑动、下拉、拖拽、点选）到视觉反馈的映射关系', enDesc: 'Mapping user input (pinch, flick, pull, drag, tap) to immediate visual feedback' },
+    { id: 'icon', n: '12', title: '图标交互动效', enTitle: 'Icon Micro-interactions', en: 'Icon Micro-interactions (8)', desc: '图标本身怎么动：绘制、形变、回弹、摇铃、旋转、填充、跟随', enDesc: 'How the icon itself moves: drawing, morph, pop, ring, spin, fill wipe, follow' }
   ];
 
   /* ---------------- English copy (keyed by category + English term) ---------------- */
   var I18N = {
     ui: {
-      subtitle: '78 front-end interaction entries · every demo is playable · vanilla JS, zero dependencies',
+      subtitle: '86 front-end interaction entries · every demo is playable · vanilla JS, zero dependencies',
       search: 'Search term / Chinese name / scenario',
       github: 'GitHub repo',
       themeToLight: 'Light theme',
@@ -118,7 +119,16 @@
       'gesture|Snap to Guides': { desc: 'Dragging near a guide snaps the element and shows the alignment line; separate enter and exit thresholds stop it from flickering, with a single recoil when a snap engages.', hint: 'Drag the chip toward a guide line: it snaps with a short recoil and only releases past the wider exit threshold.' },
       'gesture|Arc Grid Reflow': { desc: 'When the column count changes, every item travels to its new cell along a quadratic bezier curve with a staggered start, and a repeated switch resumes mid-flight.', hint: 'Switch between 2 and 3 columns: items travel along arcs one after another and land exactly on the layout position.' },
       'gesture|Adaptive Contrast Overlay': { desc: 'Floating labels read the brightness of the region behind them and cross-fade between dark and light text, with hysteresis around the threshold so it never flickers.', hint: 'Drag the backdrop sideways: each label adapts to what is behind it, continuously and without hard switches.' },
-      'gesture|Focus Mode Selection': { desc: 'The selected item scales up and brightens while its peers lose saturation, shrink slightly and blur a little — still readable and still tappable.', hint: 'Click or use the arrow keys: the choice pops, the rest recede by a capped blur and a 10% shrink.' }
+      'gesture|Focus Mode Selection': { desc: 'The selected item scales up and brightens while its peers lose saturation, shrink slightly and blur a little — still readable and still tappable.', hint: 'Click or use the arrow keys: the choice pops, the rest recede by a capped blur and a 10% shrink.' },
+
+      'icon|Stroke Drawing': { desc: 'The icon is drawn on: stroke-dashoffset runs from the real path length to zero, paths stagger, and any fill arrives only after the strokes finish.', hint: 'Click to replay: path lengths are measured with getTotalLength() and the two segments stagger by 230ms.' },
+      'icon|Two-state Morph': { desc: 'One icon morphs between two states — the outer bars translate and rotate into the diagonals while the middle bar scales out, sharing one centre origin.', hint: 'Click to toggle: the middle bar never vanishes abruptly, and re-clicking mid-morph continues from the current shape.' },
+      'icon|Play / Pause Toggle': { desc: 'Media icon switches shape with overlapping timing — the triangle shrinks and fades as the two bars grow in, so there is no empty frame.', hint: 'Click to toggle: both shapes keep the same outer size and visual weight, and the state is committed immediately.' },
+      'icon|Like Pop': { desc: 'Liking switches the icon from outline to filled and gives a spring pop; un-liking takes a deliberately weaker path.', hint: 'Click the heart: the fill is a state change, the bounce is a feedback (1 to 1.26 to 0.95 to 1); un-liking is gentler.' },
+      'icon|Bell Ring': { desc: 'A notification bell swings from its top with decaying amplitude and settles at exactly zero, while the unread badge pulses independently.', hint: 'Click the bell: the swing decays 12-10-7-5-2-0 degrees and the badge is never dragged by the angle.' },
+      'icon|Loading Spin': { desc: 'A one-shot refresh spins a full turn and settles exactly at its standard orientation, while a genuinely continuous loading state may loop — and keeps an exit.', hint: 'Click the icon to refresh once, or the button for a continuous spin you can stop at any time.' },
+      'icon|Fill Wipe': { desc: 'The outline fills up from the bottom via a clip mask, driven by the real value so four out of five stops at eighty percent, and it reverses on the way down.', hint: 'Click the star or use +/−: the fill stops exactly at the real ratio and never looks muddy in between.' },
+      'icon|Follow Cursor': { desc: 'An inner element tracks the pointer, clamped so it stays inside its container shape, and returns to neutral with a damped settle when the pointer leaves.', hint: 'Move the pointer in the box: the pupil follows within a ±3.6 limit and eases back to the centre on leave.' }
     }
   };
 
@@ -324,7 +334,7 @@
     try { localStorage.setItem('uik-lang', lang); } catch (e) {}
 
     var sub = document.getElementById('subtitle');
-    if (sub) sub.textContent = lang === 'en' ? t('subtitle') : '78 个前端交互与动效词条 · 每个演示都可直接操作 · 原生 JS 无依赖';
+    if (sub) sub.textContent = lang === 'en' ? t('subtitle') : '86 个前端交互与动效词条 · 每个演示都可直接操作 · 原生 JS 无依赖';
     var search = document.getElementById('search');
     if (search) search.placeholder = lang === 'en' ? t('search') : '搜索词条 / 中文名 / 场景';
     var gh = document.getElementById('gh-link');
