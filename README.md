@@ -1,8 +1,8 @@
 # UI Interaction Kit
 
-**86 patterns** · **No build step** · **MIT License** · **CodeBuddy Skill**
+**92 patterns** · **No build step** · **MIT License** · **CodeBuddy Skill**
 
-> 让 AI 选对交互：8 种质感动效、7 种图表交互、10 种 App 模式、7 + 8 展开与折叠、7 种导航、7 种弹窗、7 种加载、3 种滚动驱动官网模式、6 种质感组件交互、8 种手势与反馈、8 种图标交互动效，共 86 个词条，每个词条都有可运行的 Demo。
+> 让 AI 选对交互：8 种质感动效、7 种图表交互、10 种 App 模式、7 + 8 展开与折叠、7 种导航、7 种弹窗、7 种加载、3 种滚动驱动官网模式、6 种质感组件交互、8 种手势与反馈、8 种图标交互动效、6 种即时反馈组件，共 92 个词条，每个词条都有可运行的 Demo。
 
 **English version → [README_EN.md](./README_EN.md)** · **在线 Demo → https://alphaxe-hub.github.io/ui-interaction-kit/**
 
@@ -13,7 +13,7 @@
 
 ## 这是什么
 
-把模糊的动效需求（"有质感""跟手""像液体""更高级"）翻译成 86 个已定义词条；让 AI 在动手前先选对一个，主交互一个就够。规则写进了 `SKILL.md`：**先理解任务 → 选一个主交互 → 再写代码**，描述任何交互必须写清触发、开始状态、变化过程、结束状态、取消状态。
+把模糊的动效需求（"有质感""跟手""像液体""更高级"）翻译成 92 个已定义词条；让 AI 在动手前先选对一个，主交互一个就够。规则写进了 `SKILL.md`：**先理解任务 → 选一个主交互 → 再写代码**，描述任何交互必须写清触发、开始状态、变化过程、结束状态、取消状态。
 
 ## 一分钟安装
 
@@ -41,9 +41,9 @@ mkdir -p .cursor/skills && cp -r ui-interaction-kit .cursor/skills/
 
 当对话里出现下面这些词，AI 编码助手会自动调出本 Skill：
 
-> 质感动效 · 有质感 · 更顺滑 · 跟手 · 像液体 · 磁吸 · 液态 · 回弹 · 视差 · 手势转场 · 动效优化 · 交互选型 · copyable prompt · 图表交互 · 展开动画 · 导航组件 · 弹窗 · 加载动效 · 质感组件 · 重叠排列 · 进度底色 · 横向手风琴 · 组件托盘 · 下拉摘要 · 手势与反馈 · 捏合改变内容密度 · 快速滚动拖影 · 下拉拉伸 · 拖拽吸附 · 网格重排走弧线 · 悬浮元素自动反色 · 选中项突出显示 · 图标交互动效 · 描边绘制 · 双态形变 · 点赞回弹 · 铃铛摇铃 · 旋转加载 · 填充推进 · 图标跟随
+> 质感动效 · 有质感 · 更顺滑 · 跟手 · 像液体 · 磁吸 · 液态 · 回弹 · 视差 · 手势转场 · 动效优化 · 交互选型 · copyable prompt · 图表交互 · 展开动画 · 导航组件 · 弹窗 · 加载动效 · 质感组件 · 重叠排列 · 进度底色 · 横向手风琴 · 组件托盘 · 下拉摘要 · 手势与反馈 · 捏合改变内容密度 · 快速滚动拖影 · 下拉拉伸 · 拖拽吸附 · 网格重排走弧线 · 悬浮元素自动反色 · 选中项突出显示 · 图标交互动效 · 描边绘制 · 双态形变 · 点赞回弹 · 铃铛摇铃 · 旋转加载 · 填充推进 · 图标跟随 · 即时反馈 · 多选筛选标签 · 可删除标签 · 输入联想浮层 · 拨动字号刻度 · 按压倾斜卡片 · 长按录音
 
-## 86 个词条速览
+## 92 个词条速览
 
 <details>
 <summary>01 质感动效 · Motion Texture（8）</summary>
@@ -190,7 +190,21 @@ Page Loader 整页加载 · Skeleton 骨架屏 · Shimmer 微光扫过 · Spinne
 
 </details>
 
-## Demo：86 个可操作示例
+<details>
+<summary>13 即时反馈组件 · Instant Feedback Components（6）</summary>
+
+| 英文 | 中文 | 一句话场景 |
+|---|---|---|
+| Multi-select Filter Chips | 多选筛选标签 | 对勾从左侧长出、底色铺满、宽度撑开推着邻居让位，计数跳动 |
+| Removable Tag | 可删除的标签 | 删标签先缩成圆点再消失，其余用 FLIP 平滑补位，容器高度收缩 |
+| Suggestion Popover | 输入联想浮层 | 光标旁弹出并实时筛选，选中后以不可编辑标签插入正文 |
+| Font-size Ruler | 拨动字号刻度 | 当前刻度居中、两侧渐隐；拖动实时改字号，松手吸附整数刻度 |
+| Press-tilt Card | 按压倾斜卡片 | 朝触点倾斜并缩小，背后光斑向手指聚拢，松手弹性复原 |
+| Hold-to-Record | 长按变录音条 | 长按阈值后拉长成录音条并显示实时波形，加号旋转成取消 |
+
+</details>
+
+## Demo：92 个可操作示例
 
 **在线体验（GitHub Pages，无需安装）**：https://alphaxe-hub.github.io/ui-interaction-kit/
 
@@ -230,6 +244,8 @@ python3 -m http.server 8000 --directory assets/showcase
 
 > 这个点赞按钮点下去要弹一下：先变实心再回弹，取消的时候别那么用力，连点也不能越弹越大。
 
+> 这排筛选标签选中时要从左边长出对勾、底色铺满、宽度撑开把旁边的挤开，右上角的数量也跟着跳一下。
+
 ### 跨工具的英文 Copyable prompt
 
 ```
@@ -248,7 +264,7 @@ reduced-motion fallback described below:
 
 ```
 ui-interaction-kit/
-├── SKILL.md                    # 决策入口：四步工作流 + 86 词条索引
+├── SKILL.md                    # 决策入口：四步工作流 + 92 词条索引
 ├── references/                 # 每个分类的规则、验收清单、Copyable prompt
 │   ├── 01-motion-texture.md    # 8 种质感动效
 │   ├── 02-chart-interaction.md # 7 种图表交互
@@ -261,13 +277,14 @@ ui-interaction-kit/
 │   ├── 09-texture-components.md # 6 种质感组件交互（共享规则、Copyable prompt、验收与选型对照）
 │   ├── 10-gesture-feedback.md  # 8 种手势与反馈（输入→反馈映射规则、Copyable prompt、验收与选型对照）
 │   ├── 11-icon-microinteractions.md # 8 种图标交互动效 + 第三方图标库许可证对照
+│   ├── 12-instant-feedback.md  # 6 种即时反馈组件（反馈方向、让位、取消规则）
 │   └── prompt-templates.md     # 统一提示词模板
 ├── assets/showcase/            # Demo
-│   ├── index.html              # 86 个词条总览（卡片网格）
+│   ├── index.html              # 92 个词条总览（卡片网格）
 │   ├── core.js                 # 注册表 + 运行时 + reduced-motion 开关 + 中英切换
 │   ├── styles.css
 │   ├── scroll.html / .css / .js  # 滚动驱动示例官网（开场 → 横向滚段 → 全息扫描 → 结尾）
-│   └── demos/01..12-*.js       # 12 个分类共 86 个 demo
+│   └── demos/01..13-*.js       # 13 个分类共 92 个 demo
 ├── docs/demo-overview.png      # README 用的首屏截图
 └── LICENSE                     # MIT
 ```
@@ -298,7 +315,8 @@ ui-interaction-kit/
 
 修改 Demo：
 
-- 保持 12 个分类的注册文件结构。
+- 保持 13 个分类的注册文件结构。
+- 新增分类时别忘了四处同步：`demos/` 注册、`index.html` 的 `<script>` 引用、`core.js` 的 `CATS` 与英文文案、README 两份的数字与目录树。
 - `node --check assets/showcase/demos/*.js` 全部通过。
 - 打开 `assets/showcase/index.html` 实测正常交互再提交。
 - 开启右上角"减少动效"开关复验静态降级。

@@ -1,8 +1,8 @@
 # UI Interaction Kit
 
-**86 patterns** · **No build step** · **MIT License** · **CodeBuddy Skill**
+**92 patterns** · **No build step** · **MIT License** · **CodeBuddy Skill**
 
-> Pick the right interaction before writing a line of code. 8 motion textures, 7 chart interactions, 10 app patterns, 7 + 8 expand & collapse, 7 navigation, 7 overlays, 7 loading states, 3 scroll-driven site patterns, 6 texture components, 8 gesture & feedback patterns, 8 icon micro-interactions — 86 entries, each with a runnable demo.
+> Pick the right interaction before writing a line of code. 8 motion textures, 7 chart interactions, 10 app patterns, 7 + 8 expand & collapse, 7 navigation, 7 overlays, 7 loading states, 3 scroll-driven site patterns, 6 texture components, 8 gesture & feedback patterns, 8 icon micro-interactions, 6 instant feedback components — 92 entries, each with a runnable demo.
 
 **中文版 → [README.md](./README.md)** · **Live demo → https://alphaxe-hub.github.io/ui-interaction-kit/**
 
@@ -13,7 +13,7 @@
 
 ## What it is
 
-A selection-and-implementation knowledge base for front-end interactions. Turns vague asks like *"make it feel snappier"*, *"follow my finger"*, *"like liquid"* into 86 well-defined terms so the AI picks the right one before touching code. The rule baked into `SKILL.md` is simple: **understand the task → choose one interaction → then code**. Every interaction spec must cover trigger, start state, motion, end state, and cancel state.
+A selection-and-implementation knowledge base for front-end interactions. Turns vague asks like *"make it feel snappier"*, *"follow my finger"*, *"like liquid"* into 92 well-defined terms so the AI picks the right one before touching code. The rule baked into `SKILL.md` is simple: **understand the task → choose one interaction → then code**. Every interaction spec must cover trigger, start state, motion, end state, and cancel state.
 
 ## Install in one minute
 
@@ -41,9 +41,9 @@ mkdir -p .cursor/skills && cp -r ui-interaction-kit .cursor/skills/
 
 When the conversation contains any of these, the AI coding assistant will pull this Skill in:
 
-> motion texture · feel snappier · smoother · follow my finger · liquid · magnetic · spring · parallax · gesture transition · animation tuning · interaction selection · copyable prompt · chart interaction · expand animation · navigation component · overlay · loading state · texture component · overlapping stack · progress fill · horizontal accordion · pull-down summary · gesture feedback · pinch to zoom · motion blur · rubber band · snap to guides · arc reflow · adaptive contrast · focus mode · icon micro-interaction · stroke drawing · icon morph · like pop · bell ring · loading spin · fill wipe · icon follow
+> motion texture · feel snappier · smoother · follow my finger · liquid · magnetic · spring · parallax · gesture transition · animation tuning · interaction selection · copyable prompt · chart interaction · expand animation · navigation component · overlay · loading state · texture component · overlapping stack · progress fill · horizontal accordion · pull-down summary · gesture feedback · pinch to zoom · motion blur · rubber band · snap to guides · arc reflow · adaptive contrast · focus mode · icon micro-interaction · stroke drawing · icon morph · like pop · bell ring · loading spin · fill wipe · icon follow · instant feedback · filter chips · removable tag · suggestion popover · font size ruler · press tilt · hold to record
 
-## 86-entry catalog
+## 92-entry catalog
 
 <details>
 <summary>01 Motion Texture (8)</summary>
@@ -190,7 +190,21 @@ Full example page: **https://alphaxe-hub.github.io/ui-interaction-kit/scroll.htm
 
 </details>
 
-## Demo: 86 playable examples
+<details>
+<summary>13 Instant Feedback Components (6)</summary>
+
+| English | Chinese | One-line scenario |
+|---|---|---|
+| Multi-select Filter Chips | 多选筛选标签 | Checkmark grows from the left, background fills, width expands and pushes neighbours aside, count pops |
+| Removable Tag | 可删除的标签 | Remove shrinks the tag into a dot first, then FLIP slides the rest over and the field height contracts |
+| Suggestion Popover | 输入联想浮层 | Opens beside the caret, filters live, inserts the choice as a non-editable inline tag |
+| Font-size Ruler | 拨动字号刻度 | Active tick centred with fading edges; drag changes the size live, release snaps to a tick |
+| Press-tilt Card | 按压倾斜卡片 | Tilts toward the touch point and scales down while the glow gathers in, springs back once |
+| Hold-to-Record | 长按变录音条 | Past the hold threshold the group grows into a recording bar with a live waveform; plus rotates to cancel |
+
+</details>
+
+## Demo: 92 playable examples
 
 **Live demo (GitHub Pages, nothing to install)**: https://alphaxe-hub.github.io/ui-interaction-kit/
 
@@ -230,6 +244,8 @@ Each card in the demo is one entry. Use the top-right *Reduce motion* toggle to 
 
 > This like button should pop when tapped: switch to filled and bounce back, be gentler on un-like, and never let rapid taps stack up.
 
+> These filter chips should grow a checkmark from the left when selected, fill their background and widen so the neighbours shift aside, with the count on the right popping too.
+
 ### Cross-tool English copyable prompt
 
 ```
@@ -248,7 +264,7 @@ Full prompt templates: [`references/prompt-templates.md`](./references/prompt-te
 
 ```
 ui-interaction-kit/
-├── SKILL.md                    # Decision entry: 4-step workflow + 86-entry index
+├── SKILL.md                    # Decision entry: 4-step workflow + 92-entry index
 ├── references/                 # Rules, acceptance checks, copyable prompts
 │   ├── 01-motion-texture.md    # 8 motion textures
 │   ├── 02-chart-interaction.md # 7 chart interactions
@@ -261,13 +277,14 @@ ui-interaction-kit/
 │   ├── 09-texture-components.md # 6 texture components (shared rules, copyable prompts, acceptance, selection table)
 │   ├── 10-gesture-feedback.md  # 8 gesture & feedback patterns (input-to-feedback mapping, prompts, acceptance)
 │   ├── 11-icon-microinteractions.md # 8 icon micro-interactions + third-party icon license table
+│   ├── 12-instant-feedback.md  # 6 instant feedback components (direction, reflow, cancel rules)
 │   └── prompt-templates.md     # Unified prompt templates
 ├── assets/showcase/            # Demo
-│   ├── index.html              # 86-entry card grid
+│   ├── index.html              # 92-entry card grid
 │   ├── core.js                 # Registry + runtime + reduced-motion toggle + zh/en switch
 │   ├── styles.css
 │   ├── scroll.html / .css / .js  # Scroll-driven example site (opening → horizontal → hologram scan → outro)
-│   └── demos/01..12-*.js       # 12 files, 86 demos
+│   └── demos/01..13-*.js       # 13 files, 92 demos
 ├── docs/demo-overview.png      # Screenshot for this README
 └── LICENSE                     # MIT
 ```

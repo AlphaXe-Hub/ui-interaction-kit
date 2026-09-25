@@ -14,13 +14,14 @@
     { id: 'scroll', n: '09', title: '滚动驱动官网', enTitle: 'Scroll-Driven Site', en: 'Scroll-Driven Official Site (3)', desc: '用滚动位置驱动产品叙事：开场、横向检视、全息扫描内部', enDesc: 'Scroll position drives the story: opening, sideways inspection, hologram scan' },
     { id: 'texture', n: '10', title: '质感组件交互', enTitle: 'Texture Components', en: 'Texture Components (6)', desc: '组件自身形态的深浅变化：重叠、填充、展开、托盘、跟手、下拉', enDesc: 'Component-level form details: overlap, fill, expansion, tray, proximity, pull-down' },
     { id: 'gesture', n: '11', title: '手势与反馈', enTitle: 'Gesture & Feedback', en: 'Gesture & Feedback (8)', desc: '输入方式（捏合、快速滑动、下拉、拖拽、点选）到视觉反馈的映射关系', enDesc: 'Mapping user input (pinch, flick, pull, drag, tap) to immediate visual feedback' },
-    { id: 'icon', n: '12', title: '图标交互动效', enTitle: 'Icon Micro-interactions', en: 'Icon Micro-interactions (8)', desc: '图标本身怎么动：绘制、形变、回弹、摇铃、旋转、填充、跟随', enDesc: 'How the icon itself moves: drawing, morph, pop, ring, spin, fill wipe, follow' }
+    { id: 'icon', n: '12', title: '图标交互动效', enTitle: 'Icon Micro-interactions', en: 'Icon Micro-interactions (8)', desc: '图标本身怎么动：绘制、形变、回弹、摇铃、旋转、填充、跟随', enDesc: 'How the icon itself moves: drawing, morph, pop, ring, spin, fill wipe, follow' },
+    { id: 'instant', n: '13', title: '即时反馈组件', enTitle: 'Instant Feedback', en: 'Instant Feedback Components (6)', desc: '按下即有回应：反馈从哪长出来、周围怎么让位、松手回到哪', enDesc: 'Immediate response on press: where feedback grows from, how neighbours make room, where release returns' }
   ];
 
   /* ---------------- English copy (keyed by category + English term) ---------------- */
   var I18N = {
     ui: {
-      subtitle: '86 front-end interaction entries · every demo is playable · vanilla JS, zero dependencies',
+      subtitle: '92 front-end interaction entries · every demo is playable · vanilla JS, zero dependencies',
       search: 'Search term / Chinese name / scenario',
       github: 'GitHub repo',
       themeToLight: 'Light theme',
@@ -128,7 +129,14 @@
       'icon|Bell Ring': { desc: 'A notification bell swings from its top with decaying amplitude and settles at exactly zero, while the unread badge pulses independently.', hint: 'Click the bell: the swing decays 12-10-7-5-2-0 degrees and the badge is never dragged by the angle.' },
       'icon|Loading Spin': { desc: 'A one-shot refresh spins a full turn and settles exactly at its standard orientation, while a genuinely continuous loading state may loop — and keeps an exit.', hint: 'Click the icon to refresh once, or the button for a continuous spin you can stop at any time.' },
       'icon|Fill Wipe': { desc: 'The outline fills up from the bottom via a clip mask, driven by the real value so four out of five stops at eighty percent, and it reverses on the way down.', hint: 'Click the star or use +/−: the fill stops exactly at the real ratio and never looks muddy in between.' },
-      'icon|Follow Cursor': { desc: 'An inner element tracks the pointer, clamped so it stays inside its container shape, and returns to neutral with a damped settle when the pointer leaves.', hint: 'Move the pointer in the box: the pupil follows within a ±3.6 limit and eases back to the centre on leave.' }
+      'icon|Follow Cursor': { desc: 'An inner element tracks the pointer, clamped so it stays inside its container shape, and returns to neutral with a damped settle when the pointer leaves.', hint: 'Move the pointer in the box: the pupil follows within a ±3.6 limit and eases back to the centre on leave.' },
+
+      'instant|Multi-select Filter Chips': { desc: 'A checkmark grows out of the left edge, the background fills and the chip widens while its neighbours shift aside; the filter count pops on the button.', hint: 'Tap a few chips: the tick grows from the left and the widening pushes neighbours aside; the count pops without stacking.' },
+      'instant|Removable Tag': { desc: 'Tapping remove shrinks the tag into a dot before it disappears, the remaining tags slide into place via FLIP, and the field height contracts with them.', hint: 'Tap the × on a tag: it collapses to a dot, the rest slide over without jumping, and the field height animates down.' },
+      'instant|Suggestion Popover': { desc: 'Typing the first letters (or an @ trigger) opens a list next to the real caret, filters live, and inserts the choice as a non-editable inline tag before closing.', hint: 'Type @高 or a in the box: the popover follows the caret, arrow keys select, Enter or click inserts a tag, Esc closes.' },
+      'instant|Font-size Ruler': { desc: 'A horizontal ruler keeps the active tick centred with both edges fading out; dragging changes the body size live and release snaps to the nearest tick.', hint: 'Drag the ruler or use ←→: the size follows your finger with no lag and snaps to a whole tick on release.' },
+      'instant|Press-tilt Card': { desc: 'Pressing tilts the card toward the touch point and scales it down slightly while the glow behind gathers toward the finger; release springs back once.', hint: 'Hold the card and move: the tilt follows the touch point, the glow gathers in, and release rebounds exactly once.' },
+      'instant|Hold-to-Record': { desc: 'Holding the mic past the threshold expands the group into a recording bar with a live waveform while the plus rotates into a cancel icon.', hint: 'Hold the mic for about 250ms: the bar grows leftward with a live waveform; slide up 60px to cancel, release to restore.' }
     }
   };
 
@@ -334,7 +342,7 @@
     try { localStorage.setItem('uik-lang', lang); } catch (e) {}
 
     var sub = document.getElementById('subtitle');
-    if (sub) sub.textContent = lang === 'en' ? t('subtitle') : '86 个前端交互与动效词条 · 每个演示都可直接操作 · 原生 JS 无依赖';
+    if (sub) sub.textContent = lang === 'en' ? t('subtitle') : '92 个前端交互与动效词条 · 每个演示都可直接操作 · 原生 JS 无依赖';
     var search = document.getElementById('search');
     if (search) search.placeholder = lang === 'en' ? t('search') : '搜索词条 / 中文名 / 场景';
     var gh = document.getElementById('gh-link');
