@@ -1,8 +1,8 @@
 # UI Interaction Kit
 
-**92 patterns** · **No build step** · **MIT License** · **CodeBuddy Skill**
+**96 patterns** · **No build step** · **MIT License** · **CodeBuddy Skill**
 
-> Pick the right interaction before writing a line of code. 8 motion textures, 7 chart interactions, 10 app patterns, 7 + 8 expand & collapse, 7 navigation, 7 overlays, 7 loading states, 3 scroll-driven site patterns, 6 texture components, 8 gesture & feedback patterns, 8 icon micro-interactions, 6 instant feedback components — 92 entries, each with a runnable demo.
+> Pick the right interaction before writing a line of code. 8 motion textures, 7 chart interactions, 10 app patterns, 7 + 8 expand & collapse, 7 navigation, 7 overlays, 7 loading states, 3 scroll-driven site patterns, 6 texture components, 8 gesture & feedback patterns, 8 icon micro-interactions, 6 instant feedback components, 4 spring-physics demos — 96 entries, each with a runnable demo.
 
 **中文版 → [README.md](./README.md)** · **Live demo → https://alphaxe-hub.github.io/ui-interaction-kit/**
 
@@ -13,7 +13,7 @@
 
 ## What it is
 
-A selection-and-implementation knowledge base for front-end interactions. Turns vague asks like *"make it feel snappier"*, *"follow my finger"*, *"like liquid"* into 92 well-defined terms so the AI picks the right one before touching code. The rule baked into `SKILL.md` is simple: **understand the task → choose one interaction → then code**. Every interaction spec must cover trigger, start state, motion, end state, and cancel state.
+A selection-and-implementation knowledge base for front-end interactions. Turns vague asks like *"make it feel snappier"*, *"follow my finger"*, *"like liquid"* into 96 well-defined terms so the AI picks the right one before touching code. A separate reference covers **spring physics**: when to replace fixed-duration easing with a spring, and how to choose `stiffness / damping / mass`. The rule baked into `SKILL.md` is simple: **understand the task → choose one interaction → then code**. Every interaction spec must cover trigger, start state, motion, end state, and cancel state.
 
 ## Install in one minute
 
@@ -41,9 +41,9 @@ mkdir -p .cursor/skills && cp -r ui-interaction-kit .cursor/skills/
 
 When the conversation contains any of these, the AI coding assistant will pull this Skill in:
 
-> motion texture · feel snappier · smoother · follow my finger · liquid · magnetic · spring · parallax · gesture transition · animation tuning · interaction selection · copyable prompt · chart interaction · expand animation · navigation component · overlay · loading state · texture component · overlapping stack · progress fill · horizontal accordion · pull-down summary · gesture feedback · pinch to zoom · motion blur · rubber band · snap to guides · arc reflow · adaptive contrast · focus mode · icon micro-interaction · stroke drawing · icon morph · like pop · bell ring · loading spin · fill wipe · icon follow · instant feedback · filter chips · removable tag · suggestion popover · font size ruler · press tilt · hold to record
+> motion texture · feel snappier · smoother · follow my finger · liquid · magnetic · spring · parallax · gesture transition · animation tuning · interaction selection · copyable prompt · chart interaction · expand animation · navigation component · overlay · loading state · texture component · overlapping stack · progress fill · horizontal accordion · pull-down summary · gesture feedback · pinch to zoom · motion blur · rubber band · snap to guides · arc reflow · adaptive contrast · focus mode · icon micro-interaction · stroke drawing · icon morph · like pop · bell ring · loading spin · fill wipe · icon follow · instant feedback · filter chips · removable tag · suggestion popover · font size ruler · press tilt · hold to record · spring physics · stiffness · damping · damping ratio · interruptible animation · inertial throw
 
-## 92-entry catalog
+## 96-entry catalog
 
 <details>
 <summary>01 Motion Texture (8)</summary>
@@ -204,7 +204,21 @@ Full example page: **https://alphaxe-hub.github.io/ui-interaction-kit/scroll.htm
 
 </details>
 
-## Demo: 92 playable examples
+<details>
+<summary>14 Spring Physics (4)</summary>
+
+| English | Chinese | One-line scenario |
+|---|---|---|
+| Spring Tuner | 弹簧调参台 | Drag stiffness / damping / mass and watch ratio, overshoot and settling time live |
+| Interruptible Motion | 可中断运动 | A spring keeps its velocity through an interruption; a fixed transition zeroes it |
+| Damping Regimes | 阻尼三态 | Same stiffness, different damping: the ratio decides overshoot and settling |
+| Inertial Throw | 惯性抛掷 | Travels by release velocity, decays with friction, bounces off walls losing energy |
+
+> These are not "effects" but a **parameter methodology**: `references/13-spring-physics.md` covers when to use a spring, how to pick the three numbers, and the implementation rules (dt integration, settling detection, never mixed with `transition`).
+
+</details>
+
+## Demo: 96 playable examples
 
 **Live demo (GitHub Pages, nothing to install)**: https://alphaxe-hub.github.io/ui-interaction-kit/
 
@@ -246,6 +260,8 @@ Each card in the demo is one entry. Use the top-right *Reduce motion* toggle to 
 
 > These filter chips should grow a checkmark from the left when selected, fill their background and widen so the neighbours shift aside, with the count on the right popping too.
 
+> This drawer animation must be interruptible: tapping open/close repeatedly should continue from the current position and velocity instead of restarting from the beginning.
+
 ### Cross-tool English copyable prompt
 
 ```
@@ -264,7 +280,7 @@ Full prompt templates: [`references/prompt-templates.md`](./references/prompt-te
 
 ```
 ui-interaction-kit/
-├── SKILL.md                    # Decision entry: 4-step workflow + 92-entry index
+├── SKILL.md                    # Decision entry: 4-step workflow + 96-entry index
 ├── references/                 # Rules, acceptance checks, copyable prompts
 │   ├── 01-motion-texture.md    # 8 motion textures
 │   ├── 02-chart-interaction.md # 7 chart interactions
@@ -278,13 +294,14 @@ ui-interaction-kit/
 │   ├── 10-gesture-feedback.md  # 8 gesture & feedback patterns (input-to-feedback mapping, prompts, acceptance)
 │   ├── 11-icon-microinteractions.md # 8 icon micro-interactions + third-party icon license table
 │   ├── 12-instant-feedback.md  # 6 instant feedback components (direction, reflow, cancel rules)
+│   ├── 13-spring-physics.md    # Spring physics methodology (when, parameters, implementation)
 │   └── prompt-templates.md     # Unified prompt templates
 ├── assets/showcase/            # Demo
-│   ├── index.html              # 92-entry card grid
+│   ├── index.html              # 96-entry card grid
 │   ├── core.js                 # Registry + runtime + reduced-motion toggle + zh/en switch
 │   ├── styles.css
 │   ├── scroll.html / .css / .js  # Scroll-driven example site (opening → horizontal → hologram scan → outro)
-│   └── demos/01..13-*.js       # 13 files, 92 demos
+│   └── demos/01..14-*.js       # 14 files, 96 demos
 ├── docs/demo-overview.png      # Screenshot for this README
 └── LICENSE                     # MIT
 ```
@@ -298,6 +315,7 @@ ui-interaction-kit/
 - **Platform differences**: web, native app, and mini-program each need their own implementation. Check platform capabilities first and coordinate with system gestures, back, and scroll when in conflict.
 - **No frame-rate promises**: real performance depends on device and implementation. Passing a build does not replace a real interaction test.
 - **No bloat**: don't pull in a full physics engine, animation library, or routing framework for a decorative effect. Use what the project already has.
+- **Public does not mean usable**: many animation repositories (e.g. [ckissi/kinetics](https://github.com/ckissi/kinetics)) **declare no license at all** — under copyright defaults that means all rights reserved, so their code cannot be copied into a public MIT project like this one. This Skill only distils methodology from them (the spring-physics reference), never code. Before reusing someone's implementation, confirm the license permits redistribution (ISC / MIT / Apache-2.0 yes; "no license" or "no redistribution" no).
 - **Icon art is licensed separately from code**: libraries such as Iconsax forbid redistributing icon files outright (*Redistribution (Loose Icons): FORBIDDEN! Neither loose nor in packs*), so copying their SVGs into a public repository is redistribution — install them as a dependency instead, or pick an ISC/MIT library (Lucide, Heroicons, Phosphor, Tabler). Every icon in this repo's demo is drawn from scratch; see the license table in [`references/11-icon-microinteractions.md`](./references/11-icon-microinteractions.md).
 - **Every gesture needs an equivalent input**: pinch, two-finger and pull-down gestures must have a desktop / non-touch substitute (Ctrl/⌘ + wheel, buttons, keyboard, pointer drag). Never make touch the only way to finish the task.
 - **Separate component-level from flow-level**: overlapping stacks, progress fills, trays and pull-down summaries are alternative views of the same data and usually leave business state untouched. Only the checklist and the folding components sync state, and the state change must be committed before the animation.

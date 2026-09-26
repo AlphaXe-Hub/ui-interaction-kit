@@ -15,13 +15,14 @@
     { id: 'texture', n: '10', title: '质感组件交互', enTitle: 'Texture Components', en: 'Texture Components (6)', desc: '组件自身形态的深浅变化：重叠、填充、展开、托盘、跟手、下拉', enDesc: 'Component-level form details: overlap, fill, expansion, tray, proximity, pull-down' },
     { id: 'gesture', n: '11', title: '手势与反馈', enTitle: 'Gesture & Feedback', en: 'Gesture & Feedback (8)', desc: '输入方式（捏合、快速滑动、下拉、拖拽、点选）到视觉反馈的映射关系', enDesc: 'Mapping user input (pinch, flick, pull, drag, tap) to immediate visual feedback' },
     { id: 'icon', n: '12', title: '图标交互动效', enTitle: 'Icon Micro-interactions', en: 'Icon Micro-interactions (8)', desc: '图标本身怎么动：绘制、形变、回弹、摇铃、旋转、填充、跟随', enDesc: 'How the icon itself moves: drawing, morph, pop, ring, spin, fill wipe, follow' },
-    { id: 'instant', n: '13', title: '即时反馈组件', enTitle: 'Instant Feedback', en: 'Instant Feedback Components (6)', desc: '按下即有回应：反馈从哪长出来、周围怎么让位、松手回到哪', enDesc: 'Immediate response on press: where feedback grows from, how neighbours make room, where release returns' }
+    { id: 'instant', n: '13', title: '即时反馈组件', enTitle: 'Instant Feedback', en: 'Instant Feedback Components (6)', desc: '按下即有回应：反馈从哪长出来、周围怎么让位、松手回到哪', enDesc: 'Immediate response on press: where feedback grows from, how neighbours make room, where release returns' },
+    { id: 'spring', n: '14', title: '弹簧物理', enTitle: 'Spring Physics', en: 'Spring Physics (4)', desc: '用 stiffness / damping / mass 替代固定时长缓动：什么时候用弹簧、参数怎么选', enDesc: 'stiffness / damping / mass instead of fixed-duration easing: when to use springs and how to pick the numbers' }
   ];
 
   /* ---------------- English copy (keyed by category + English term) ---------------- */
   var I18N = {
     ui: {
-      subtitle: '92 front-end interaction entries · every demo is playable · vanilla JS, zero dependencies',
+      subtitle: '96 front-end interaction entries · every demo is playable · vanilla JS, zero dependencies',
       search: 'Search term / Chinese name / scenario',
       github: 'GitHub repo',
       themeToLight: 'Light theme',
@@ -136,7 +137,12 @@
       'instant|Suggestion Popover': { desc: 'Typing the first letters (or an @ trigger) opens a list next to the real caret, filters live, and inserts the choice as a non-editable inline tag before closing.', hint: 'Type @高 or a in the box: the popover follows the caret, arrow keys select, Enter or click inserts a tag, Esc closes.' },
       'instant|Font-size Ruler': { desc: 'A horizontal ruler keeps the active tick centred with both edges fading out; dragging changes the body size live and release snaps to the nearest tick.', hint: 'Drag the ruler or use ←→: the size follows your finger with no lag and snaps to a whole tick on release.' },
       'instant|Press-tilt Card': { desc: 'Pressing tilts the card toward the touch point and scales it down slightly while the glow behind gathers toward the finger; release springs back once.', hint: 'Hold the card and move: the tilt follows the touch point, the glow gathers in, and release rebounds exactly once.' },
-      'instant|Hold-to-Record': { desc: 'Holding the mic past the threshold expands the group into a recording bar with a live waveform while the plus rotates into a cancel icon.', hint: 'Hold the mic for about 250ms: the bar grows leftward with a live waveform; slide up 60px to cancel, release to restore.' }
+      'instant|Hold-to-Record': { desc: 'Holding the mic past the threshold expands the group into a recording bar with a live waveform while the plus rotates into a cancel icon.', hint: 'Hold the mic for about 250ms: the bar grows leftward with a live waveform; slide up 60px to cancel, release to restore.' },
+
+      'spring|Spring Tuner': { desc: 'Drag stiffness / damping / mass and watch the damping ratio, overshoot and settling time change in real time.', hint: 'Hit Go, then drag the sliders: below 1 the spring overshoots, near 1 it lands cleanly, above 1 it turns sluggish.' },
+      'spring|Interruptible Motion': { desc: 'The same back-and-forth, twice: a spring keeps its velocity and turns smoothly, while a fixed-duration transition zeroes the velocity at the interruption.', hint: 'Tap Reverse rapidly: the spring keeps a continuous velocity, the transition resets to zero every time.' },
+      'spring|Damping Regimes': { desc: 'One action under underdamped, critical and overdamped settings — the overshoot and settling time are decided by the damping ratio, not by speed.', hint: 'Hit Trigger all: same stiffness on all three, only damping differs, so the ratio decides whether it bounces.' },
+      'spring|Inertial Throw': { desc: 'Flick the block and it keeps travelling by release velocity, decaying with friction and bouncing off the edges while losing energy.', hint: 'Drag and throw it: velocity sets the distance, friction decides how fast it stops, and each bounce loses 55% of the energy.' }
     }
   };
 
@@ -342,7 +348,7 @@
     try { localStorage.setItem('uik-lang', lang); } catch (e) {}
 
     var sub = document.getElementById('subtitle');
-    if (sub) sub.textContent = lang === 'en' ? t('subtitle') : '92 个前端交互与动效词条 · 每个演示都可直接操作 · 原生 JS 无依赖';
+    if (sub) sub.textContent = lang === 'en' ? t('subtitle') : '96 个前端交互与动效词条 · 每个演示都可直接操作 · 原生 JS 无依赖';
     var search = document.getElementById('search');
     if (search) search.placeholder = lang === 'en' ? t('search') : '搜索词条 / 中文名 / 场景';
     var gh = document.getElementById('gh-link');

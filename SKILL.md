@@ -1,13 +1,13 @@
 ---
 name: ui-interaction-kit
-description: 前端 UI 交互与动效选型知识库。当用户要为页面、组件或图表选择、描述、实现交互效果时使用。覆盖 8 种质感动效（磁吸、液态形变、3D 视差、中心聚焦、液态 Tab、图片展开、手势转场、碰撞回弹）、7 种图表交互（框选、十字线、数据点高亮、数据提示框、图例筛选、缩放、下钻）、10 种 App 高级交互模式（圆形主题切换、拖拽排序、批量勾选、滑杆惯性吸附、文本展开、步骤条回弹、开关联动涟漪、曲线删除、卡片堆叠滚动、标签挤开）、7 种展开动画、8 种折叠组件、7 种导航组件、7 种弹窗组件、7 种加载动效、3 种滚动驱动官网模式（滚动驱动开场、横向滚动区段、可反向的爆炸视图），6 种质感组件交互（重叠排列、进度底色、横向手风琴、组件托盘、跟手放大图标、下拉摘要），8 种手势与反馈（捏合改变内容密度、滚动驱动进度动画、快速滚动拖影、下拉拉伸顶部图片、拖拽元素自动吸附、网格重排走弧线、悬浮元素自动反色、选中项突出显示），8 种图标交互动效（描边绘制、双态形变、播放暂停切换、点赞回弹、铃铛摇铃、旋转加载、填充推进、图标跟随指针），以及 6 种即时反馈组件（多选筛选标签、可删除标签、输入联想浮层、拨动字号刻度、按压倾斜卡片、长按变录音条）。触发词包括：质感动效、有质感、更顺滑、跟手、像液体、磁吸、液态、回弹、视差、手势转场、动效优化、交互选型、copyable prompt、图表交互、展开动画、导航组件、弹窗、加载动效、滚动驱动、scroll-driven、Apple 风格产品页、产品官网、爆炸视图、exploded view、质感组件、重叠排列、进度底色、横向手风琴、组件托盘、跟手放大图标、下拉摘要、overlapping stack、pull-down summary、手势与反馈、捏合改变内容密度、快速滚动拖影、下拉拉伸、拖拽吸附、网格重排走弧线、悬浮元素自动反色、选中项突出显示、pinch to zoom、motion blur、snap to guides、图标交互动效、描边绘制、双态形变、点赞回弹、铃铛摇铃、旋转加载、填充推进、图标跟随指针、icon animation、stroke drawing、icon morph、即时反馈、多选筛选标签、可删除标签、输入联想浮层、拨动字号刻度、按压倾斜卡片、长按录音、filter chips、removable tag、suggestion popover。
+description: 前端 UI 交互与动效选型知识库。当用户要为页面、组件或图表选择、描述、实现交互效果时使用。覆盖 8 种质感动效（磁吸、液态形变、3D 视差、中心聚焦、液态 Tab、图片展开、手势转场、碰撞回弹）、7 种图表交互（框选、十字线、数据点高亮、数据提示框、图例筛选、缩放、下钻）、10 种 App 高级交互模式（圆形主题切换、拖拽排序、批量勾选、滑杆惯性吸附、文本展开、步骤条回弹、开关联动涟漪、曲线删除、卡片堆叠滚动、标签挤开）、7 种展开动画、8 种折叠组件、7 种导航组件、7 种弹窗组件、7 种加载动效、3 种滚动驱动官网模式（滚动驱动开场、横向滚动区段、可反向的爆炸视图），6 种质感组件交互（重叠排列、进度底色、横向手风琴、组件托盘、跟手放大图标、下拉摘要），8 种手势与反馈（捏合改变内容密度、滚动驱动进度动画、快速滚动拖影、下拉拉伸顶部图片、拖拽元素自动吸附、网格重排走弧线、悬浮元素自动反色、选中项突出显示），8 种图标交互动效（描边绘制、双态形变、播放暂停切换、点赞回弹、铃铛摇铃、旋转加载、填充推进、图标跟随指针），6 种即时反馈组件（多选筛选标签、可删除标签、输入联想浮层、拨动字号刻度、按压倾斜卡片、长按变录音条），以及弹簧物理的参数选型方法论与 4 个演示（调参台、可中断运动、阻尼三态、惯性抛掷）。触发词包括：质感动效、有质感、更顺滑、跟手、像液体、磁吸、液态、回弹、视差、手势转场、动效优化、交互选型、copyable prompt、图表交互、展开动画、导航组件、弹窗、加载动效、滚动驱动、scroll-driven、Apple 风格产品页、产品官网、爆炸视图、exploded view、质感组件、重叠排列、进度底色、横向手风琴、组件托盘、跟手放大图标、下拉摘要、overlapping stack、pull-down summary、手势与反馈、捏合改变内容密度、快速滚动拖影、下拉拉伸、拖拽吸附、网格重排走弧线、悬浮元素自动反色、选中项突出显示、pinch to zoom、motion blur、snap to guides、图标交互动效、描边绘制、双态形变、点赞回弹、铃铛摇铃、旋转加载、填充推进、图标跟随指针、icon animation、stroke drawing、icon morph、即时反馈、多选筛选标签、可删除标签、输入联想浮层、拨动字号刻度、按压倾斜卡片、长按录音、filter chips、removable tag、suggestion popover、弹簧物理、弹簧参数、阻尼比、stiffness、damping、可中断动画、惯性抛掷、spring physics。
 ---
 
 # UI Interaction Kit｜前端交互与动效选型
 
 ## 目的
 
-把模糊的动效需求（"有质感""跟手""像液体""更高级""更顺滑"）翻译成可实现的输入、状态与运动规则，然后从 92 个已定义词条中选出最匹配的一个（最多主 1 + 辅 1），再实现。
+把模糊的动效需求（"有质感""跟手""像液体""更高级""更顺滑"）翻译成可实现的输入、状态与运动规则，然后从 96 个已定义词条中选出最匹配的一个（最多主 1 + 辅 1），再实现。
 
 ## 核心原则
 
@@ -38,6 +38,7 @@ description: 前端 UI 交互与动效选型知识库。当用户要为页面、
 | 要处理的是**输入本身**——捏合、快速滑动、下拉、拖拽、点选，需要立刻给出比例／速度／阈值明确的视觉反馈？ | 手势与反馈（8） |
 | 需要动的是**一枚图标本身**（状态切换、操作反馈、加载、提醒、评分），或需要判断某套图标库能不能随仓库分发？ | 图标交互动效（8） |
 | 用户**手指刚落下**就要看到回应（筛选、输入、刻度、按压、长按），且反馈要朝触点／选中侧长出、周围要让位？ | 即时反馈组件（6） |
+| 运动需要**可中断、可接续、跟手**，或者要判断"该用弹簧还是固定时长 easing"、`stiffness / damping / mass` 该怎么取？ | 弹簧物理（方法论文档 + 4 个演示） |
 
 ### 第 3 步：选词条并解释
 
@@ -66,6 +67,7 @@ description: 前端 UI 交互与动效选型知识库。当用户要为页面、
 | 11 | 手势与反馈 | Pinch to Zoom Density / Scroll-driven Progress Animation / Velocity-based Motion Blur / Rubber-band Header Stretch / Snap to Guides / Arc Grid Reflow / Adaptive Contrast Overlay / Focus Mode Selection | `references/10-gesture-feedback.md` |
 | 12 | 图标交互动效 | Stroke Drawing / Two-state Morph / Play-Pause Toggle / Like Pop / Bell Ring / Loading Spin / Fill Wipe / Follow Cursor | `references/11-icon-microinteractions.md` |
 | 13 | 即时反馈组件 | Multi-select Filter Chips / Removable Tag / Suggestion Popover / Font-size Ruler / Press-tilt Card / Hold-to-Record | `references/12-instant-feedback.md` |
+| 14 | 弹簧物理 | Spring Tuner / Interruptible Motion / Damping Regimes / Inertial Throw（+ 参数选型方法论） | `references/13-spring-physics.md` |
 
 需求落到具体分类后，再读取对应 reference 获取"必须保留"的约束、Copyable prompt 与验收清单。不要一次性加载全部 reference。
 
@@ -103,10 +105,11 @@ description: 前端 UI 交互与动效选型知识库。当用户要为页面、
 - `references/10-gesture-feedback.md` – 8 种手势与反馈：捏合改变内容密度、滚动驱动进度动画、快速滚动拖影、下拉拉伸、拖拽吸附、弧线重排、自动反色、选中项聚焦；含输入→反馈映射规则、Copyable prompt、验收与选型对照表
 - `references/11-icon-microinteractions.md` – 8 种图标交互动效：描边绘制、双态形变、播放暂停、点赞回弹、铃铛摇铃、旋转加载、填充推进、跟随指针；含通用参数、Copyable prompt、验收，以及**第三方图标库许可证对照**（能否随项目再分发图标文件、Iconsax 的边界）
 - `references/12-instant-feedback.md` – 6 种即时反馈组件：多选筛选标签、可删除标签、输入联想浮层、拨动字号刻度、按压倾斜卡片、长按变录音条；含共享规则、Copyable prompt、验收与选型对照
+- `references/13-spring-physics.md` – 弹簧物理方法论：何时该用弹簧、stiffness / damping / mass 与阻尼比 ζ、场景参数起点表、实现要点（dt 积分 / 收敛判定 / 不与 transition 混用）、验收清单；附第三方素材的许可证边界说明
 - `references/prompt-templates.md` – Copyable prompt 模板与输出格式
-- `assets/showcase/index.html` – 92 个词条的可运行 Demo，每个卡片标注词条英文名与中文名；可直接用浏览器打开
+- `assets/showcase/index.html` – 96 个词条的可运行 Demo，每个卡片标注词条英文名与中文名；可直接用浏览器打开
 - `assets/showcase/scroll.html` – 滚动驱动官网的完整示例页（开场 → 横向滚段 → 全息扫描 → 结尾），支持双向 scrub 与 reduced-motion 静态兜底；全息扫描用 Three.js WebGL 实现，加载失败时降级为静态示意
 
 ## 使用 Demo
 
-向用户交付或自查时，打开 `assets/showcase/index.html`：按 13 个分类分组，每个词条一张卡片，卡片内是可真实操作的迷你示例，支持"减少动效"开关与中英切换。滚动驱动的三个词条在卡片里只放缩略预览，点"打开完整演示"进入 `scroll.html` 看真实的长滚动 + sticky 效果。实现同类效果时优先复用其中的原生 JS 片段（无第三方依赖）。
+向用户交付或自查时，打开 `assets/showcase/index.html`：按 14 个分类分组，每个词条一张卡片，卡片内是可真实操作的迷你示例，支持"减少动效"开关与中英切换。滚动驱动的三个词条在卡片里只放缩略预览，点"打开完整演示"进入 `scroll.html` 看真实的长滚动 + sticky 效果。实现同类效果时优先复用其中的原生 JS 片段（无第三方依赖）。

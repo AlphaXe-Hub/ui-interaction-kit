@@ -1,8 +1,8 @@
 # UI Interaction Kit
 
-**92 patterns** · **No build step** · **MIT License** · **CodeBuddy Skill**
+**96 patterns** · **No build step** · **MIT License** · **CodeBuddy Skill**
 
-> 让 AI 选对交互：8 种质感动效、7 种图表交互、10 种 App 模式、7 + 8 展开与折叠、7 种导航、7 种弹窗、7 种加载、3 种滚动驱动官网模式、6 种质感组件交互、8 种手势与反馈、8 种图标交互动效、6 种即时反馈组件，共 92 个词条，每个词条都有可运行的 Demo。
+> 让 AI 选对交互：8 种质感动效、7 种图表交互、10 种 App 模式、7 + 8 展开与折叠、7 种导航、7 种弹窗、7 种加载、3 种滚动驱动官网模式、6 种质感组件交互、8 种手势与反馈、8 种图标交互动效、6 种即时反馈组件、4 个弹簧物理演示，共 96 个词条，每个词条都有可运行的 Demo。
 
 **English version → [README_EN.md](./README_EN.md)** · **在线 Demo → https://alphaxe-hub.github.io/ui-interaction-kit/**
 
@@ -13,7 +13,7 @@
 
 ## 这是什么
 
-把模糊的动效需求（"有质感""跟手""像液体""更高级"）翻译成 92 个已定义词条；让 AI 在动手前先选对一个，主交互一个就够。规则写进了 `SKILL.md`：**先理解任务 → 选一个主交互 → 再写代码**，描述任何交互必须写清触发、开始状态、变化过程、结束状态、取消状态。
+把模糊的动效需求（"有质感""跟手""像液体""更高级"）翻译成 96 个已定义词条；让 AI 在动手前先选对一个，主交互一个就够。另外单独有一篇**弹簧物理**方法论：什么时候该用弹簧替代固定时长缓动、`stiffness / damping / mass` 与阻尼比怎么取。规则写进了 `SKILL.md`：**先理解任务 → 选一个主交互 → 再写代码**，描述任何交互必须写清触发、开始状态、变化过程、结束状态、取消状态。
 
 ## 一分钟安装
 
@@ -41,9 +41,9 @@ mkdir -p .cursor/skills && cp -r ui-interaction-kit .cursor/skills/
 
 当对话里出现下面这些词，AI 编码助手会自动调出本 Skill：
 
-> 质感动效 · 有质感 · 更顺滑 · 跟手 · 像液体 · 磁吸 · 液态 · 回弹 · 视差 · 手势转场 · 动效优化 · 交互选型 · copyable prompt · 图表交互 · 展开动画 · 导航组件 · 弹窗 · 加载动效 · 质感组件 · 重叠排列 · 进度底色 · 横向手风琴 · 组件托盘 · 下拉摘要 · 手势与反馈 · 捏合改变内容密度 · 快速滚动拖影 · 下拉拉伸 · 拖拽吸附 · 网格重排走弧线 · 悬浮元素自动反色 · 选中项突出显示 · 图标交互动效 · 描边绘制 · 双态形变 · 点赞回弹 · 铃铛摇铃 · 旋转加载 · 填充推进 · 图标跟随 · 即时反馈 · 多选筛选标签 · 可删除标签 · 输入联想浮层 · 拨动字号刻度 · 按压倾斜卡片 · 长按录音
+> 质感动效 · 有质感 · 更顺滑 · 跟手 · 像液体 · 磁吸 · 液态 · 回弹 · 视差 · 手势转场 · 动效优化 · 交互选型 · copyable prompt · 图表交互 · 展开动画 · 导航组件 · 弹窗 · 加载动效 · 质感组件 · 重叠排列 · 进度底色 · 横向手风琴 · 组件托盘 · 下拉摘要 · 手势与反馈 · 捏合改变内容密度 · 快速滚动拖影 · 下拉拉伸 · 拖拽吸附 · 网格重排走弧线 · 悬浮元素自动反色 · 选中项突出显示 · 图标交互动效 · 描边绘制 · 双态形变 · 点赞回弹 · 铃铛摇铃 · 旋转加载 · 填充推进 · 图标跟随 · 即时反馈 · 多选筛选标签 · 可删除标签 · 输入联想浮层 · 拨动字号刻度 · 按压倾斜卡片 · 长按录音 · 弹簧物理 · 弹簧参数 · 阻尼比 · 可中断动画 · 惯性抛掷
 
-## 92 个词条速览
+## 96 个词条速览
 
 <details>
 <summary>01 质感动效 · Motion Texture（8）</summary>
@@ -204,7 +204,21 @@ Page Loader 整页加载 · Skeleton 骨架屏 · Shimmer 微光扫过 · Spinne
 
 </details>
 
-## Demo：92 个可操作示例
+<details>
+<summary>14 弹簧物理 · Spring Physics（4）</summary>
+
+| 英文 | 中文 | 一句话场景 |
+|---|---|---|
+| Spring Tuner | 弹簧调参台 | 拖 stiffness / damping / mass，实时看阻尼比、过冲与稳定时间 |
+| Interruptible Motion | 可中断运动 | 弹簧保留速度平滑换向；固定时长过渡在中断处把速度清零 |
+| Damping Regimes | 阻尼三态 | 同刚度只改阻尼：过冲与收敛时间由阻尼比决定 |
+| Inertial Throw | 惯性抛掷 | 按释放速度滑行，摩擦逐帧衰减，边界反弹损失能量 |
+
+> 这一组不是"效果"，而是**参数方法论**：`references/13-spring-physics.md` 里写了什么时候该用弹簧、三个参数怎么取、以及实现要点（dt 积分、收敛判定、不要与 transition 混用）。
+
+</details>
+
+## Demo：96 个可操作示例
 
 **在线体验（GitHub Pages，无需安装）**：https://alphaxe-hub.github.io/ui-interaction-kit/
 
@@ -246,6 +260,8 @@ python3 -m http.server 8000 --directory assets/showcase
 
 > 这排筛选标签选中时要从左边长出对勾、底色铺满、宽度撑开把旁边的挤开，右上角的数量也跟着跳一下。
 
+> 这个抽屉的动画要能中途打断：连着点开合时从当前位置和当前速度接续，不要每次都回到起点重播。
+
 ### 跨工具的英文 Copyable prompt
 
 ```
@@ -264,7 +280,7 @@ reduced-motion fallback described below:
 
 ```
 ui-interaction-kit/
-├── SKILL.md                    # 决策入口：四步工作流 + 92 词条索引
+├── SKILL.md                    # 决策入口：四步工作流 + 96 词条索引
 ├── references/                 # 每个分类的规则、验收清单、Copyable prompt
 │   ├── 01-motion-texture.md    # 8 种质感动效
 │   ├── 02-chart-interaction.md # 7 种图表交互
@@ -278,13 +294,14 @@ ui-interaction-kit/
 │   ├── 10-gesture-feedback.md  # 8 种手势与反馈（输入→反馈映射规则、Copyable prompt、验收与选型对照）
 │   ├── 11-icon-microinteractions.md # 8 种图标交互动效 + 第三方图标库许可证对照
 │   ├── 12-instant-feedback.md  # 6 种即时反馈组件（反馈方向、让位、取消规则）
+│   ├── 13-spring-physics.md    # 弹簧物理方法论（何时用弹簧、参数选型、实现要点）
 │   └── prompt-templates.md     # 统一提示词模板
 ├── assets/showcase/            # Demo
-│   ├── index.html              # 92 个词条总览（卡片网格）
+│   ├── index.html              # 96 个词条总览（卡片网格）
 │   ├── core.js                 # 注册表 + 运行时 + reduced-motion 开关 + 中英切换
 │   ├── styles.css
 │   ├── scroll.html / .css / .js  # 滚动驱动示例官网（开场 → 横向滚段 → 全息扫描 → 结尾）
-│   └── demos/01..13-*.js       # 13 个分类共 92 个 demo
+│   └── demos/01..14-*.js       # 14 个分类共 96 个 demo
 ├── docs/demo-overview.png      # README 用的首屏截图
 └── LICENSE                     # MIT
 ```
@@ -298,6 +315,7 @@ ui-interaction-kit/
 - **平台差异**：网页 / 原生 App / 小程序不默认使用同一套实现；先检查目标平台能力，与系统手势、返回、滚动冲突时优先协调现有行为。
 - **不承诺帧率**：实际性能依赖设备和实现细节，编译通过不能替代真实交互验收。
 - **不堆库**：不要为装饰效果引入完整物理引擎、动画库或路由框架，必要时优先用项目已有的依赖。
+- **仓库公开 ≠ 可以使用**：GitHub 上很多动效仓库（例如 [ckissi/kinetics](https://github.com/ckissi/kinetics)）**没有声明任何许可证**——按版权默认规则属于"保留所有权利"，不能复制其代码进本仓库这类公开的 MIT 项目。本 Skill 只从中提炼方法论（弹簧参数选型那一篇即为此），不复制任何代码；要复用他人实现，先确认许可证允许再分发（ISC / MIT / Apache-2.0 可以，"无许可证"或"禁止再分发"的不行）。
 - **图标是美术资源，许可证要和代码分开看**：Iconsax 等库的 Free 许可明确禁止再分发图标文件（原文 *Redistribution (Loose Icons): FORBIDDEN! Neither loose nor in packs*），把 SVG 复制进公开仓库就是再分发——改用 npm 依赖引入，或选 ISC / MIT 的库（Lucide、Heroicons、Phosphor、Tabler）。本仓库的图标 demo 全部自绘，不携带任何第三方图标素材；对照表见 [`references/11-icon-microinteractions.md`](./references/11-icon-microinteractions.md)。
 - **手势必须有等价输入**：捏合、双指、下拉这类手势在桌面与无触屏设备上要给出替代（⌘/Ctrl + 滚轮、按钮、键盘、指针拖拽），不能只有触摸才能完成任务。
 - **分清组件级与流程级**：重叠排列、进度底色、组件托盘、下拉摘要属于"同一份数据的另一种呈现"，通常不改业务状态；只有进度底色的勾选和折叠开合会同步状态，且状态必须先于动画提交。
@@ -315,7 +333,7 @@ ui-interaction-kit/
 
 修改 Demo：
 
-- 保持 13 个分类的注册文件结构。
+- 保持 14 个分类的注册文件结构。
 - 新增分类时别忘了四处同步：`demos/` 注册、`index.html` 的 `<script>` 引用、`core.js` 的 `CATS` 与英文文案、README 两份的数字与目录树。
 - `node --check assets/showcase/demos/*.js` 全部通过。
 - 打开 `assets/showcase/index.html` 实测正常交互再提交。
